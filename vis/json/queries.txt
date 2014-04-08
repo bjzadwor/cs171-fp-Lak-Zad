@@ -1,0 +1,58 @@
+
+
+"name_long" in ("Albania","Bosnia and Herzegovina","Bulgaria","Croatia","Czech Republic", "Hungary","Macedonia","Montenegro","Poland","Romania","Serbia,"Slovakia","Slovenia")
+
+
+"name_long" in ("Colombia","Costa Rica","El Salvador","Guatemala","Honduras","Mexico","Nicaragua","Panama","Venezuela")
+
+"name_long" in ("Angola","Central African Republic","Congo","Democratic Republic of the Congo","Equatorial Guinea","Gabon")
+
+"name_long" in ("China","North Korea","Taiwan")
+
+"name_long" in ("Belarus","Estonia","Latvia","Lithuania","Moldova","Russia","Ukraine")
+
+"name_long" in ("Burundi","Comoros","Djibouti","Eritrea","Ethiopia","Kenya","Madagascar","Malawi","Mauritius","Mozambique","Rwanda","Seychelles","Somalia","Sudan","Tanzania","Uganda","Zambia")
+
+"name_long" in (" Brunei","Japan","South Korea","Singapore")
+
+"name_long" in ("Canada","United States")
+
+
+
+"name_long" in (" Algeria","Bahrain","Egypt","Iran","Iraq","Jordan","Kuwait","Lebanon","Libya","Morocco","Palestine","Oman","Qatar","Saudi Arabia","Syria","Tunisia","Turkey","United Arab Emirates","Yemen")
+
+"name_long" in (" Fiji","Kiribati","Marshall Islands","Micronesia","Papua New Guinea","Samoa","Solomon Islands","Tonga,"Vanuatu")
+
+
+"name_long" in (" Afghanistan,"Bangladesh,"Bhutan","India","Nepal","Pakistan")
+
+
+
+
+
+"name_long" in ("Cambodia","Indonesia","Laos","Malaysia","Maldives","Myanmar","Philippines","Sri Lanka","Thailand","Timor-Leste","Vietnam")
+
+
+"name_long" in ("Argentina","Chile","Uruguay")
+
+
+"name_long" in ("Botswana","Lesotho","Namibia","South Africa","Swaziland","Zimbabwe")
+
+
+"name_long" in ("Brazil,"Paraguay")
+
+
+"name_long" in("Andorra,"Austria","Belgium","Cyprus","Denmark","Finland","France","Germany","Greece","Iceland","Ireland","Israel","Italy","Luxembourg","Malta","Netherlands","Norway","Portugal","Spain","Sweden,"Switzerland","United Kingdom")
+
+
+"name_long" in (" Benin","Burkina Faso","Cameroon","Cape Verde","Chad","Cote d'Ivoire","Gambia","Ghana","Guinea","Guinea-Bissau","Liberia","Mali","Mauritania","Niger","Nigeria","Sao Tome and Principe","Senegal","Sierra Leone","Togo")
+
+"name_long" in ('Antigua and Barbuda','Barbados','Belize','Cuba','Dominica','Dominican Republic','Grenada','Guyana','Haiti','Jamaica','Saint Kitts and Nevis','Saint Lucia','Saint Vincent and the Grenadines','Suriname','The Bahamas','Trinidad and Tobago')
+
+"name_long" inBurundi','Comoros','Djibouti','Eritrea','Ethiopia','Kenya','Madagascar','Malawi','Mozambique','Rwanda','Somalia','South Sudan','Sudan','Tanzania','Uganda','Zambia')
+
+"name_long" in ('Federated States of Micronesia','Fiji','Kiribati','Marshall Islands','Nauru','Niue','Palau','Papua New Guinea','Samoa','Solomon Islands','Tonga','Tuvalu','Vanuatu')
+
+"name_long" in ('Cambodia','Indonesia','Laos,'Malaysia','Maldives','Mauritius','Myanmar','Philippines','Seychelles','Sri Lanka','Thailand','Timor-Leste','Vietnam')
+
+"name_long" in ('Andorra','Austria','Belgium','Cyprus','Denmark','Finland','France','Germany','Greece','Iceland','Ireland','Israel','Italy','Liechtenstein','Luxembourg','Malta','Monaco','Netherlands','Norway','Portugal','San Marino','Spain','Sweden','Switzerland','United Kingdom','Vatican City')

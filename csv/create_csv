@@ -1,0 +1,18 @@
+grep 'Central Europe'  all_data.csv > CEU.csv
+grep 'Central Latin America'  all_data.csv > CLA.csv
+grep 'Central sub-Saharan Africa'  all_data.csv > CSA.csv
+grep 'East Asia'  all_data.csv > EAS.csv
+grep 'Eastern Europe'  all_data.csv > EEU.csv
+grep 'Eastern sub-Saharan Africa'  all_data.csv > ESA.csv
+grep 'High-income Asia Pacific'  all_data.csv > HAP.csv
+grep 'High-income North America'  all_data.csv > HNA.csv
+grep 'North Africa and Middle East'  all_data.csv > NAM.csv
+grep 'Oceania'  all_data.csv > OCA.csv
+grep 'South Asia'  all_data.csv > SAS.csv
+grep 'Southeast Asia'  all_data.csv > SEA.csv
+grep 'Southern Latin America'  all_data.csv > SLA.csv
+grep 'Southern sub-Saharan Africa'  all_data.csv > SSA.csv
+grep 'Tropical Latin America'  all_data.csv > TLA.csv
+grep 'Western Europe'  all_data.csv > WEU.csv
+grep 'Western sub-Saharan Africa'  all_data.csv > WSA.csv
+
