@@ -56,10 +56,15 @@ var cause_value_var = 0;
 var age_value_var = 0;
 var fullData;
 var filteredData;
+var barChartData;
 var sex = {male: "Male", female: "Female", both: "Both"};
 
 var filterValues = {sex: "Both", year:"1990"};
 
+
+/*
+*  loop through the regions and build the objects we use to translate
+ */
 
 d3.csv("data/region.csv", function(csv){
    csv.forEach(function(row){
@@ -74,8 +79,7 @@ d3.csv("data/region.csv", function(csv){
     })
 }) // end csv("data/region.csv")
 
-d3.csv("data/global.csv", function(csv){
-
+d3.csv("data/fullSmall.csv", function(csv){
     csv.forEach( function(row){
 
         if (!(row.cause_medium in cause_medium)){
@@ -88,7 +92,6 @@ d3.csv("data/global.csv", function(csv){
             cause_value_var++;
         }
 
-
         if (!(row.age_name in age_name)){
             age_name[row.age_name] = age_value_var;
             age_value[age_value_var]= row.age_name;
@@ -98,18 +101,26 @@ d3.csv("data/global.csv", function(csv){
                     .text(row.age_name));
             age_value_var++;
         }
-    })
 
-    d3.csv("data/full.csv", function(csv){
-        fullData = csv;
+        switch(row.year){
+            case "90":
+                row.year = "1990";
+                break;
+            case "5":
+                row.year = "2005";
+                break;
+            case "10":
+                row.year = "2010";
+                break;
+        }
 
-        $("#ageSelect").val(20);
+    })  // csv for each
+    fullData = csv;
+    console.log("Full Data Loaded")
 
-       $("#filterForm").change();
-        console.log("Full Data Loaded")
-    })
 
-});
+})
+
 
 xy = d3.geo.conicEqualArea()
     .parallels([179, 1])
@@ -124,7 +135,9 @@ vis = d3.select("#mapContainer")
 
 
 tip = d3.tip().attr('class', 'd3-tip').html(function(d) {
-    var html ="Country: "+  d.properties.name +"<br/> Region: "+ region_short[d.properties.featurecla]
+    var html ="Country: "+  d.properties.name +
+        "<br/> Region: "+ region_short[d.properties.featurecla] +
+        "<br/> Value: "+ d.value
     return html;
 });
 
@@ -140,7 +153,7 @@ d3.json("json/Combined.geojson", function(json) {
             "transform" : "translate(-100,-100)"
         })
 
-
+ var className
     map.selectAll("path")
         .data(json.features)
         .enter()
@@ -152,53 +165,55 @@ d3.json("json/Combined.geojson", function(json) {
         .attr("stroke", "#222")
         .on("mouseover", function(d){
             // color the borders red to highlight the region
-            var className = "."+d.properties.featurecla
+            className = "."+d.properties.featurecla
             d3.selectAll(className)
                 .attr("stroke", "red")
                 .attr("fill", "yellow");
 
             tip.show(d)
-            $('.d3-tip').offset({left:(window.outerWidth/4),top:25})
+            $('.d3-tip').offset({left:(window.outerWidth/4),top:0})
         })
         .on("mouseout", function(d){
 
             tip.hide(d)
-            var className = d.properties.featurecla
             var className = "."+d.properties.featurecla
+            var color = d3.select(className).attr("fill2");
             d3.selectAll(className)
                 .attr("stroke", "#222")
-                .attr("fill", function(d){
-                    console.log("this is this")
-                    console.log(d)
-                    console.log(d.properties.featurecla)
-                    console.log(colorScale(d.properties.featurecla))
-                    colorScale(className)
+                .attr("fill", color)
 
-                })
         })
         .on("click", function(d){
-
+            $("#regionSelect").val(d.properties.featurecla);
+            $("#filterForm").change();
         })
-
+console.log("geoJson complete")
+    $("#ageSelect").val(20);
+    $("#filterForm").change();
     });
 
 var colorScale, scaleValues
     function drawChartColors(){
         scaleValues = d3.extent(filteredData, function(d){
         return +d[filterValues.metric]
-    })
+        })
+
 
        colorScale = d3.scale.linear()
             .domain(scaleValues)
-            .range(["red","blue"])
+            .range(["red", "blue"]);
 
       filteredData.forEach(function(d,i,a){
           color = colorScale(d[filterValues.metric])
-          mapClass = "." + region_name[d.region_name]
-          console.log(mapClass)
+          mapClass = "." + d.region_name.trim()
           map.selectAll(mapClass)
             .attr("fill", color)
-          d.color = color
+            .attr("fill2", color)
+            .attr("value", function(e){ // I don't really care about e, which comes from the map class, I care about
+                  e.color = color
+                  e.value = d[filterValues.metric]
+                  return d[filterValues.metric]
+              })
 
        })
 
@@ -206,94 +221,8 @@ var colorScale, scaleValues
     }
 
 
-    $("#filterForm").change(function(){
-        filterValues.region = $("#regionSelect").val();
-        filterValues.cause = cause_value[$("#causeSelect").val()];
-        filterValues.age = age_value[$("#ageSelect").val()];
-        filterValues.metric = $("#metricSelect").val();
-        console.log(filterValues)
-        filter();
 
 
-    })
-    $("#maleButton").click(function(){
-         filterValues.sex = "Male";
-        $(".sexButton").removeClass("btn-primary");
-        $("#maleButton").addClass("btn-primary");
-        filter();
-    })
-    $("#bothButton").click(function(){
-        filterValues.sex = "Both";
-        $(".sexButton").removeClass("btn-primary");
-        $("#bothButton").addClass("btn-primary");
-        filter();
-    })
-    $("#femaleButton").click(function(){
-        filterValues.sex = "Female";
-        $(".sexButton").removeClass("btn-primary");
-        $("#femaleButton").addClass("btn-primary");
-        filter();
-    })
-    $("#yr1990Button").click(function(){
-        filterValues.year = "1990";
-        $(".yrButton").removeClass("btn-primary");
-        $("#yr1990Button").addClass("btn-primary");
-        filter();
-    })
-    $("#yr2005Button").click(function(){
-        filterValues.year = "2005"
-        $(".yrButton").removeClass("btn-primary")
-        $("#yr2005Button").addClass("btn-primary")
-        filter();
-    })
-    $("#yr2010Button").click(function(){
-        filterValues.year = "2010"
-        $(".yrButton").removeClass("btn-primary")
-        $("#yr2010Button").addClass("btn-primary")
-        filter();
-    })
-
-
-
-
-    function filter(){
-        console.log("filter firing")
-        filteredData = [];
-        fullData.every(function(element, index, array){
-            if (index == 0) console.log(element)
-            if (
-                     ((element.cause_medium.trim() == filterValues.cause))
-                  && true // ((filterValues.region == null)||(element.region_name.trim() == filterValues.region))
-                  && (element.year.trim() == filterValues.year)
-                  && (element.sex_name.trim() == filterValues.sex)
-                  && (element.age_name.trim() == filterValues.age)
-                )
-            {
-              //  console.log(element.sex_name)
-                filteredData.push(element)
-            }
-
-/*
-
-            if (filteredData.length > 21  ) return false;
-            else return true;
-
-*/
-            return true;
-        })
-        console.log(filteredData)
-        drawChartColors();
-    }// end filter()
-
-
-
-
-$( document ).ready(function() {
-    // once the document is ready, trigger a filterForm change
-    // and get the values from the select boxes.
-    console.log("Document is Ready")
-
-});
 
 
 
