@@ -85,5 +85,6 @@ function filter(){
         return true;
     })
     createAgeBars(barChartData, "#vis1");
+    regionMetricsGraph(filteredData, "#vis2");
     drawChartColors();
 }// end filter()
