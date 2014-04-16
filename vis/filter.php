@@ -16,7 +16,7 @@ $year = htmlspecialchars($_GET["year"]);
 
 $fileName = 'filteredData.csv';
  
- 
+ // This code is based on this link:  http://ran.ge/2009/10/27/howto-create-stream-csv-php/
  // Set the response headers
 header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
 header('Content-Description: File Transfer');
