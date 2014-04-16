@@ -24,6 +24,8 @@ header("Content-type: text/csv");
 header("Content-Disposition: attachment; filename={$fileName}");
 header("Expires: 0");
 header("Pragma: public");
+header("Access-Control-Allow-Origin: *");  // this allows us to download from our home networks.
+
 
 // add the query params in as response headers, this makes testing easier
 header("cause_medium: "  . $cause_medium); 
