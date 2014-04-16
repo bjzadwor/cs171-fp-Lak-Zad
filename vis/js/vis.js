@@ -42,6 +42,7 @@ $(window).resize(function(){
 
 var path, vis, xy;
 var map, tip ;
+var globalCsv;
 
 var region_name = {};
 var region_short = {};
@@ -66,6 +67,7 @@ var filterValues = {sex: "Both", year:"1990"};
 *  loop through the regions and build the objects we use to translate
  */
 
+
 d3.csv("data/region.csv", function(csv){
    csv.forEach(function(row){
        if(!(row.fullRegion in region_name)){
@@ -79,8 +81,10 @@ d3.csv("data/region.csv", function(csv){
     })
 }) // end csv("data/region.csv")
 
-d3.csv("data/fullSmall.csv", function(csv){
-    csv.forEach( function(row){
+//d3.csv("data/fullSmall.csv", function(csv){
+d3.csv("http://www.zadworney.com/z/vis/filter.php", function(csv){
+    globalCSV = csv;
+	csv.forEach( function(row){
 
         if (!(row.cause_medium in cause_medium)){
             cause_medium[row.cause_medium] = cause_value_var;
@@ -201,7 +205,7 @@ var colorScale, scaleValues
 
        colorScale = d3.scale.linear()
             .domain(scaleValues)
-            .range(["red", "blue"]);
+            .range(["white", "red"]);
 
       filteredData.forEach(function(d,i,a){
           color = colorScale(d[filterValues.metric])
