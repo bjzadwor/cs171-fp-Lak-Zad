@@ -49,7 +49,7 @@ function getJsonCookie(cname)
     var ca = document.cookie.split(';');
     for(var i=0; i<ca.length; i++)
     {
-        var c = ca[i].trim();
+        var c = ca[i].trim(); 
         if (c.indexOf(name)==0) {
             try {return JSON.parse(c.substring(name.length,c.length));}
             catch (error ){console.log("The selected cookie was not a valid JSON string. ", error); return "";}
