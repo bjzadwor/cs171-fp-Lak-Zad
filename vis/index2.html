@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>GBD</title>
+
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+ 
+</head>
+<body>
+
+<div class="container">
+test
+</div>
+    <!-- Load the scripts -->
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/d3.min.js"></script>
+    <script type="text/javascript" src="js/d3.tip.js"></script>
+	<!-- http://locachejs.org/   -->
+	<!-- <script type="text/javascript" src="js/locache.min.js"></script>-->
+   <script>
+var data; var jsonCsv; var readData;
+var fileSystem;
+
+		var start = new Date();
+		console.log("starting");
+		console.log(start);
+/*navigator.webkitPersistentStorage.requestQuota
+(
+	300000,
+	//60000000000000000000, 
+	function(grantedBytes) {
+		window.webkitRequestFileSystem(
+			PERSISTENT, 
+			grantedBytes, 
+			function(fs){fileSystem = fs;  saveFile(fs) ; console.log("success2", fs);}, 
+			function(error){console.log("Internal Error", error)})
+			}, 
+	function(error) {
+		console.log('Error', error); 
+	}
+);
+	*/
+
+// http://www.html5rocks.com/en/tutorials/file/filesystem/	 4/17/2014
+//https://developers.google.com/chrome/whitepapers/storage#asking_more
+//http://www.html5rocks.com/en/tutorials/offline/storage/ 4/17/2014
+//http://www.smashingmagazine.com/2010/10/11/local-storage-and-how-to-use-it/
+	
+try
+{	
+window.webkitRequestFileSystem(
+			"PERSISTENT", 
+			30000000, 
+			function(fs){saveFile(fs) ; console.log("File System Created Successfullly", fs);}, 
+			function(error){console.log("Internal Error", error)}	
+			);
+}
+catch (err)
+{
+console.log("I caught the error, this browser will not open the fileSystem: ", err);
+d3.csv("data/fullsmall.csv", function(csv){
+var dataSet = csv;
+console.log(csv);
+console.log("Processing the data the hard way");
+//processdata(csv);
+});
+
+}	
+	
+function saveFile(fs){
+	//d3.csv("http://www.zadworney.com/z/vis/filter.php", function(csv){	
+	d3.csv("data/fullsmall.csv",function(csv){		
+		
+		jsonCsv = JSON.stringify(csv);
+		
+	fs.root.getFile('data8.json', {create: true}, function(fileEntry) {
+
+    // Create a FileWriter object for our FileEntry (data.json).
+    fileEntry.createWriter(function(fileWriter) {
+
+      fileWriter.onwriteend = function(e) {
+        console.log('Write completed.');
+      };
+
+      fileWriter.onerror = function(e) {
+        console.log('Write failed: ' + e.toString());
+      };
+
+      // Create a new Blob and write it to log.txt.
+      var blob = new Blob([jsonCsv], {type: 'text/plain'});
+
+      fileWriter.write(blob);
+	  console.log("File correctly Written to local file storage");
+	//getMyFile(fs, 'data.json');
+    }, function(e){console.log("error2");});
+
+  }, function(e){console.log("error3");});
+		
+		var stop = new Date();
+		console.log(stop);
+	});
+}
+
+
+function openFileSystemAndGetMyFile(filename){
+
+	window.webkitRequestFileSystem(PERSISTENT, 
+		0, 
+		function(fs){getMyFile(fs, filename)}, 
+		function(error){console.log("Internal Error Could Not Open File System", error)}) // eventually I will handle this error and download the file the hard way.
+}
+
+
+
+
+function getMyFile(fs,filename){
+  fs.root.getFile(filename, {}, function(fileEntry) { 
+  //data2.json does not exist
+  //  error4
+  //  code: 1
+  //  message: "A requested file or directory could not be found at the time an operation was processed."
+  //  name: "NotFoundError"
+  
+  
+    // Get a File object representing the file,
+    // then use FileReader to read its contents.
+    fileEntry.file(function(file) {
+       var reader = new FileReader();
+
+       reader.onloadend = function(e) {
+        
+		readData = JSON.parse(this.result);
+		
+		// var txtArea = document.createElement('textarea');
+        // txtArea.value = this.result;
+        // document.body.appendChild(txtArea);
+       };
+
+       reader.readAsText(file);
+    }, function(e){console.log("error3", e);});
+
+  }, function(e){console.log("error4", e);});
+
+}
+
+
+
+
+
+
+   </script>
+</body>
+</html>
