@@ -161,40 +161,66 @@
             right:-7px;
         }
 
+        .centerText
+        {
+            text-align : center;
+        }
+
+        select{
+            width:350px;
+        }
+
+        .hidden{
+            display:none;
+        }
+
+        #inst{
+            background-color: black;
+            color:white;
+
+        }
+
     </style>
 
 </head>
 <body>
-<header class ="row-fluid header">
-    <!--
-    <div class="span3 headerLeft">headerLeft</div>
-    <div class="span6 headerCenter">headerCenter</div>
-    <div class="span3 headerRight">headerRight</div>
-    -->
+<header class ="header">
+    <div id="help" class="help pull-right">Help</div>
+    <h1 class="centerText">Global Mortality Dashboard</h1>
 </header>
 
 
 
 <div class="container">
+    <div id="inst" class="hidden">Instructions Container
+
+    <div id="checkbox" class="pull-right">
+        <form>
+            <input type="checkbox" name="stop" value="stop">I do not want to see these instructions when I load the page
+        </form>
+    </div>
+    </div>
+
     <div class="row">
         <div id="mapContainer" class="col-md-8"></div>
         <div id="rightColumn" class="col-md-4">
             <form id="filterForm" class = "something">
-                <label for "regionSelect">Region: </label><select id = "regionSelect"></select>
+                <label for "regionSelect">Region: </label><br /><select id = "regionSelect"></select>
                 <br />
-                <label for "causeSelect">Cause: </label><select id ="causeSelect"></select>
+                <label for "causeSelect">Cause: </label><br /><select id ="causeSelect"></select>
                 <br />
-                <label for "ageSelect">Age Range: </label><select id ="ageSelect"></select>
+                <label for "ageSelect">Age Range: </label><br /><select id ="ageSelect"></select>
                 <br />
-                <label for "metricSelect">Metric: </label><select id ="metricSelect">
-             <!--   <option value="DALY_abs">Disability Adjusted Life Years</option> -->
-                <option value="DALY_rate">Disability Adjusted Life Years per 100,000</option>
-             <!--    <option value="YLD_abs">Years Lived with Disability</option> -->
-                <option value="YLD_rate">Years Lived with Disabilty per 100,000 </option>
-             <!--    <option value="YLL_abs">Years of Life Lost</option> -->
-                <option value="YLL_rate">Years of Life Lost per 100,000</option>
-             <!--    <option value="death_abs">Number of Deaths</option> -->
-                <option value="death_rate">Death Rate Per 100,000</option>
+                <label for "metricSelect">Metric: </label><br /><select id ="metricSelect">
+                    <option value="death_rate">Death Rate Per 100,000</option>
+                 <!--   <option value="DALY_abs">Disability Adjusted Life Years</option> -->
+                    <option value="DALY_rate">Disability Adjusted Life Years per 100,000</option>
+                 <!--    <option value="YLD_abs">Years Lived with Disability</option> -->
+                    <option value="YLD_rate">Years Lived with Disabilty per 100,000 </option>
+                 <!--    <option value="YLL_abs">Years of Life Lost</option> -->
+                    <option value="YLL_rate">Years of Life Lost per 100,000</option>
+                 <!--    <option value="death_abs">Number of Deaths</option> -->
+                    <option value="death_rate">Death Rate Per 100,000</option>
                 </select>
                 <br />
                 <label for"sex">Sex:</label><div class="btn-group btn-group-xs">
@@ -230,6 +256,7 @@
     <script type="text/javascript" src="js/ageBarChart.js"></script>
     <script type="text/javascript" src="js/filter.js"></script>
     <script type="text/javascript" src="js/modal.js"></script>
+    <script type="text/javascript" src="js/cookies.js"></script>
     <!--<script type="text/javascript" src="js/vis.js"></script>-->
 
 </body>

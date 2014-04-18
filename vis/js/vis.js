@@ -1,43 +1,8 @@
 /**
  * Created by Bryan on 4/3/14.
  */
-/*
+
 var mapContainerWidth = $('#mapContainer').width()
-
-var svg = d3.select("#mapContainer")
-    .append("svg")
-    .attr({
-    width: mapContainerWidth,
-    height: mapContainerWidth
-    });
-*/
-/*var g = svg
-    .append("g")
-    .append("rect")
-    .attr({
-        transform: "translate(15,15)",
-        class: "red",
-        fill:"red",
-        width:  mapContainerWidth -30,
-        height: mapContainerWidth -30
-    })
-*/
-
-/*
-$(window).resize(function(){
-    mapContainerWidth = $('#mapContainer').width()
-        svg.attr({
-            width: mapContainerWidth,
-            height: mapContainerWidth
-        })
-*/
-  /*  g.attr({
-        width: mapContainerWidth -30,
-        height: mapContainerWidth-30
-    })
-*/
- //       console.log(mapContainerWidth)
-  //  })
 
 
 var path, vis, xy;
@@ -81,8 +46,8 @@ d3.csv("data/region.csv", function(csv){
     })
 }) // end csv("data/region.csv")
 
-//d3.csv("data/fullSmall.csv", function(csv){
-d3.csv("http://www.zadworney.com/z/vis/filter.php", function(csv){
+d3.csv("data/fullSmall.csv", function(csv){
+//d3.csv("http://www.zadworney.com/z/vis/filter.php", function(csv){
     globalCSV = csv;
 	csv.forEach( function(row){
 
