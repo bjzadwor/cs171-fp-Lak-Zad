@@ -23,7 +23,7 @@ var ageBarsPreviouslyLoaded
 var createAgeBars = function(dataSet, div) {
     var ageBars, xAxis, xScale, yAxis,  yScale;
     var barChartContainerWidth = $(div).width()
-    var margin = { left: 60 , right: 20, top: 25, bottom: 30};
+    var margin = { left: 40 , right: 5, top: 15, bottom: 40};
     var width = barChartContainerWidth - margin.left - margin.right;
     var height = (.65*barChartContainerWidth) - margin.bottom - margin.top;
 
@@ -108,7 +108,7 @@ var createAgeBars = function(dataSet, div) {
         ageBars.selectAll(".bar")
             .data(dataSet)
             .enter().append("rect")
-                .attr("class", "bar")
+                .attr("class", "agebar bar")
                 .attr("x", function(d, i) { return xScale(i); })
 //              .attr("width", xScale.rangeBand())
                 .attr("width", (width/dataSet.length)-5)
@@ -125,7 +125,7 @@ var createAgeBars = function(dataSet, div) {
 var regionMetricsGraph = function(dataSet, div) {
     var barChart, xAxis, xScale, yAxis,  yScale;
     var barChartContainerWidth = $(div).width()
-    var margin = { left: 60 , right: 20, top: 25, bottom: 30};
+    var margin = { left: 40 , right: 5, top: 15, bottom: 40};
     var width = barChartContainerWidth - margin.left - margin.right;
     var height = (.65*barChartContainerWidth) - margin.bottom - margin.top;
 
@@ -207,7 +207,13 @@ var regionMetricsGraph = function(dataSet, div) {
         barChart.selectAll(".bar")
             .data(dataSet)
             .enter().append("rect")
-                .attr("class", "bar")
+                .attr("class",
+                function(d){
+                    var classString = "bar "
+                    console.log(d.region_name);
+                    classString = classString + d.region_name;
+                    return classString;
+                })
                 .attr("x", function(d, i) { return xScale(i); })
 //              .attr("width", xScale.rangeBand())
                 .attr("width", (width/dataSet.length)-5)

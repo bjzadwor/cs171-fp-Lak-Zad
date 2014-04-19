@@ -72,12 +72,6 @@
           left: 100%;
         }
 
-        #mapContainer2{
-        background-color: darkorange;
-        min-height: 50px;
-
-        }
-
         .floatR{
             float:right;
         }
@@ -199,7 +193,7 @@
         }
 
         select{
-            width:350px;
+            width:280px;
         }
 
         .hidden{
@@ -211,7 +205,44 @@
             color:white;
 
         }
+        header {
+            width: 1200px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        #container{
+            width: 1200px;
+        }
 
+        .border{
+            border:solid;
+
+        }
+
+        #mainVis{
+            width: 895px;
+        }
+
+        #rightColumn{
+            border: solid;
+
+            width: 300px;
+        }
+        .third{
+            width: 95px;
+
+        }
+        .btn-group{
+            margin-left:  auto;
+            margin-right: auto;
+        }
+
+        .vis{
+            width:300px;
+        }
+        #filterForm label{
+            margin:0;
+        }
     </style>
 
 </head>
@@ -223,7 +254,7 @@
 
 
 
-<div class="container">
+<div id="container" class="container ">
     <div id="inst" class="hidden">Instructions Container
 
     <div id="checkbox" class="pull-right">
@@ -234,16 +265,24 @@
     </div>
 
     <div class="row">
-        <div id="mainVis" class="col-md-8"></div>
-        <div id="rightColumn" class="col-md-4">
+        <div id="mainVis" class="floatL border"></div>
+        <div id="rightColumn" class="floatR border">
             <form id="filterForm" class = "something">
-                <label for "regionSelect">Region: </label><br /><select id = "regionSelect"></select>
+                <label for "regionSelect">Region: </label>
                 <br />
-                <label for "causeSelect">Cause: </label><br /><select id ="causeSelect"></select>
+                <select id = "regionSelect"></select>
                 <br />
-                <label for "ageSelect">Age Range: </label><br /><select id ="ageSelect"></select>
+                <label for "causeSelect">Cause: </label>
                 <br />
-                <label for "metricSelect">Metric: </label><br /><select id ="metricSelect">
+                <select id ="causeSelect"></select>
+                <br />
+                <label for "ageSelect">Age Range: </label>
+                <br />
+                <select id ="ageSelect"></select>
+                <br />
+                <label for "metricSelect">Metric: </label>
+                <br />
+                <select id ="metricSelect">
                     <option value="death_rate">Death Rate Per 100,000</option>
                  <!--   <option value="DALY_abs">Disability Adjusted Life Years</option> -->
                     <option value="DALY_rate">Disability Adjusted Life Years per 100,000</option>
@@ -252,27 +291,38 @@
                  <!--    <option value="YLL_abs">Years of Life Lost</option> -->
                     <option value="YLL_rate">Years of Life Lost per 100,000</option>
                  <!--    <option value="death_abs">Number of Deaths</option> -->
-                    <option value="death_rate">Death Rate Per 100,000</option>
                 </select>
                 <br />
-                <label for"sex">Sex:</label><div class="btn-group btn-group-xs">
-                    <button type="button" id="maleButton" class="sexButton btn btn-default">Male</button>
-                    <button type="button" id="bothButton" class="sexButton btn btn-default btn-primary">Both</button>
-                    <button type="button" id="femaleButton" class="sexButton btn btn-default">Female</button>
+                <label for"sex">Sex:</label>
+                <br />
+                <div class="btn-group btn-group-xs">
+                    <button type="button" id="maleButton" class="third sexButton btn btn-default">Male</button>
+                    <button type="button" id="bothButton" class="third sexButton btn btn-default btn-primary">Both</button>
+                    <button type="button" id="femaleButton" class="third sexButton btn btn-default">Female</button>
                 </div>
                 <br />
-                <label for"year">Year:</label><div class="btn-group btn-group-xs">
-                    <button type="button" id="yr1990Button" class="yrButton btn btn-default btn-primary">1990</button>
-                    <button type="button" id="yr2005Button" class="yrButton btn btn-default">2005</button>
-                    <button type="button" id="yr2010Button" class="yrButton btn btn-default">2010</button>
+                <label for"year">Year:</label>
+                <br />
+                <div class="btn-group btn-group-xs">
+                    <button type="button" id="yr1990Button" class="third yrButton btn btn-default btn-primary">1990</button>
+                    <button type="button" id="yr2005Button" class="third yrButton btn btn-default">2005</button>
+                    <button type="button" id="yr2010Button" class="third yrButton btn btn-default">2010</button>
                 </div>
             </form>
         </div>
     </div>
     <div class="row">
-        <div id="vis1" class="col-md-4"></div>
-        <div id="vis2" class="col-md-4">vis2</div>
-        <div id="vis3" class="col-md-4">vis3</div>
+        <div id="vis1" class="vis floatL">vis1</div>
+        <div id="vis2" class="vis floatL">vis2</div>
+        <div id="vis3" class="vis floatL">vis3</div>
+        <div id="vis4" class="vis floatL">vis4</div>
+
+    </div>
+    <div class="row">
+        <div id="vis5" class="vis floatL">vis5</div>
+        <div id="vis6" class="vis floatL">vis6</div>
+        <div id="vis7" class="vis floatL">vis7</div>
+        <div id="vis8" class="vis floatL">vis8</div>
 
     </div>
 </div>

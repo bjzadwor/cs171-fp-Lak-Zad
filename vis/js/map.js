@@ -11,14 +11,14 @@ function drawMap(chosenDiv){
 
     xy = d3.geo.conicEqualArea()
         .parallels([179, 1])
-        .scale(120); // adjust this to make it fit the page later
+        .scale(143); // adjust this to make it fit the page later
 
     path = d3.geo.path().projection(xy);
 
     vis = d3.select(chosenDiv)
         .append("svg")
-        .attr("width", 770) // need to update this
-        .attr("height",300 ); // need to update this
+        .attr("width", 895) // need to update this
+        .attr("height",270 ); // need to update this
 
 
     tip = d3.tip().attr('class', 'd3-tip').html(function(d) {
@@ -32,7 +32,7 @@ function drawMap(chosenDiv){
 
     map = vis.append("g")
         .attr({
-            "transform" : "translate(-100,-100)"
+            "transform" : "translate(-30,-100)"
         })
 
 
@@ -45,6 +45,7 @@ function drawMap(chosenDiv){
         .attr("fill-opacity", 0.5)
         .attr("fill", "#85C3C0")
         .attr("stroke", "#222")
+        .attr("stroke-width",.25)
         .on("mouseover", function(d){
             // color the borders red to highlight the region
             className = "."+d.properties.featurecla
@@ -66,8 +67,10 @@ function drawMap(chosenDiv){
 
         })
         .on("click", function(d){
+            var className = "."+d.properties.featurecla
             $("#regionSelect").val(d.properties.featurecla);
             $("#filterForm").change();
+            d3.selectAll(className).attr("fill","yellow"); // color was getting reset when the form changed keep it yellow
         })
 } // end drawMap
 
