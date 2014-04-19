@@ -132,7 +132,7 @@
             width: 100%;
             height: 100%;
             background: #000;
-            opacity: 0.5;
+            opacity: 0.9;
             filter: alpha(opacity=50);
         }
 
@@ -142,6 +142,38 @@
             background:rgba(0,0,0,0.2);
             border-radius:14px;
             padding:8px;
+        }
+
+        #loadingOverlay{
+            display:table;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            opacity: 0.99;
+
+        }
+        #loadingOuter{
+            float:left;
+            height:50%;
+            margin-bottom: -250px;
+            width:100%;
+        }
+
+        #loading{
+            clear:both;
+            height: 500px;
+            position:relative;
+            width: 130px;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+
+        #loading h1{
+            color: black;
         }
 
         #content {
@@ -202,7 +234,7 @@
     </div>
 
     <div class="row">
-        <div id="mapContainer" class="col-md-8"></div>
+        <div id="mainVis" class="col-md-8"></div>
         <div id="rightColumn" class="col-md-4">
             <form id="filterForm" class = "something">
                 <label for "regionSelect">Region: </label><br /><select id = "regionSelect"></select>
@@ -244,6 +276,14 @@
 
     </div>
 </div>
+<div id="loadingOverlay" class="">
+    <div id="loadingOuter">
+        <div id="loading">
+            <h1 class="center">Loading</h1>
+            <img src="img/ajax-loader.gif" alt = "Please be patient the page is loading"/>
+        </div>
+    </div>
+</div>
 
     <!-- Load the scripts -->
     <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
@@ -251,12 +291,17 @@
     <script type="text/javascript" src="js/d3.min.js"></script>
     <script type="text/javascript" src="js/d3.tip.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/vis.js"></script>
     <script type="text/javascript" src="js/categoryPieChart.js"></script>
     <script type="text/javascript" src="js/ageBarChart.js"></script>
     <script type="text/javascript" src="js/filter.js"></script>
     <script type="text/javascript" src="js/modal.js"></script>
     <script type="text/javascript" src="js/cookies.js"></script>
+    <script type="text/javascript" src="js/map.js"></script>
+
+
+
+
+    <script type="text/javascript" src="js/vis.js"></script>
     <!--<script type="text/javascript" src="js/vis.js"></script>-->
 
 </body>

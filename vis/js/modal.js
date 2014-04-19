@@ -24,9 +24,9 @@ var modal = (function(){
 					$content.empty().append(settings.content);
 
 					$modal.css({
-						width: settings.width || 'auto', 
-						height: settings.height || 'auto'
-					});
+                        width: settings.width || 'auto',
+                        height: settings.height || 'auto'
+                    });
 
 					method.center();
 					$(window).bind('resize.modal', method.center);
