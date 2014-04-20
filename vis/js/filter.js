@@ -1,9 +1,14 @@
 
 $("#filterForm").change(function(){
+    filterValues.main = $("#mainSelect").val();
     filterValues.region = $("#regionSelect").val();
-    filterValues.cause = cause_value[$("#causeSelect").val()];
-    filterValues.age = age_value[$("#ageSelect").val()];
+    filterValues.cause = $("#causeSelect").val();
+    //filterValues.cause = cause_value[$("#causeSelect").val()];
+    filterValues.age = $("#ageSelect").val();
+    // filterValues.age = age_value[$("#ageSelect").val()];
     filterValues.metric = $("#metricSelect").val();
+
+    // After we load the valuse into the object, call the filter function
     filter();
 })
 
@@ -36,55 +41,96 @@ $("#yr1990Button").click(function(){
 })
 
 $("#yr2005Button").click(function(){
-    filterValues.year = "2005"
-    $(".yrButton").removeClass("btn-primary")
-    $("#yr2005Button").addClass("btn-primary")
+    filterValues.year = "2005";
+    $(".yrButton").removeClass("btn-primary");
+    $("#yr2005Button").addClass("btn-primary");
     filter();
 })
 
 $("#yr2010Button").click(function(){
-    filterValues.year = "2010"
-    $(".yrButton").removeClass("btn-primary")
-    $("#yr2010Button").addClass("btn-primary")
+    filterValues.year = "2010";
+    $(".yrButton").removeClass("btn-primary");
+    $("#yr2010Button").addClass("btn-primary");
     filter();
 })
 
-
-
+/*
+*  filter()  This function loops through the data set testing each data point
+*  adding it to the appropriate array if it is one of the data points needed for the visualization.
+*  we build multiple arrays, as necessary for the different visualizations
+*
+* */
 
 function filter(){
     filteredData = [];
     barChartData = [];
+
+    // Loop through the data, testing each data point and adding it to the appropriate array if it
+    // is one of the data points needed for the visualization.
     fullData.every(function(element, index, array){
 
+
+        // colorize the map
+        // draw the region metrics bar chart
         if (
-                ((element.cause_medium.trim() == filterValues.cause))
-                // && true // ((filterValues.region == null)||(element.region_name.trim() == filterValues.region))
+                ((element.cause_medium.trim() == cause_value[filterValues.cause]))
                 && (element.year.trim() == filterValues.year)
                 && (element.sex_name.trim() == filterValues.sex)
-                && (element.age_name.trim() == filterValues.age)
+                && (element.age_name.trim() == age_value[filterValues.age])
             )
-        {
+        {filteredData.push(element);}
 
-            filteredData.push(element)
-        }
-
-
-        if ((element.cause_medium.trim() == filterValues.cause)
+        // build the dataset required to draw the bar chart of ages
+        if ((element.cause_medium.trim() == cause_value[filterValues.cause])
             && (element.region_name.trim() == filterValues.region)
             && (element.year.trim() == filterValues.year)
             && (element.sex_name.trim() == filterValues.sex)
-            && (element.age_name.trim() != "All ages")){
-            barChartData.push(element)
-        }
+            && (element.age_name.trim() != "All ages"))
+        {barChartData.push(element);}
 
-        /*            if (filteredData.length > 21  ) return false;
-         else return true;
-
-         */
         return true;
-    })
-    createAgeBars(barChartData, "#vis1");
-    regionMetricsGraph(filteredData, "#vis2");
-    drawChartColors();
+    })//end fullData.every
+
+    setJsonCookie("filter", filterValues, 365);
+
+    // set the cookie with the filter data.
+
+    switch (filterValues.main){
+    case "map":
+        $('svg').remove();
+        console.log("drawing Map in Main Vis");
+        drawMap('#mainVis');
+        createAgeBars(barChartData, "#vis1");
+        regionMetricsGraph(filteredData, "#vis2");
+        drawChartColors();
+        break;
+    case"ageGroups":
+        $('svg').remove();
+        console.log("drawing Age Groups in Main Vis");
+        drawMap('#vis1');
+        createAgeBars(barChartData, "#mainVis");
+        regionMetricsGraph(filteredData, "#vis2");
+        drawChartColors();
+        break;
+
+
+        case "regionBarChart":
+        $('svg').remove();
+        console.log("drawing Region Bar Chart in Main Vis")
+        drawMap('#vis2');
+        createAgeBars(barChartData, "#vis1");
+        regionMetricsGraph(filteredData, "#mainVis");
+        drawChartColors();
+        break;
+
+
+    default:
+    console.log("Default Fired You should not be seeing this");
+        drawMap('#mainVis');
+        createAgeBars(barChartData, "#vis1");
+        regionMetricsGraph(filteredData, "#vis2");
+        drawChartColors();
+    break;
+
+    }
 }// end filter()

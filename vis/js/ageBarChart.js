@@ -2,36 +2,20 @@
  * library for subgraphs
  */
 
-/*
-var csvData;
 
-d3.csv("data/global.csv", function(data) {
-    csvData = data;
-    var chartData = [];
-    csvData.forEach(function(d, i) {
-        if (d.cause_medium == "Tuberculosis" && d.year == "2010" && d.sex_name == "Both" && d.age_name != "All ages") { 
-            d.death_abs = parseFloat(d.death_abs.split(',').join('')); // replacing commas and storing as a number
-            chartData.push(d);
-        }
-    });
-//console.log(chartData);
 
-    createAgeBars(chartData, "#vis1");
-});
-*/
 var ageBarsPreviouslyLoaded
 var createAgeBars = function(dataSet, div) {
     var ageBars, xAxis, xScale, yAxis,  yScale;
     var barChartContainerWidth = $(div).width()
-    var margin = { left: 40 , right: 5, top: 15, bottom: 40};
+    var margin = { left: 40 , right: 0, top: 15, bottom: 40};
     var width = barChartContainerWidth - margin.left - margin.right;
     var height = (.65*barChartContainerWidth) - margin.bottom - margin.top;
-
+    if (div == "#mainVis") height = (250)
     if (ageBarsPreviouslyLoaded){
 
         var selectString = div + " .ageBars"
-        console.log (selectString)
-        d3.select(selectString).remove();
+         d3.select(selectString).remove();
     }
 
 
@@ -87,10 +71,13 @@ var createAgeBars = function(dataSet, div) {
             .attr("transform", "translate(" + margin.left + ",0)")
             .call(yAxis);
 
+    // Draw the Captions on the page
+
+    // Left Side Caption
         ageBars.append("text")
             .attr("transform", "rotate(-90)")
-            .attr("x", 0 - (height + margin.top)/2)
-            .attr("y", margin.top )
+            .attr("x", 0 - (height + margin.top )/2)
+            .attr("y", 5 )
             .style("text-anchor", "middle")
             .text(function(){
                 return filterValues.metric
@@ -98,11 +85,11 @@ var createAgeBars = function(dataSet, div) {
 
             })                                                                                    // needs to be replaced with filter data
             .attr("class", "caption");
-
+    // Bottom  Caption
         ageBars.append("text")
-            .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," + (height + 2* margin.top) + ")")
+            .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," + (height + margin.top+ margin.bottom) + ")")
             .style("text-anchor", "middle")
-            .text("Age Groups") // needs to be replaced with filter data
+            .text("Age Group")
             .attr("class", "caption");
 
         ageBars.selectAll(".bar")
@@ -132,8 +119,7 @@ var regionMetricsGraph = function(dataSet, div) {
     if (regionGraphLoaded){
 
         var selectString = div + " .barChart"
-        console.log (selectString)
-        d3.select(selectString).remove();
+         d3.select(selectString).remove();
     }
 
     regionGraphLoaded = true;
@@ -210,7 +196,6 @@ var regionMetricsGraph = function(dataSet, div) {
                 .attr("class",
                 function(d){
                     var classString = "bar "
-                    console.log(d.region_name);
                     classString = classString + d.region_name;
                     return classString;
                 })

@@ -215,7 +215,7 @@
         }
 
         .border{
-            border:solid;
+            border:none;
 
         }
 
@@ -224,7 +224,7 @@
         }
 
         #rightColumn{
-            border: solid;
+
 
             width: 300px;
         }
@@ -268,6 +268,19 @@
         <div id="mainVis" class="floatL border"></div>
         <div id="rightColumn" class="floatR border">
             <form id="filterForm" class = "something">
+                <label for"mainSelect">Main Visualization:</label>
+                <br />
+                <select id ="mainSelect">
+                    <option value="map">Map</option>
+                    <!--   <option value="DALY_abs">Disability Adjusted Life Years</option> -->
+                    <option value="ageGroups">Age Groups</option>
+                    <!--    <option value="YLD_abs">Years Lived with Disability</option> -->
+                    <option value="regionBarChart">Regional Bar Chart</option>
+                    <!--    <option value="YLL_abs">Years of Life Lost</option> -->
+                    <option value="vis4">Vis4</option>
+                    <!--    <option value="death_abs">Number of Deaths</option> -->
+                </select>
+                <br />
                 <label for "regionSelect">Region: </label>
                 <br />
                 <select id = "regionSelect"></select>
@@ -308,6 +321,7 @@
                     <button type="button" id="yr2005Button" class="third yrButton btn btn-default">2005</button>
                     <button type="button" id="yr2010Button" class="third yrButton btn btn-default">2010</button>
                 </div>
+
             </form>
         </div>
     </div>

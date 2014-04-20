@@ -9,16 +9,30 @@ showModalDialog
 
 function drawMap(chosenDiv){
 
+    $(chosenDiv).empty();
+
+    var divWidth = $(chosenDiv).width()
+
     xy = d3.geo.conicEqualArea()
         .parallels([179, 1])
-        .scale(143); // adjust this to make it fit the page later
+        .scale(47); // adjust this to make it fit the page later  143/(900/divWidth)
 
     path = d3.geo.path().projection(xy);
 
-    vis = d3.select(chosenDiv)
-        .append("svg")
-        .attr("width", 895) // need to update this
-        .attr("height",270 ); // need to update this
+
+    if(chosenDiv == "#mainVis"){
+        vis = d3.select(chosenDiv)
+            .append("svg")
+            .attr("width", 900) // need to update this
+            .attr("height", 300 ); // need to update this
+
+    }
+    else {
+        vis = d3.select(chosenDiv)
+            .append("svg")
+            .attr("width", 300) // need to update this
+            .attr("height", 200); // need to update this
+    }
 
 
     tip = d3.tip().attr('class', 'd3-tip').html(function(d) {
@@ -31,9 +45,12 @@ function drawMap(chosenDiv){
     vis.call(tip)
 
     map = vis.append("g")
-        .attr({
-            "transform" : "translate(-30,-100)"
-        })
+        .attr("transform", function(){
+       if(chosenDiv == "#mainVis") return "translate(-30,-100)"
+       else return 'translate(-325,-140)'
+    }
+
+        )
 
 
     map.selectAll("path")
@@ -72,6 +89,7 @@ function drawMap(chosenDiv){
             $("#filterForm").change();
             d3.selectAll(className).attr("fill","yellow"); // color was getting reset when the form changed keep it yellow
         })
+    drawChartColors()  // colorize the chart
 } // end drawMap
 
 
