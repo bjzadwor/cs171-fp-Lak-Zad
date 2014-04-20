@@ -94,23 +94,23 @@ function filter(){
     setJsonCookie("filter", filterValues, 365);
 
     // set the cookie with the filter data.
-
+    $('svg').remove();
     switch (filterValues.main){
     case "map":
-        $('svg').remove();
+
         console.log("drawing Map in Main Vis");
         drawMap('#mainVis');
         createAgeBars(barChartData, "#vis1");
-        regionMetricsGraph(filteredData, "#vis2");
-        drawChartColors();
+        regionBarChart(filteredData, "#vis2");
+       // drawChartColors();
         break;
     case"ageGroups":
-        $('svg').remove();
+
         console.log("drawing Age Groups in Main Vis");
         drawMap('#vis1');
         createAgeBars(barChartData, "#mainVis");
-        regionMetricsGraph(filteredData, "#vis2");
-        drawChartColors();
+        regionBarChart(filteredData, "#vis2");
+        //drawChartColors();
         break;
 
 
@@ -119,8 +119,8 @@ function filter(){
         console.log("drawing Region Bar Chart in Main Vis")
         drawMap('#vis2');
         createAgeBars(barChartData, "#vis1");
-        regionMetricsGraph(filteredData, "#mainVis");
-        drawChartColors();
+        regionBarChart(filteredData, "#mainVis");
+       // drawChartColors();
         break;
 
 
@@ -128,7 +128,7 @@ function filter(){
     console.log("Default Fired You should not be seeing this");
         drawMap('#mainVis');
         createAgeBars(barChartData, "#vis1");
-        regionMetricsGraph(filteredData, "#vis2");
+        regionBarChart(filteredData, "#vis2");
         drawChartColors();
     break;
 

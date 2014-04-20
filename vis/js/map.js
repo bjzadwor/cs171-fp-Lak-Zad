@@ -9,13 +9,13 @@ showModalDialog
 
 function drawMap(chosenDiv){
 
-    $(chosenDiv).empty();
+
 
     var divWidth = $(chosenDiv).width()
 
     xy = d3.geo.conicEqualArea()
         .parallels([179, 1])
-        .scale(47); // adjust this to make it fit the page later  143/(900/divWidth)
+        .scale(143/(900/divWidth)); // adjust this to make it fit the page later  143/(900/divWidth)
 
     path = d3.geo.path().projection(xy);
 
