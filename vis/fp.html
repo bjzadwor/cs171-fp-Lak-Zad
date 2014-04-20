@@ -132,7 +132,6 @@
 
         #modal {
             position:absolute;
-            background:url(tint20.png) 0 0 repeat;
             background:rgba(0,0,0,0.2);
             border-radius:14px;
             padding:8px;
@@ -268,7 +267,7 @@
         <div id="mainVis" class="floatL border"></div>
         <div id="rightColumn" class="floatR border">
             <form id="filterForm" class = "something">
-                <label for"mainSelect">Main Visualization:</label>
+                <label for="mainSelect">Main Visualization:</label>
                 <br />
                 <select id ="mainSelect">
                     <option value="map">Map</option>
@@ -281,19 +280,19 @@
                     <!--    <option value="death_abs">Number of Deaths</option> -->
                 </select>
                 <br />
-                <label for "regionSelect">Region: </label>
+                <label for="regionSelect">Region: </label>
                 <br />
                 <select id = "regionSelect"></select>
                 <br />
-                <label for "causeSelect">Cause: </label>
+                <label for = "causeSelect">Cause: </label>
                 <br />
                 <select id ="causeSelect"></select>
                 <br />
-                <label for "ageSelect">Age Range: </label>
+                <label for ="ageSelect">Age Range: </label>
                 <br />
                 <select id ="ageSelect"></select>
                 <br />
-                <label for "metricSelect">Metric: </label>
+                <label for = "metricSelect">Metric: </label>
                 <br />
                 <select id ="metricSelect">
                     <option value="death_rate">Death Rate Per 100,000</option>
@@ -306,7 +305,7 @@
                  <!--    <option value="death_abs">Number of Deaths</option> -->
                 </select>
                 <br />
-                <label for"sex">Sex:</label>
+                <label>Sex:</label>
                 <br />
                 <div class="btn-group btn-group-xs">
                     <button type="button" id="maleButton" class="third sexButton btn btn-default">Male</button>
@@ -314,7 +313,7 @@
                     <button type="button" id="femaleButton" class="third sexButton btn btn-default">Female</button>
                 </div>
                 <br />
-                <label for"year">Year:</label>
+                <label>Year:</label>
                 <br />
                 <div class="btn-group btn-group-xs">
                     <button type="button" id="yr1990Button" class="third yrButton btn btn-default btn-primary">1990</button>
