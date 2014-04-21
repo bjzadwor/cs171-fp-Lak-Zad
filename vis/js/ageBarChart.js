@@ -4,7 +4,7 @@
 
 
 
-var ageBarsPreviouslyLoaded
+
 var createAgeBars = function(dataSet, div) {
     var ageBars, xAxis, xScale, yAxis,  yScale;
     var barChartContainerWidth = $(div).width()
@@ -12,14 +12,7 @@ var createAgeBars = function(dataSet, div) {
     var width = barChartContainerWidth - margin.left - margin.right;
     var height = (.65*barChartContainerWidth) - margin.bottom - margin.top;
     if (div == "#mainVis") height = (250)
-  //  if (ageBarsPreviouslyLoaded){
 
-  //      var selectString = div + " .ageBars"
-  //       d3.select(selectString).remove();
-  //  }
-
-
-    ageBarsPreviouslyLoaded = true;
 
     ageBars = d3.select(div).append("svg")
         .attr({ width: width + margin.left + margin.right,
@@ -27,8 +20,8 @@ var createAgeBars = function(dataSet, div) {
                 class: "ageBars"
         })
        .on("click", function(){
-            modal.open({content: $('<div id="bigChart"  style="width:800px"></div>')});
-            createAgeBars(barChartData, "#bigChart"); // should this be called with dataSet?
+            $("#mainSelect").val("ageBarChart");
+            $('#filterForm').change();
         } );
         // .append("g").attr({ 
         //     transform: "translate(" + margin.left + "," + margin.top + ")"

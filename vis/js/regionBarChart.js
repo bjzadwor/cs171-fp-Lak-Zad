@@ -24,7 +24,7 @@ var regionBarChart = function(dataSet, regionGraphDiv) {
         })
         .on("click", function(d){
             $("#mainSelect").val("regionBarChart");
-         $('#filterForm').change();
+            $('#filterForm').change();
 
         } );
 

@@ -104,7 +104,7 @@ function filter(){
         regionBarChart(filteredData, "#vis2");
 
         break;
-    case"ageGroups":
+    case"ageBarChart":
 
         console.log("drawing Age Groups in Main Vis");
         drawMap('#vis1');
