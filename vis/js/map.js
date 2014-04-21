@@ -15,8 +15,8 @@ function drawMap(chosenDiv){
 
     xy = d3.geo.conicEqualArea()
         .parallels([179.9,.1])
-        .scale(147/(900/divWidth)); // adjust this to make it fit the page later  143/(900/divWidth)
-//147
+        .scale(147/(900/divWidth)); // this allows the image to scale to the div, the big div is 900px
+
     path = d3.geo.path().projection(xy);
 
     if(chosenDiv == "#mainVis"){
@@ -101,6 +101,7 @@ var regionColor;
             $("#filterForm").change();
             d3.selectAll(className).attr("fill","yellow"); // color was getting reset when the form changed keep it yellow
         })
+
     drawChartColors()  // colorize the chart
 } // end drawMap
 
