@@ -107,9 +107,6 @@ d3.csv("data/fullSmall.csv", function(csv){
 d3.json("json/Combined.geojson", function(json) {
 
     geoJSON = json;
-
-
-
     console.log("geoJson Loaded")
     geoJSONLoaded = true;
     if (dataLoaded && geoJSONLoaded  ){ drawPage();}

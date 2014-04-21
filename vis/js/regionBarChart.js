@@ -11,7 +11,6 @@ var regionBarChart = function(dataSet, regionGraphDiv) {
     if (regionGraphDiv == "#mainVis") height = (250)
 
     if (regionGraphLoaded){
-
         var selectString = regionGraphDiv + " .barChart"
         d3.select(selectString).remove();
     }
@@ -23,9 +22,10 @@ var regionBarChart = function(dataSet, regionGraphDiv) {
             height: height + margin.top + margin.bottom,
             class: "barChart"
         })
-        .on("click", function(){
-            modal.open({content: $('<div id="bigChart"  style="width:800px"></div>')});
-            regionMetricsGraph(dataSet, "#bigChart");
+        .on("click", function(d){
+            $("#mainSelect").val("regionChart")
+          //  modal.open({content: $('<div id="bigChart"  style="width:800px"></div>')});
+           // regionMetricsGraph(dataSet, "#bigChart");
         } );
     // .append("g").attr({
     //     transform: "translate(" + margin.left + "," + margin.top + ")"
