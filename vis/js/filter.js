@@ -64,7 +64,7 @@ $("#yr2010Button").click(function(){
 function filter(){
     filteredData = [];
     barChartData = [];
-
+    console.log("filter firing");
     // Loop through the data, testing each data point and adding it to the appropriate array if it
     // is one of the data points needed for the visualization.
     fullData.every(function(element, index, array){

@@ -14,9 +14,9 @@ function drawMap(chosenDiv){
     var divWidth = $(chosenDiv).width()
 
     xy = d3.geo.conicEqualArea()
-        .parallels([179, 1])
-        .scale(143/(900/divWidth)); // adjust this to make it fit the page later  143/(900/divWidth)
-
+        .parallels([179.9,.1])
+        .scale(147/(900/divWidth)); // adjust this to make it fit the page later  143/(900/divWidth)
+//147
     path = d3.geo.path().projection(xy);
 
     if(chosenDiv == "#mainVis"){
@@ -42,14 +42,9 @@ function drawMap(chosenDiv){
 
 
 
-    tip = d3.tip().attr('class', 'd3-tip').html(function(d) {
-        var html ="Country: "+  d.properties.name +
-            "<br/> Region: "+ region_short[d.properties.featurecla] +
-            "<br/> Value: "+ d.value
-        return html;
-    });
 
-    vis.call(tip)
+
+
 
     map = vis.append("g")
         .attr("transform", function(){
@@ -76,9 +71,9 @@ var regionColor;
             d3.selectAll(className).filter("rect")
                 .attr("stroke", "red")
                 .attr("fill", "yellow");
-
+            console.log(d);
             tip.show(d)
-            $('.d3-tip').offset({left:(window.outerWidth/4),top:0})
+         //   $('.d3-tip').offset({left:(window.outerWidth/4),top:0})
         })
         .on("mouseout", function(d){
 
@@ -109,6 +104,8 @@ var regionColor;
 
 
 function drawChartColors(){
+
+
 
     scaleValues = d3.extent(filteredData, function(d){
         return +d[filterValues.metric]
@@ -158,12 +155,6 @@ function drawChartColors(){
         .attr("fill", "url(#gradient)")
         .attr("transform", "translate(" + width/3 + ","+ height *.96 + ")")
 
-
-
-
-
-
-
     vis.append("g")
         .attr("class", "axis")
         .attr("height", height * .03 )
@@ -171,6 +162,10 @@ function drawChartColors(){
         .attr("transform", "translate(" + width/3 + ","+ height *.98 + ")")
         .call(axis)
 
+
+
+
+    $("path").attr("value","No Data Provided");
 
     filteredData.forEach(function(d,i,a){
         color = colorScale(d[filterValues.metric])
@@ -186,5 +181,14 @@ function drawChartColors(){
 
     })
 
+    tip = d3.tip().attr('class', 'd3-tip').html(function(d) {
+        var html ="Country: "+  d.properties.name +
+            "<br/> Region: "+ region_short[d.properties.featurecla] +
+            "<br/> Value: "+ d3.selectAll('path').filter("."+d.properties.featurecla).attr("value")
+        //    console.log(filteredData[d.properties.featurecla])
+        //  console.log("tip", d)
+        return html;
+    });
 
+    vis.call(tip)
 }

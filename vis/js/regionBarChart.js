@@ -23,17 +23,15 @@ var regionBarChart = function(dataSet, regionGraphDiv) {
             class: "barChart"
         })
         .on("click", function(d){
-            $("#mainSelect").val("regionChart")
-          //  modal.open({content: $('<div id="bigChart"  style="width:800px"></div>')});
-           // regionMetricsGraph(dataSet, "#bigChart");
+            $("#mainSelect").val("regionBarChart");
+         $('#filterForm').change();
+
         } );
-    // .append("g").attr({
-    //     transform: "translate(" + margin.left + "," + margin.top + ")"
-    // });
+
     var yMin = d3.min(dataSet, function(d) { return +d[filterValues.metric];} );   //<-------------------------------------------------------------------------------------------------
     var yMax = d3.max(dataSet, function(d) { return +d[filterValues.metric];} );   //<-------------------------------------------------------------------------------------------------
 
-//        xScale = d3.scale.ordinal().rangeRoundBands([margin.left, width], .1);
+
     xScale = d3.scale.linear()
         .domain([0, dataSet.length-1])
         .range([margin.left, width]);
