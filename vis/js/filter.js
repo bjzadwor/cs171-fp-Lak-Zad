@@ -102,7 +102,7 @@ function filter(){
         drawMap('#mainVis');
         createAgeBars(barChartData, "#vis1");
         regionBarChart(filteredData, "#vis2");
-       // drawChartColors();
+
         break;
     case"ageGroups":
 
@@ -110,7 +110,7 @@ function filter(){
         drawMap('#vis1');
         createAgeBars(barChartData, "#mainVis");
         regionBarChart(filteredData, "#vis2");
-        //drawChartColors();
+
         break;
 
 
@@ -120,7 +120,7 @@ function filter(){
         drawMap('#vis2');
         createAgeBars(barChartData, "#vis1");
         regionBarChart(filteredData, "#mainVis");
-       // drawChartColors();
+
         break;
 
 
@@ -129,7 +129,7 @@ function filter(){
         drawMap('#mainVis');
         createAgeBars(barChartData, "#vis1");
         regionBarChart(filteredData, "#vis2");
-        drawChartColors();
+
     break;
 
     }

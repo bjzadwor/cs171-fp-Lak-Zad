@@ -10,7 +10,7 @@ showModalDialog
 function drawMap(chosenDiv){
 
 
-
+    $(".d3-tip").remove();
     var divWidth = $(chosenDiv).width()
 
     xy = d3.geo.conicEqualArea()
@@ -38,6 +38,10 @@ function drawMap(chosenDiv){
        .attr("width", width)
        .attr("height", height )
       .attr("fill", "#9FD7F5")
+        .on("click", function(){
+            $("#mainSelect").val("map");
+            $("#filterForm").change();
+        })
 
 
 
@@ -62,18 +66,16 @@ var regionColor;
         .attr("stroke", "#222")
         .attr("stroke-width",.25)
         .on("mouseover", function(d){
-            // color the borders red and highlight the region
+            // highlight the region and show the tool tip
             className = "."+d.properties.featurecla
             d3.selectAll(className).filter("path")
-               .attr("stroke", "red")
                .attr("fill", "yellow");
 
             d3.selectAll(className).filter("rect")
-                .attr("stroke", "red")
-                .attr("fill", "yellow");
-            console.log(d);
+                .attr("fill", "yellow")
+                .attr("stroke", "yellow");
+
             tip.show(d)
-         //   $('.d3-tip').offset({left:(window.outerWidth/4),top:0})
         })
         .on("mouseout", function(d){
 
@@ -93,7 +95,7 @@ var regionColor;
                 .attr("fill", "black");
 
         })
-        .on("click", function(d){
+        .on("click", function(d){   // when you click on a region, change the filter to that region.
             var className = "."+d.properties.featurecla
             $("#regionSelect").val(d.properties.featurecla);
             $("#filterForm").change();
@@ -177,17 +179,35 @@ function drawChartColors(){
                 e.color = color
                 e.value = d[filterValues.metric]
                 return d[filterValues.metric]
+
             })
 
     })
 
     tip = d3.tip().attr('class', 'd3-tip').html(function(d) {
+var people;
+        switch (filterValues.sex) {
+            case "Male":
+                people = " males";
+                break;
+            case "Female":
+                people = " females";
+                break;
+            default:
+                people = " people";
+                break;
+        }
+
         var html ="Country: "+  d.properties.name +
             "<br/> Region: "+ region_short[d.properties.featurecla] +
-            "<br/> Value: "+ d3.selectAll('path').filter("."+d.properties.featurecla).attr("value")
-        //    console.log(filteredData[d.properties.featurecla])
-        //  console.log("tip", d)
-        return html;
+            "<br/>" + d3.selectAll('path').filter("."+d.properties.featurecla).attr("value") + " "
+            + metric[filterValues.metric] + people +
+            "<br />" + "due to " + cause_value[filterValues.cause]
+
+
+
+
+          return html;
     });
 
     vis.call(tip)

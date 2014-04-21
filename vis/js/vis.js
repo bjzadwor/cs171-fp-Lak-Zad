@@ -17,8 +17,7 @@ var cause_medium = {};
 var cause_value = {};
 var age_value = {};
 var age_name = {};
-var metric_value = {};
-var metric_name = {};
+var metric = {};
 var className;
 var cause_value_var = 0;
 var age_value_var = 0;
@@ -35,6 +34,18 @@ var filterValues = {sex: "Both", year:"1990"};
 
 dataLoaded = false;
 geoJSONLoaded = false;
+
+
+
+metric["death_rate"] = "Death Rate Per 100,000";
+metric["Death Rate Per 100,000"] = "death_rate";
+metric["DALY_rate"] = "Disability Adjusted Life Years per 100,000";
+metric["Disability Adjusted Life Years per 100,000"] = "DALY_rate";
+metric["YLD_rate"] = "Years Lived with Disabilty per 100,000";
+metric["Years Lived with Disabilty per 100,000"] = "YLD_rate";
+metric["YLL_rate"] = "Years of Life Lost per 100,000";
+metric["Years of Life Lost per 100,000"] = "YLL_rate";
+
 
 
 /*
