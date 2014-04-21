@@ -184,8 +184,11 @@ function drawChartColors(){
 
     })
 
-    tip = d3.tip().attr('class', 'd3-tip').html(function(d) {
-var people;
+    tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .offset([-10,0])
+        .html(function(d) {
+        var people;
         switch (filterValues.sex) {
             case "Male":
                 people = " males";
@@ -197,18 +200,15 @@ var people;
                 people = " people";
                 break;
         }
-
         var html ="Country: "+  d.properties.name +
             "<br/> Region: "+ region_short[d.properties.featurecla] +
             "<br/>" + d3.selectAll('path').filter("."+d.properties.featurecla).attr("value") + " "
             + metric[filterValues.metric] + people +
             "<br />" + "due to " + cause_value[filterValues.cause]
 
+        return html;
+        });
 
-
-
-          return html;
-    });
 
     vis.call(tip)
 }
