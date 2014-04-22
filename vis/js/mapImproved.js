@@ -188,7 +188,11 @@ function drawChartColors2(){
         .attr("transform", "translate(" + width/3 + ","+ height *.98 + ")")
         .call(axis)
 
-
+    improvedMapSvg.append("g")
+        .attr("transform", "translate(" + 5 + ","+ height *.98 + ")")
+        .append("text")
+        .text("Reset Zoom")
+        .on("click", filter);
 
 
     $("path").attr("value","No Data Provided");
