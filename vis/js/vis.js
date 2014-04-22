@@ -69,7 +69,7 @@ d3.csv("data/region.csv", function(csv){
 }) // end csv("data/region.csv")
 
 // Load the data set
-d3.csv("data/fullSmall.csv", function(csv){
+d3.csv("data/fullsmall.csv", function(csv){
 //d3.csv("http://www.zadworney.com/z/vis/filter.php", function(csv){
     globalCSV = csv;
 	csv.forEach( function(row){
