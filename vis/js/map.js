@@ -35,9 +35,9 @@ function drawMap(chosenDiv){
 
 
     vis.append("rect")
-       .attr("width", width)
-       .attr("height", height )
-      .attr("fill", "#9FD7F5")
+        .attr("width", width)
+        .attr("height", height )
+        .attr("fill", "#9FD7F5")
         .on("click", function(){
             $("#mainSelect").val("map");
             $("#filterForm").change();
@@ -52,11 +52,11 @@ function drawMap(chosenDiv){
 
     map = vis.append("g")
         .attr("transform", function(){
-       if(chosenDiv == "#mainVis") return "translate(-30,-100)"
-       else return 'translate(-325,-140)'
-    })
+            if(chosenDiv == "#mainVis") return "translate(-30,-100)"
+            else return 'translate(-325,-140)'
+        })
 
-var regionColor;
+    var regionColor;
     map.selectAll("path")
         .data(geoJSON.features)
         .enter()
@@ -69,7 +69,7 @@ var regionColor;
             // highlight the region and show the tool tip
             className = "."+d.properties.featurecla
             d3.selectAll(className).filter("path")
-               .attr("fill", "yellow");
+                .attr("fill", "yellow");
 
             d3.selectAll(className).filter("rect")
                 .attr("fill", "yellow")
@@ -189,25 +189,25 @@ function drawChartColors(){
         .attr('class', 'd3-tip')
         .offset([-10,0])
         .html(function(d) {
-        var people;
-        switch (filterValues.sex) {
-            case "Male":
-                people = " males";
-                break;
-            case "Female":
-                people = " females";
-                break;
-            default:
-                people = " people";
-                break;
-        }
-        var html ="Country: "+  d.properties.name +
-            "<br/> Region: "+ region_short[d.properties.featurecla] +
-            "<br/>" + d3.selectAll('path').filter("."+d.properties.featurecla).attr("value") + " "
-            + metric[filterValues.metric] + people +
-            "<br />" + "due to " + cause_value[filterValues.cause]
+            var people;
+            switch (filterValues.sex) {
+                case "Male":
+                    people = " males";
+                    break;
+                case "Female":
+                    people = " females";
+                    break;
+                default:
+                    people = " people";
+                    break;
+            }
+            var html ="Country: "+  d.properties.name +
+                "<br/> Region: "+ region_short[d.properties.featurecla] +
+                "<br/>" + d3.selectAll('path').filter("."+d.properties.featurecla).attr("value") + " "
+                + metric[filterValues.metric] + people +
+                "<br />" + "due to " + cause_value[filterValues.cause]
 
-        return html;
+            return html;
         });
 
 

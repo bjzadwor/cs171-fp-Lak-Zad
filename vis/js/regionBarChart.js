@@ -20,14 +20,13 @@ function regionBarChart (dataSet, regionGraphDiv) {
         });
 
 
-    var barChartRect = svg.append("rect")
+    var barChartBackgroundRect = svg.append("rect")
         .attr({ width: width + margin.left + margin.right,
             height: height + margin.top + margin.bottom,
-            class: "barChartRect",
+            class: "barChartBackgroundRect",
             fill: "white"
         })
         .on("click", function(d){ // if a user click on the chart(not a bar) open in big window
-            console.log("RegionBarChart Rectangle Clicked");
             $("#mainSelect").val("regionBarChart");
             $('#filterForm').change();
 
@@ -92,7 +91,7 @@ function regionBarChart (dataSet, regionGraphDiv) {
         .enter().append("rect")
         .attr("class",
         function(d){
-            var classString = "bar "
+            var classString = "bar pointer "
             classString = classString + d.region_name;
             return classString;
         })

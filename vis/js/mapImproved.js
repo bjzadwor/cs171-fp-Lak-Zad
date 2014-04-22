@@ -190,6 +190,7 @@ function drawChartColors2(){
 
     improvedMapSvg.append("g")
         .attr("transform", "translate(" + 5 + ","+ height *.98 + ")")
+        .attr("class", "pointer")
         .append("text")
         .text("Reset Zoom")
         .on("click", filter);
