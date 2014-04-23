@@ -157,5 +157,5 @@ function filter(){
     drawImprovedMap(mapDivString);
     createAgeBars(barChartData, ageGroupBarChartDivString);
     regionBarChart(filteredData, regionalBarChartDivString);
-    trendLineGraph(trendChartData, "#vis3");
+    trendLineGraph(trendChartData, ageLineChartDivString);
 }// end filter()
