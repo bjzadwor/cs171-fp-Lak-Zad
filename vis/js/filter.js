@@ -66,6 +66,11 @@ function filter(){
     barChartData = [];
     simpleYearChartData = [];
     console.log("filter firing");
+    trendChartData = {};
+    trendChartData["1990"] = [];
+    trendChartData["2005"] = [];
+    trendChartData["2010"] = [];
+
     // Loop through the data, testing each data point and adding it to the appropriate array if it
     // is one of the data points needed for the visualization.
     fullData.every(function(element, index, array){
@@ -95,6 +100,14 @@ function filter(){
             && (element.age_name.trim() == age_value[filterValues.age])
             )
         {simpleYearChartData.push(element);}
+
+        if ((element.cause_medium.trim() == cause_value[filterValues.cause])
+            && (element.region_name.trim() == filterValues.region)
+            && (element.sex_name.trim() == filterValues.sex)
+            && (element.age_name.trim() != mappings["ALL"])) 
+        {
+            trendChartData[element.year.trim()].push(element);
+        }
 
         return true;
     })//end fullData.every
