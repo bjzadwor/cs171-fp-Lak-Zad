@@ -133,7 +133,7 @@ console.log("Drawing Chart Colors 2")
     scaleValues = d3.extent(filteredData, function(d){
         return +d[filterValues.metric]
     })
-
+// touch
 
 
     // http://bl.ocks.org/mbostock/1086421
