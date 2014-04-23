@@ -130,7 +130,7 @@ function filter(){
 
 
         break;
-    case"ageBarChart":
+        case"ageBarChart":
             console.log("drawing Age Groups in Main Vis");
             ageGroupBarChartDivString = "#mainVis";
             mapDivString="#vis1";
@@ -142,6 +142,10 @@ function filter(){
             mapDivString="#vis2";
         break;
 
+        case "trendLineChart":
+            ageLineChartDivString = "#mainVis";
+            mapDivString="#vis3";
+        break;
 
     default:
         console.log("Default Fired You should not be seeing this");
@@ -153,4 +157,5 @@ function filter(){
     drawImprovedMap(mapDivString);
     createAgeBars(barChartData, ageGroupBarChartDivString);
     regionBarChart(filteredData, regionalBarChartDivString);
+    trendLineGraph(trendChartData, "#vis3");
 }// end filter()

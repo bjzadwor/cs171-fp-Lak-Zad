@@ -2,22 +2,15 @@
  * library for subgraphs
  */
 
-var trendGraphLoaded = false;
 var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
     var lineChart, xAxis, xScale, yAxis,  yScale;
     var lineChartContainerWidth = $(trendGraphDiv).width()
-//    var margin = { left: 60 , right: 20, top: 25, bottom: 30};
     var margin = { left: 40 , right: 0, top: 15, bottom: 40};
     var width = lineChartContainerWidth - margin.left - margin.right;
     var height = (.65*lineChartContainerWidth) - margin.bottom - margin.top;
     if (trendGraphDiv == "#mainVis") height = (250)
     var xAxisMetric = "age_name";
 
-    if (trendGraphLoaded) {
-        var selectString = trendGraphDiv + " .lineChart"
-        d3.select(selectString).remove();
-    }
-    trendGraphLoaded = true;
 
     lineChart = d3.select(trendGraphDiv).append("svg")
         .attr({ width: width + margin.left + margin.right,
@@ -25,9 +18,8 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
             class: "lineChart"
         })
         .on("click", function(){
-            $("#mainSelect").val("trendChart")
-            modal.open({content: $('<div id="bigChart"  style="width:800px"></div>')});
-            trendLineGraph(dataSet, "#bigChart");
+            $("#mainSelect").val("trendLineChart")
+            $('#filterForm').change();
         });
         // .append("g").attr({ 
         //     transform: "translate(" + margin.left + "," + margin.top + ")"
