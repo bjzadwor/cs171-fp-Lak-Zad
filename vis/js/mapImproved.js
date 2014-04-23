@@ -42,7 +42,7 @@ function drawImprovedMap(improvedMapDiv) {
 
     improvedMapG.append("rect")
         .attr("class", "background")
-        .attr("fill", "#9FD7F5")
+        .attr("fill", backgroundColor)
         .attr("width", width)
         .attr("height", height)
         .attr("transform", function(){

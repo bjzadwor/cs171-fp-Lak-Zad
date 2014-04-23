@@ -60,6 +60,8 @@ $("#yr2010Button").click(function(){
 * */
 var yearChartData;
 function filter(){
+
+    var mapDivString, ageGroupBarChartDivString, regionalBarChartDivString, ageLineChartDivString;
     filteredData = [];
     barChartData = [];
     simpleYearChartData = [];
@@ -101,43 +103,41 @@ function filter(){
 
     // set the cookie with the filter data.
     $('svg').remove();
+
+    mapDivString = "#mainVis"
+    ageGroupBarChartDivString = "#vis1"
+    regionalBarChartDivString =  "#vis2"
+    ageLineChartDivString = "#vis3"
+
+
     switch (filterValues.main){
     case "map":
 
         console.log("drawing Map in Main Vis");
-        drawMap('#mainVis');
-        createAgeBars(barChartData, "#vis1");
-        regionBarChart(filteredData, "#vis2");
+
 
         break;
     case"ageBarChart":
-
-        console.log("drawing Age Groups in Main Vis");
-        drawMap('#vis1');
-        createAgeBars(barChartData, "#mainVis");
-        regionBarChart(filteredData, "#vis2");
-
+            console.log("drawing Age Groups in Main Vis");
+            ageGroupBarChartDivString = "#mainVis";
+            mapDivString="#vis1";
         break;
 
 
         case "regionBarChart":
-        $('svg').remove();
-        console.log("drawing Region Bar Chart in Main Vis")
-        drawMap('#vis2');
-        createAgeBars(barChartData, "#vis1");
-        regionBarChart(filteredData, "#mainVis");
-
+            regionalBarChartDivString = "#mainVis";
+            mapDivString="#vis2";
         break;
 
 
     default:
-    console.log("Default Fired You should not be seeing this");
-        drawImprovedMap('#mainVis');
-        //drawImprovedMap('#vis4');
-        createAgeBars(barChartData, "#vis1");
-        regionBarChart(filteredData, "#vis2");
-
+        console.log("Default Fired You should not be seeing this");
     break;
 
     }
+
+    // drawMap(mapDivString);
+    drawImprovedMap(mapDivString);
+    createAgeBars(barChartData, ageGroupBarChartDivString);
+    regionBarChart(filteredData, regionalBarChartDivString);
 }// end filter()

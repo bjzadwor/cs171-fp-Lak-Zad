@@ -30,7 +30,9 @@ var geoJSONLoaded;
 var sex = {male: "Male", female: "Female", both: "Both"};
 var filterValues = {sex: "Both", year:"1990"};
 
+var backgroundColor;
 
+backgroundColor = $('body').css("background-color");
 
 dataLoaded = false;
 geoJSONLoaded = false;
@@ -153,7 +155,7 @@ function drawPage() {
         }
     }
 
-//     drawMap("#mainVis")
+
      $("#filterForm").change();
      $("#loadingOverlay").addClass("hidden");
 

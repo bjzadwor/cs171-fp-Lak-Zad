@@ -3,7 +3,16 @@
  */
 
 
-createSimpleYearChart(yearChartDiv, data){
+createSimpleYearChart(yearChartDiv, simpleYearChartData){
+
+   divWidth = yearChartDiv.width()
+
+
+
+    var margin = {top: 20, right: 80, bottom: 30, left: 50},
+        width = divWidth - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
+
     d3.select(yearChartDiv).append("svg")
         .attr({ width: width + margin.left + margin.right,
                 height: height + margin.top + margin.bottom,
