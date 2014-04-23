@@ -142,7 +142,7 @@ function filter(){
             mapDivString="#vis2";
         break;
 
-/^  ^/
+
     default:
         console.log("Default Fired You should not be seeing this");
     break;
