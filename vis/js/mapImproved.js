@@ -91,17 +91,19 @@ function drawImprovedMap(improvedMapDiv) {
                     .attr("fill", "black");
 
             })
-            .on("dblclick", function(d){   // when you click on a region, change the filter to that region.
+            .on("click", function(d){   // when you click on a region, change the filter to that region.
+                tip.hide();
                 var className = "."+d.properties.featurecla
                 $("#regionSelect").val(d.properties.featurecla);
                 $("#filterForm").change();
                 d3.selectAll(className).attr("fill","yellow"); // color was getting reset when the form changed keep it yellow
+                tip.show(d);
             })
-            .on("click", clicked)
+           // .on("dblclick", dblclicked)
     drawChartColors2();
 }
 
-function clicked(d) {
+function dblclicked(d) {
     var centroid = path.centroid(d),
         translate = projection.translate();
 
@@ -119,24 +121,20 @@ function clicked(d) {
 
 function zoomed() {
     tip.hide();
-    console.log("pre", d3.event.scale)
-
     projection.translate(d3.event.translate).scale(d3.event.scale);
-
-    console.log(d3.event.scale)
     improvedMapG.selectAll("path").attr("d", path);
 }
 
 
 function drawChartColors2(){
 
-
+console.log("Drawing Chart Colors 2")
 
     scaleValues = d3.extent(filteredData, function(d){
         return +d[filterValues.metric]
     })
 
-    console.log(vis);
+
 
     // http://bl.ocks.org/mbostock/1086421
 

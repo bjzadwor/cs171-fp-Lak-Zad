@@ -15,10 +15,16 @@ test
     <!-- Load the scripts -->
     <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/d3.min.js"></script>
-    <script type="text/javascript" src="js/d3.tip.js"></script>
-	<!-- http://locachejs.org/   -->
-	<!-- <script type="text/javascript" src="js/locache.min.js"></script>-->
+ 
+
+
+	<!--[if gt IE 8]><!-->
+		<script type="text/javascript" src="js/d3.min.js"></script> 
+		<script type="text/javascript" src="js/d3.min.js"></script
+		
+	<!--<![endif]-->
+ 
+	
    <script>
 var data; var jsonCsv; var readData;
 var fileSystem;
@@ -146,10 +152,13 @@ function getMyFile(fs,filename){
 }
 
 
+  
 
 
 
 
    </script>
+nn
+
 </body>
 </html>

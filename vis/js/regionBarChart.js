@@ -25,7 +25,7 @@ function regionBarChart (dataSet, regionGraphDiv) {
         .attr({ width: width + margin.left + margin.right,
             height: height + margin.top + margin.bottom,
             class: "barChartBackgroundRect",
-            fill: "white"
+            fill: backgroundColor
         })
         .on("click", function(d){ // if a user click on the chart(not a bar) open in big window
             $("#mainSelect").val("regionBarChart");

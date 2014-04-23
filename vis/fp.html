@@ -244,11 +244,14 @@
             cursor : pointer;
         }
 
-        body{
+        select[selected], .blueBackground, body{
             background : #B7D5ED;
             bakcground : #C8D2F7;
         }
 
+        select option{
+            bakcground : #C8D2F7;
+        }
 
     </style>
 
@@ -277,8 +280,8 @@
             <form id="filterForm" class = "something">
                 <label for="mainSelect">Main Visualization:</label>
                 <br />
-                <select id ="mainSelect">
-                    <option value="map">Map</option>
+                <select id ="mainSelect" class="blueBackground">
+                    <option value="map" class = "blueBackground">Map</option>
                     <!--   <option value="DALY_abs">Disability Adjusted Life Years</option> -->
                     <option value="ageBarChart">Age Groups</option>
                     <!--    <option value="YLD_abs">Years Lived with Disability</option> -->
@@ -359,22 +362,27 @@
     <!-- Load the scripts -->
     <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/d3.min.js"></script>
-    <script type="text/javascript" src="js/d3.tip.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/categoryPieChart.js"></script>
+  
+	<!--[if gt IE 8]><!-->
+	<script type="text/javascript" src="js/d3.min.js"></script> 
+	<script type="text/javascript" src="js/d3.tip.js"></script>
+	<script type="text/javascript" src="js/vis.js"></script>
+	<script type="text/javascript" src="js/categoryPieChart.js"></script>
     <script type="text/javascript" src="js/ageBarChart.js"></script>
     <script type="text/javascript" src="js/regionBarChart.js"></script>
     <script type="text/javascript" src="js/trendLineGraph.js"></script>
     <script type="text/javascript" src="js/filter.js"></script>
     <script type="text/javascript" src="js/modal.js"></script>
     <script type="text/javascript" src="js/cookies.js"></script>
-    <script type="text/javascript" src="js/map.js"></script>
+  <!--  <script type="text/javascript" src="js/map.js"></script> -->
     <script type="text/javascript" src="js/regionBarChart.js"></script>
     <script type="text/javascript" src="js/mapImproved.js"></script>
+		
+	<!--<![endif]-->
+ 
 
 
-    <script type="text/javascript" src="js/vis.js"></script>
     <!--<script type="text/javascript" src="js/vis.js"></script>-->
 
 </body>

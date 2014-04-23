@@ -36,6 +36,8 @@ var filterValues = {sex: "Both", year:"1990"};
 var backgroundColor;
 
 backgroundColor = $('body').css("background-color");
+$("select").addClass("blueBackground");
+
 
 dataLoaded = false;
 geoJSONLoaded = false;
