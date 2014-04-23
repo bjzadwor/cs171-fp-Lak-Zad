@@ -11,6 +11,7 @@ var createAgeBars = function(dataSet, div) {
     var margin = { left: 40 , right: 0, top: 15, bottom: 40};
     var width = barChartContainerWidth - margin.left - margin.right;
     var height = (.65*barChartContainerWidth) - margin.bottom - margin.top;
+	var xAxisMetric = "age_name";
     if (div == "#mainVis") height = (250)
 
 
@@ -42,7 +43,7 @@ var createAgeBars = function(dataSet, div) {
             .scale(xScale)
             .orient("bottom")
             .ticks(dataSet.length-1)
-            .tickFormat(function(i) { return dataSet[i]["age_name"]; });
+            .tickFormat(function(i) { return dataSet[i][xAxisMetric]; });
 
         yAxis = d3.svg.axis()
             .scale(yScale)
@@ -73,16 +74,14 @@ var createAgeBars = function(dataSet, div) {
             .attr("y", 5 )
             .style("text-anchor", "middle")
             .text(function(){
-                return filterValues.metric
-
-
-            })                                                                                    // needs to be replaced with filter data
+                return mappings[filterValues.metric]
+            })
             .attr("class", "caption");
     // Bottom  Caption
         ageBars.append("text")
             .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," + (height + margin.top+ margin.bottom) + ")")
             .style("text-anchor", "middle")
-            .text("Age Group")
+            .text(mappings[xAxisMetric])
             .attr("class", "caption");
 
         ageBars.selectAll(".bar")

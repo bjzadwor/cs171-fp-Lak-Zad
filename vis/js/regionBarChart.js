@@ -10,6 +10,7 @@ function regionBarChart (dataSet, regionGraphDiv) {
     var width = barChartContainerWidth - margin.left - margin.right;
     var height = (.65*barChartContainerWidth) - margin.bottom - margin.top;
     if (regionGraphDiv == "#mainVis") height = (250)
+    var xAxisMetric = "region_name";
 
 
 
@@ -48,7 +49,7 @@ function regionBarChart (dataSet, regionGraphDiv) {
         .scale(xScale)
         .orient("bottom")
         .ticks(dataSet.length-1)
-        .tickFormat(function(i) { return dataSet[i]["region_name"]; });
+        .tickFormat(function(i) { return dataSet[i][xAxisMetric]; });
 
     yAxis = d3.svg.axis()
         .scale(yScale)
@@ -76,14 +77,14 @@ function regionBarChart (dataSet, regionGraphDiv) {
         .attr("y", margin.top )
         .style("text-anchor", "middle")
         .text(function() {
-            return filterValues.metric
+            return mappings[filterValues.metric];
         })
         .attr("class", "caption");
 
   var bottomLabel =  svg.append("text")   // Bottom Label
         .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," + (height + 2* margin.top) + ")")
         .style("text-anchor", "middle")
-        .text("Regions") // needs to be replaced with filter data
+        .text(mappings[xAxisMetric])
         .attr("class", "caption");
 
    var bars = svg.selectAll(".bar")
