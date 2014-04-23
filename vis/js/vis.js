@@ -18,15 +18,18 @@ var cause_value = {};
 var age_value = {};
 var age_name = {};
 var metric = {};
+var mappings = {};
 var className;
 var cause_value_var = 0;
 var age_value_var = 0;
 var fullData;
 var filteredData;
 var barChartData;
+var trendChartData;
 var geoJSON;
 var dataLoaded;
 var geoJSONLoaded;
+var mappingsLoaded;
 var sex = {male: "Male", female: "Female", both: "Both"};
 var filterValues = {sex: "Both", year:"1990"};
 
@@ -34,6 +37,7 @@ var filterValues = {sex: "Both", year:"1990"};
 
 dataLoaded = false;
 geoJSONLoaded = false;
+mappingsLoaded = false;
 
 
 
@@ -67,6 +71,13 @@ d3.csv("data/region.csv", function(csv){
 
 
 }) // end csv("data/region.csv")
+
+d3.csv("data/mappings.csv", function(csv){
+    csv.forEach(function(row) {
+        mappings[row.short_name] = row.full_name;
+    })
+    mappingsLoaded = true;
+});
 
 // Load the data set
 d3.csv("data/fullsmall.csv", function(csv){
@@ -110,7 +121,7 @@ d3.csv("data/fullsmall.csv", function(csv){
     fullData = csv;
     console.log("Full Data Loaded")
     dataLoaded = true;
-    if (dataLoaded && geoJSONLoaded){ drawPage();}
+    if (dataLoaded && geoJSONLoaded && mappingsLoaded){ drawPage();}
 
 })
 
@@ -120,11 +131,9 @@ d3.json("json/Combined.geojson", function(json) {
     geoJSON = json;
     console.log("geoJson Loaded")
     geoJSONLoaded = true;
-    if (dataLoaded && geoJSONLoaded  ){ drawPage();}
+    if (dataLoaded && geoJSONLoaded  && mappingsLoaded ){ drawPage();}
 
 });
-
-
 
 function drawPage() {
 
