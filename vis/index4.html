@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GBD</title>
+
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    <link href="css/bootstrap.css" rel="stylesheet" type = "text/css">
+    <link href="css/bootstrap-theme.css" rel="stylesheet" type = "text/css">
+  <!--
+   <link href="css/bootstrap-responsive.css" rel="stylesheet" type = "text/css">
+-->
+
+
+    <style>
+
+		.d3-tip {
+          line-height: 1;
+          font-weight: bold;
+          padding: 12px;
+          background: rgba(0, 0, 0, 0.8);
+          color: #fff;
+          border-radius: 2px;
+          pointer-events: none;
+        }
+
+        /* Creates a small triangle extender for the tooltip */
+        .d3-tip:after {
+          box-sizing: border-box;
+          display: inline;
+          font-size: 10px;
+          width: 100%;
+          line-height: 1;
+          color: rgba(0, 0, 0, 0.8);
+          position: absolute;
+
+        }
+
+        /* Northward tooltips */
+        .d3-tip.n:after {
+          content: "\25BC";
+          margin: -1px 0 0 0;
+          top: 100%;
+          left: 0;
+          text-align: center;
+        }
+
+        /* Eastward tooltips */
+        .d3-tip.e:after {
+          content: "\25C0";
+          margin: -4px 0 0 0;
+          top: 50%;
+          left: -8px;
+        }
+
+        /* Southward tooltips */
+        .d3-tip.s:after {
+          content: "\25B2";
+          margin: 0 0 1px 0;
+          top: -8px;
+          left: 0;
+          text-align: center;
+        }
+
+        /* Westward tooltips */
+        .d3-tip.w:after {
+          content: "\25B6";
+          margin: -4px 0 0 -1px;
+          top: 50%;
+          left: 100%;
+        }
+
+        .floatR{
+            float:right;
+        }
+
+        .floatL{
+            float:left;
+        }
+
+        .clear{
+            clear: both;
+        }
+
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #BBBBBB;
+            shape-rendering: crispEdges;
+        }
+
+        .caption {
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 9px;
+        }
+
+        .axis text {
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 8px;
+        }
+        .line {
+            fill: none;
+        }
+        .dataArea {
+            stroke: 1px steelblue;
+            fill:steelblue;
+            fill-opacity:0.5;
+            clip-path: url(#clip);
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            opacity: 0.9;
+            filter: alpha(opacity=50);
+        }
+
+        #modal {
+            position:absolute;
+            background:rgba(0,0,0,0.2);
+            border-radius:14px;
+            padding:8px;
+        }
+
+        #loadingOverlay{
+            display:table;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            opacity: 0.99;
+
+        }
+        #loadingOuter{
+            float:left;
+            height:50%;
+            margin-bottom: -250px;
+            width:100%;
+        }
+
+        #loading{
+            clear:both;
+            height: 500px;
+            position:relative;
+            width: 130px;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+
+        #loading h1{
+            color: black;
+        }
+
+        #content {
+            border-radius:8px;
+            background:#fff;
+            padding:20px;
+        }
+
+        #close {
+            position:absolute;
+            background:url(img/close.png) 0 0 no-repeat;
+            width:24px;
+            height:27px;
+            display:block;
+            text-indent:-9999px;
+            top:-7px;
+            right:-7px;
+        }
+
+        .centerText
+        {
+            text-align : center;
+        }
+
+        select{
+            width:280px;
+        }
+
+        .hidden{
+            display:none;
+        }
+
+        #inst{
+            background-color: black;
+            color:white;
+
+        }
+        header {
+            width: 1200px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        #container{
+            width: 1200px;
+        }
+
+        .border{
+            border:none;
+
+        }
+
+        #mainVis{
+            width: 895px;
+        }
+
+        #rightColumn{
+
+            padding-left: 5px;
+            width: 300px;
+        }
+        .third{
+            width: 95px;
+
+        }
+        .btn-group{
+            margin-left:  auto;
+            margin-right: auto;
+        }
+
+        .vis{
+            width:300px;
+        }
+        #filterForm label{
+            margin:0;
+        }
+
+        path{
+            cursor : pointer;
+        }
+
+        .pointer {
+            cursor : pointer;
+        }
+
+        select[selected], .blueBackground, body{
+            background : #B7D5ED;
+            bakcground : #C8D2F7;
+        }
+
+        select option{
+            bakcground : #C8D2F7;
+        }
+
+    </style>
+
+</head>
+<body>
+<header class ="header">
+    <div id="help" class="help pull-right">Help</div>
+    <h1 class="centerText">Global Mortality Dashboard</h1>
+</header>
+
+
+
+<div id="container" class="container ">
+    <div id="inst" class="hidden">Instructions Container
+
+    <div id="checkbox" class="pull-right">
+        <form>
+            <input type="checkbox" name="stop" value="stop">I do not want to see these instructions when I load the page
+        </form>
+    </div>
+    </div>
+
+    <div class="row">
+        <div id="mainVis" class="floatL border"></div>
+        <div id="rightColumn" class="floatR border">
+            <form id="filterForm" class = "something">
+                <label for="mainSelect">Main Visualization:</label>
+                <br />
+                <select id ="mainSelect" class="blueBackground">
+                    <option value="map" class = "blueBackground">Map</option>
+                    <!--   <option value="DALY_abs">Disability Adjusted Life Years</option> -->
+                    <option value="ageBarChart">Age Groups</option>
+                    <!--    <option value="YLD_abs">Years Lived with Disability</option> -->
+                    <option value="regionBarChart">Regional Bar Chart</option>
+                    <!--    <option value="YLL_abs">Years of Life Lost</option> -->
+                    <option value="vis4">Vis4</option>
+                    <!--    <option value="death_abs">Number of Deaths</option> -->
+                </select>
+                <br />
+                <label for="regionSelect">Region: </label>
+                <br />
+                <select id = "regionSelect"></select>
+                <br />
+                <label for = "causeSelect">Cause: </label>
+                <br />
+                <select id ="causeSelect"></select>
+                <br />
+                <label for ="ageSelect">Age Range: </label>
+                <br />
+                <select id ="ageSelect"></select>
+                <br />
+                <label for = "metricSelect">Metric: </label>
+                <br />
+                <select id ="metricSelect">
+                    <option value="death_rate">Death Rate Per 100,000</option>
+                 <!--   <option value="DALY_abs">Disability Adjusted Life Years</option> -->
+                    <option value="DALY_rate">Disability Adjusted Life Years per 100,000</option>
+                 <!--    <option value="YLD_abs">Years Lived with Disability</option> -->
+                    <option value="YLD_rate">Years Lived with Disabilty per 100,000 </option>
+                 <!--    <option value="YLL_abs">Years of Life Lost</option> -->
+                    <option value="YLL_rate">Years of Life Lost per 100,000</option>
+                 <!--    <option value="death_abs">Number of Deaths</option> -->
+                </select>
+                <br />
+                <label>Sex:</label>
+                <br />
+                <div class="btn-group btn-group-xs">
+                    <button type="button" id="maleButton" class="third sexButton btn btn-default">Male</button>
+                    <button type="button" id="bothButton" class="third sexButton btn btn-default btn-primary">Both</button>
+                    <button type="button" id="femaleButton" class="third sexButton btn btn-default">Female</button>
+                </div>
+                <br />
+                <label>Year:</label>
+                <br />
+                <div class="btn-group btn-group-xs">
+                    <button type="button" id="yr1990Button" class="third yrButton btn btn-default btn-primary">1990</button>
+                    <button type="button" id="yr2005Button" class="third yrButton btn btn-default">2005</button>
+                    <button type="button" id="yr2010Button" class="third yrButton btn btn-default">2010</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div id="vis1" class="vis floatL">vis1</div>
+        <div id="vis2" class="vis floatL">vis2</div>
+        <div id="vis3" class="vis floatL">vis3</div>
+        <div id="vis4" class="vis floatL">vis4</div>
+
+    </div>
+    <div class="row">
+        <div id="vis5" class="vis floatL">vis5</div>
+        <div id="vis6" class="vis floatL">vis6</div>
+        <div id="vis7" class="vis floatL">vis7</div>
+        <div id="vis8" class="vis floatL">vis8</div>
+
+    </div>
+</div>
+<div id="loadingOverlay" class="">
+    <div id="loadingOuter">
+        <div id="loading">
+            <h1 class="center">Loading</h1>
+            <img src="img/ajax-loader.gif" alt = "Please be patient the page is loading"/>
+        </div>
+    </div>
+</div>
+
+    <!-- Load the scripts -->
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+  
+	<!--[if gt IE 8]><!-->
+	<script type="text/javascript" src="js/d3.min.js"></script> 
+	<script type="text/javascript" src="js/d3.tip.js"></script>
+	<script type="text/javascript" src="js/vis4.js"></script>
+    <script type="text/javascript" src="js/mapImproved.js"></script>
+	<script type="text/javascript" src="js/categoryPieChart.js"></script>
+    <script type="text/javascript" src="js/ageBarChart.js"></script>
+    <script type="text/javascript" src="js/regionBarChart.js"></script>
+    <script type="text/javascript" src="js/trendLineGraph.js"></script>
+    <script type="text/javascript" src="js/filter.js"></script>
+    <script type="text/javascript" src="js/modal.js"></script>
+    <script type="text/javascript" src="js/cookies.js"></script>
+  <!--  <script type="text/javascript" src="js/map.js"></script> -->
+    <script type="text/javascript" src="js/regionBarChart.js"></script>
+
+		
+	<!--<![endif]-->
+ 
+
+
+    <!--<script type="text/javascript" src="js/vis.js"></script>-->
+
+</body>
+</html>
