@@ -11,7 +11,6 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
     if (trendGraphDiv == "#mainVis") height = (250)
     var xAxisMetric = "age_name";
 
-
     lineChart = d3.select(trendGraphDiv).append("svg")
         .attr({ width: width + margin.left + margin.right,
             height: height + margin.top + margin.bottom,
@@ -21,14 +20,14 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
             $("#mainSelect").val("trendLineChart")
             $('#filterForm').change();
         });
-        // .append("g").attr({ 
-        //     transform: "translate(" + margin.left + "," + margin.top + ")"
-        // });
-        var yMin = d3.min(dataSet["1990"], function(d) { return +d[filterValues.metric];} );
-//                   d3.min(dataSet, function(dYear) { console.log(dYear); return d3.min(dYear, function(e) { return e[filterValues.metric]; }); });
-        var yMax = d3.max(dataSet["1990"], function(d) { return +d[filterValues.metric];} );
-console.log("yMin", yMin);
-console.log("yMax", yMax);
+
+        var arrData = [];
+        for (var key in dataSet) {
+            arrData.push(dataSet[key]);
+        }
+        
+        var yMin = d3.min(arrData, function(d, i) { return d3.min(d, function(e, i) { return +e[filterValues.metric]; }); });
+        var yMax = d3.max(arrData, function(d, i) { return d3.max(d, function(e, i) { return +e[filterValues.metric]; }); });
 
 //        xScale = d3.scale.ordinal().rangeRoundBands([margin.left, width], .1);
         xScale = d3.scale.linear()
@@ -82,20 +81,19 @@ console.log("yMax", yMax);
             .attr("class", "caption");
 
         lineChart.append("text")
-            .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," + (height + 2* margin.top) + ")")
+            .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," + (height + margin.top + margin.bottom) + ")")
             .style("text-anchor", "middle")
             .text(mappings[xAxisMetric]) 
             .attr("class", "caption");
 
+        var color = d3.scale.category10()
+            .domain(0, 2); 
+
         var line = d3.svg.line()
-//        .interpolate("basis")
+        .interpolate("basis")
         .x(function(d, i) { return xScale(i); })
         .y(function(d, i) { return yScale(d[filterValues.metric]); });
 
-        var arrData = [];
-        for (var key in dataSet) {
-            arrData.push(dataSet[key]);
-        }
         var yrData = lineChart.selectAll(".year")
             .data(arrData)
             .enter()
@@ -105,7 +103,7 @@ console.log("yMax", yMax);
         yrData.append("path")
             .attr("class", "line")
             .attr("d", function(d) { return line(d);})
-            .style("stroke", "red")
+            .style("stroke", function(d, i) { return color(i);})
             .attr("class", "line");
         
 /*        lineChart.selectAll(".bar")
@@ -120,19 +118,5 @@ console.log("yMax", yMax);
                 .attr("height", function(d) { if (height != yScale(+d[filterValues.metric])) return height - yScale(+d[filterValues.metric]); else return 0.001; })
                 .append("title")
                 .html(function(d) { return (d.year + ": " + region_short[d.region_name] + ", " + d.cause_medium + ", " + d.age_name + ", Sex-" + d.sex_name + " : " +d[filterValues.metric])});
-*/
-
-/*        var color = d3.scale.category10()
-            .domain(d3.keys(dataSet[0]).filter(function(key) { return key !== "Year"; })); // ignore column heading 'Year'
-
-        census = color.domain().map(function(source) { //define census obj with source name and array of years and estimates
-            return {
-                source: source,
-                estimation: dataSet.map(function(d) {
-                    return { year: +d["Year"], 
-                             estimate: +d[source]};
-                })
-            };
-        });
 */
 }

@@ -13,8 +13,8 @@ function regionBarChart (dataSet, regionGraphDiv) {
     var xAxisMetric = "region_name";
 
 
-
-   svg = d3.select(regionGraphDiv).append("svg")
+    var backgroundColor = $('body').css("background-color");
+    svg = d3.select(regionGraphDiv).append("svg")
         .attr({ width: width + margin.left + margin.right,
             height: height + margin.top + margin.bottom,
             class: "barChart"
