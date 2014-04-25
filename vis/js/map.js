@@ -96,11 +96,14 @@ function drawMap(chosenDiv){
 
         })
         .on("click", function(d){   // when you click on a region, change the filter to that region.
-            var className = "."+d.properties.featurecla
-            $("#regionSelect").val(d.properties.featurecla);
-            $("#filterForm").change();
-            d3.selectAll(className).attr("fill","yellow"); // color was getting reset when the form changed keep it yellow
-        })
+            if (chosenDiv == )
+            {
+                var className = "." + d.properties.featurecla
+                $("#regionSelect").val(d.properties.featurecla);
+                $("#filterForm").change();
+                d3.selectAll(className).attr("fill", "yellow"); // color was getting reset when the form changed keep it yellow
+            }
+            })
 
     drawChartColors()  // colorize the chart
 } // end drawMap
