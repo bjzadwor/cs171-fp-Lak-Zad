@@ -37,6 +37,7 @@ function getAndSaveFile() {
                 openFileSystemAndGetMyFile(fs, fileName)
             },
             function (error) {
+                $('#loading').append("<h3>For faster load times and a better user experience, we recommend Google Chrome</h3>");
                 console.log("Internal Error This browser does support the Webkit File System, however another error occurred  we will download the hard way.", error)
                 downloadTheHardWay();
             }
@@ -54,6 +55,7 @@ function saveFile(fs){
 
         fullData = csv;
         console.log("We donloaded the data using d3.csv fullData now contains our data.")
+        processData(fullData);
         console.log("Now we will save it to the local storage so future loads will be faster.")
         jsonCsv = JSON.stringify(csv);
 
@@ -76,9 +78,9 @@ function saveFile(fs){
                 fileWriter.write(blob);
                 console.log("File correctly Written to local file storage");
 
-            }, function(e){console.log("error2");});
+            }, function(e){console.log("error2"); downloadTheHardWay()});
 
-        }, function(e){console.log("error3");});
+        }, function(e){console.log("error3"); downloadTheHardWay()});
 
         var stop = new Date();
         console.log(stop);
@@ -105,11 +107,15 @@ function openFileSystemAndGetMyFile(fs, internalFileName){
                 var reader = new FileReader();
                 reader.onloadend = function () {
                     fullData = JSON.parse(this.result);
+                    processData(fullData);
+                    console.log("Step4.  File has been converted from a JSON file to a JavaScriptObject, success!", fileName , " Has been downloaded and parsed into fullData");
                     };
                 reader.readAsText(file);
-                console.log("Step4.  File has been converted from a JSON file to a JavaScriptObject, success!", fileName , " Has been downloaded and parsed into fullData");
+
+
             }, function (e) {
                 console.log("error3", e);
+                downloadTheHardWay();
             });
         }
         , function(e){
@@ -141,7 +147,8 @@ function downloadTheHardWay(){
     d3.csv("data/fullsmall.csv", function (csv) {
 
         fullData = csv;
-        console.log("Data is downloaded");
+        console.log("Data is downloaded.  Time to draw the page.");
+        processData(fullData);
 
     });
 

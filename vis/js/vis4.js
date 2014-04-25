@@ -31,8 +31,8 @@ var dataLoaded;
 var geoJSONLoaded;
 var mappingsLoaded;
 var sex = {male: "Male", female: "Female", both: "Both"};
-var filterValues = {sex: "Both", year:"1990"};
-
+var filterValues = {sex: "Both", year:"2010", age: "20", main: "map", region: "GLB", cause:"0"  };
+var regionsLoaded = true;
 var backgroundColor;
 
 backgroundColor = $('body').css("background-color");
@@ -42,7 +42,7 @@ $("select").addClass("blueBackground");
 dataLoaded = false;
 geoJSONLoaded = false;
 mappingsLoaded = false;
-
+regionsLoaded = false;
 
 
 metric["death_rate"] = "Death Rate Per 100,000";
@@ -71,9 +71,10 @@ d3.csv("data/region.csv", function(csv){
                     .attr("value",row.shortRegion.trim())
                     .text(row.fullRegion.trim()));
         }
-    })
 
-
+        })
+    regionsLoaded = true;
+    drawPage();
 }) // end csv("data/region.csv")
 
 d3.csv("data/mappings.csv", function(csv){
@@ -81,6 +82,7 @@ d3.csv("data/mappings.csv", function(csv){
         mappings[row.short_name] = row.full_name;
     })
     mappingsLoaded = true;
+    drawPage();
 });
 
 // Load the data set
@@ -125,7 +127,7 @@ function processData(csv){
     fullData = csv;
     console.log("Full Data Loaded")
     dataLoaded = true;
-    if (dataLoaded && geoJSONLoaded && mappingsLoaded){ drawPage();}
+   drawPage();
 
 } // end processData
 
@@ -135,12 +137,22 @@ d3.json("json/Combined.geojson", function(json) {
     geoJSON = json;
     console.log("geoJson Loaded")
     geoJSONLoaded = true;
-    if (dataLoaded && geoJSONLoaded  && mappingsLoaded ){ drawPage();}
+    drawPage();
 
 });
 
-function drawPage() {
+function drawPage(){
+    // Everything has downloaded and we have all the data, we can move on to step two;
+    if (dataLoaded && geoJSONLoaded && mappingsLoaded && regionsLoaded ) drawPageStepTwo();
+    else console.log(dataLoaded, geoJSONLoaded, mappingsLoaded, regionsLoaded );
+}
 
+
+function drawPageStepTwo() {
+
+
+
+    console.log("All of the requirements have been met, drawing the page.")
     // Download the cookie into an object
     filterCookieValue = getJsonCookie("filter");
     // if the cookie existed set the filter form to the values from the cookie
@@ -151,8 +163,8 @@ function drawPage() {
         $('#causeSelect').val(filterValues.cause);
         $('#ageSelect').val(filterValues.age);
         $('#metricSelect').val(filterValues.metric);
-        $(".sexButton").removeClass("btn-primary");
-        switch(filterValues.sex)
+        /*       $(".sexButton").removeClass("btn-primary");
+       switch(filterValues.sex)
         {
             case "Male":
                 $("#maleButton").addClass("btn-primary")
@@ -164,6 +176,7 @@ function drawPage() {
                 $("#femaleButton").addClass("btn-primary")
             break;
         }
+    */
     }
 
 
