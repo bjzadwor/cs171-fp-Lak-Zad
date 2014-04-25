@@ -95,15 +95,20 @@ function drawMap(chosenDiv){
                 .attr("fill", "black");
 
         })
-        .on("click", function(d){   // when you click on a region, change the filter to that region.
-            if (chosenDiv == )
-            {
+        .on("click", function(d) {   // when you click on a region, change the filter to that region.
+            if (chosenDiv == "#mainVis") {
+                console.log()
                 var className = "." + d.properties.featurecla
                 $("#regionSelect").val(d.properties.featurecla);
                 $("#filterForm").change();
                 d3.selectAll(className).attr("fill", "yellow"); // color was getting reset when the form changed keep it yellow
             }
-            })
+            else {
+
+            $("#mainSelect").val("map");
+            $("#filterForm").change();
+            }
+        })
 
     drawChartColors()  // colorize the chart
 } // end drawMap

@@ -48,7 +48,8 @@ function drawImprovedMap(improvedMapDiv) {
         .attr("transform", function(){
             if(improvedMapDiv == "#mainVis") return "translate(30,100)"
             else return 'translate(-325,-140)'
-        });
+        })
+        ;
 
 
         improvedMapG.append("g")
@@ -91,17 +92,26 @@ function drawImprovedMap(improvedMapDiv) {
                     .attr("fill", "black");
 
             })
-            .on("click", function(d){   // when you click on a region, change the filter to that region.
-                tip.hide();
-                var className = "."+d.properties.featurecla
-                $("#regionSelect").val(d.properties.featurecla);
-                $("#filterForm").change();
-                d3.selectAll(className).attr("fill","yellow"); // color was getting reset when the form changed keep it yellow
-                tip.show(d);
-            })
+            .on("click", function(d) {   // when you click on a region, change the filter to that region.
+                if (improvedMapDiv == "#mainVis") {
+                    tip.hide();
+                    var className = "." + d.properties.featurecla
+                    $("#regionSelect").val(d.properties.featurecla);
+                    $("#filterForm").change();
+                    d3.selectAll(className).attr("fill", "yellow"); // color was getting reset when the form changed keep it yellow
+                    tip.show(d);
+                }
+                else {
+                    tip.hide();
+                    $("#mainSelect").val("map");
+                    $("#filterForm").change();
+                }
+            });
            // .on("dblclick", dblclicked)
-    drawChartColors2();
-}
+
+        drawChartColors2();
+};
+
 
 function dblclicked(d) {
     var centroid = path.centroid(d),
