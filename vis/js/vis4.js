@@ -33,10 +33,20 @@ var mappingsLoaded;
 var sex = {male: "Male", female: "Female", both: "Both"};
 var filterValues = {sex: "Both", year:"2010", age: "20", main: "map", region: "GLB", cause:"0"  };
 var regionsLoaded = true;
-var backgroundColor;
+var backgroundColor, male, female, both, ninety, ten, five;
 
 backgroundColor = $('body').css("background-color");
 $("select").addClass("blueBackground");
+
+male = "#0000FF" ;
+female = "#FF3399";
+both = "#801ACC";
+ninety = "#005824";
+five   = "#41ae76";
+ten = "#99d8c9";
+
+
+
 
 
 dataLoaded = false;

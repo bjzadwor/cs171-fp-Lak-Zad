@@ -37,15 +37,17 @@ function getAndSaveFile() {
                 openFileSystemAndGetMyFile(fs, fileName)
             },
             function (error) {
-                $('#loading').append("<h3>For faster load times and a better user experience, we recommend Google Chrome</h3>");
-                console.log("Internal Error This browser does support the Webkit File System, however another error occurred  we will download the hard way.", error)
+
+                console.log("An Unanticipated Internal Error occurrred we will download the files the hard way.", error)
                 downloadTheHardWay();
             }
         );
     }
     catch (err) {
+        $('#loading').append("<h3>For faster load times and a better user experience, we recommend Google Chrome</h3>");
         console.log("I caught the error, this browser does not support the Webkit File System we will download the hard way: ", err);
         downloadTheHardWay();
+
 
      }
 }
