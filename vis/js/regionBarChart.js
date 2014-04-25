@@ -112,25 +112,29 @@ function regionBarChart (dataSet, regionGraphDiv) {
                $("#filterForm").change();
             })
             .on("mouseover", function(d){
-                className = '.'+ d.region_name;
-                d3.selectAll(className).filter("path")
-                    .attr("fill", "yellow");
 
-                d3.selectAll(className).filter("rect")
-                    .attr("fill", "yellow")
-                    .attr("stroke", "yellow");
+                if (d.region_name.trim() != 'GLB') {
+                    className = '.' + d.region_name.trim();
+                    d3.selectAll(className).filter("path")
+                        .attr("fill", "yellow");
 
+                    d3.selectAll(className).filter("rect")
+                        .attr("fill", "yellow")
+                        .attr("stroke", "yellow");
+                }
            })
             .on("mouseout", function(d){
-                console.log("mouseout!");
-                className = '.'+ d.region_name;
-            console.log(d.region_name);
-            d3.selectAll(className).filter("path")
-               .attr("fill", function(){return d3.select(this).attr("fill2")});
+                if (d.region_name.trim() != 'GLB') {
+                    className = '.' + d.region_name;
+                    d3.selectAll(className).filter("path")
+                        .attr("fill", function () {
+                            return d3.select(this).attr("fill2")
+                        });
 
-            d3.selectAll(className).filter("rect")
-                .attr("fill", "black")
-                .attr("stroke", "black");
+                    d3.selectAll(className).filter("rect")
+                        .attr("fill", "black")
+                        .attr("stroke", "black");
+                }
             });
 
       } // end regionBarChart function.
