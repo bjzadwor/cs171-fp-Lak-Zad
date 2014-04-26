@@ -90,12 +90,7 @@ function regionBarChart (dataSet, regionGraphDiv) {
    var bars = svg.selectAll(".bar")
         .data(dataSet)
         .enter().append("rect")
-        .attr("class",
-        function(d){
-            var classString = "bar pointer "
-            classString = classString + d.region_name;
-            return classString;
-        })
+        .attr("class", function(d){ return "bar pointer bar" + d.year; })
         .attr("x", function(d, i) { return xScale(i)+2; })
 //              .attr("width", xScale.rangeBand())
         .attr("width", (width/dataSet.length)-5)
@@ -103,7 +98,7 @@ function regionBarChart (dataSet, regionGraphDiv) {
         //if the value is too small to be displayed, set the height to a minimum 0.001 to enable the tooltip to be displayed to show data on hover
         .attr("height", function(d) { if (height != yScale(+d[filterValues.metric])) return height - yScale(+d[filterValues.metric]); else return 0.001; })
         .append("title")
-        .html(function(d) { return  (region_short[d.region_name] + ", " + d.cause_medium + ", " + d.age_name + ", Sex-" + d.sex_name + " : " +d[filterValues.metric]) } )
+        .html(function(d) { return  (d.year + ": " + mappings[d.region_name] + ", " + d.cause_medium + ", " + d.age_name + ", Sex-" + d.sex_name + " : " +d[filterValues.metric]) } )
 
 
         svg.selectAll(".bar")

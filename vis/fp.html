@@ -252,7 +252,33 @@
         select option{
             bakcground : #C8D2F7;
         }
+        
+        .bar1990 {
+            fill:#FF6600; //#99aa99;//#770033;  //#5ca587; //#99d8c9;
+            stroke:#FF6600; //#99aa99;
+        }
 
+        .bar2005 {
+            fill:#2e772e; //#41ae76;
+            stroke:#2e772e;
+        }
+
+        .bar2010 {
+            fill:#990033; //#005805;
+            stroke:#990033; //#005805;
+        }
+
+        .line1990 {
+            stroke:#FF6600; //#99aa99
+        }
+
+        .line2005 {
+            stroke:#2e772e;
+        }
+
+        .line2010 {
+            stroke:#990033; //#005805;
+        }
     </style>
 
 </head>
@@ -289,6 +315,8 @@
                     <!--    <option value="YLL_abs">Years of Life Lost</option> -->
                     <option value="vis4">Vis4</option>
                     <!--    <option value="death_abs">Number of Deaths</option> -->
+                    <option value="trendLineChart">Regional Line Chart</option>
+                    <option value="trendBarChart">Regional Trend Chart</option>
                 </select>
                 <br />
                 <label for="regionSelect">Region: </label>
@@ -372,6 +400,7 @@
     <script type="text/javascript" src="js/ageBarChart.js"></script>
     <script type="text/javascript" src="js/regionBarChart.js"></script>
     <script type="text/javascript" src="js/trendLineGraph.js"></script>
+    <script type="text/javascript" src="js/regionTrendChart.js"></script>
     <script type="text/javascript" src="js/filter.js"></script>
     <script type="text/javascript" src="js/modal.js"></script>
     <script type="text/javascript" src="js/cookies.js"></script>

@@ -90,9 +90,9 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
             .domain(0, 2); 
 
         var line = d3.svg.line()
-        .interpolate("basis")
-        .x(function(d, i) { return xScale(i); })
-        .y(function(d, i) { return yScale(d[filterValues.metric]); });
+            .interpolate("basis")
+            .x(function(d, i) { return xScale(i); })
+            .y(function(d, i) { return yScale(d[filterValues.metric]); });
 
         var yrData = lineChart.selectAll(".year")
             .data(arrData)
@@ -103,20 +103,18 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
         yrData.append("path")
             .attr("class", "line")
             .attr("d", function(d) { return line(d);})
-            .style("stroke", function(d, i) { return color(i);})
-            .attr("class", "line");
-        
-/*        lineChart.selectAll(".bar")
-            .data(dataSet)
-            .enter().append("rect")
-                .attr("class", "bar")
-                .attr("x", function(d, i) { return xScale(i); })
-//              .attr("width", xScale.rangeBand())
-                .attr("width", (width/dataSet.length)-5)
-                .attr("y", function(d, i) { return yScale(+d[filterValues.metric]); })
-                //if the value is too small to be displayed, set the height to a minimum 0.001 to enable the tooltip to be displayed to show data on hover
-                .attr("height", function(d) { if (height != yScale(+d[filterValues.metric])) return height - yScale(+d[filterValues.metric]); else return 0.001; })
-                .append("title")
-                .html(function(d) { return (d.year + ": " + region_short[d.region_name] + ", " + d.cause_medium + ", " + d.age_name + ", Sex-" + d.sex_name + " : " +d[filterValues.metric])});
-*/
+            .attr("data-legend",function(d) { return d[0].year})
+            .attr("class", function(d, i) { return "line line" + d[0].year;})
+            .append("title")
+            .html(function(d) { console.log("LINE", d);
+                return  (d[0].year + ": " + mappings[d[0].region_name] + ", " 
+                    + d[0].cause_medium + ", " + d.age_name + ", Sex-" + d[0].sex_name + " : " +d[filterValues.metric]) } );
+;
+
+/*         var legend = svg.append("g")
+            .attr("class","legend")
+            .attr("transform","translate(50,30)")
+            .style("font-size","12px")
+            .call(d3.legend);
+*/        
 }

@@ -27,8 +27,8 @@ var createAgeBars = function(dataSet, div) {
         // .append("g").attr({ 
         //     transform: "translate(" + margin.left + "," + margin.top + ")"
         // });
-        var yMin = d3.min(dataSet, function(d) { return +d[filterValues.metric];} );   //<-------------------------------------------------------------------------------------------------
-        var yMax = d3.max(dataSet, function(d) { return +d[filterValues.metric];} );   //<-------------------------------------------------------------------------------------------------
+        var yMin = d3.min(dataSet, function(d) { return +d[filterValues.metric];} );
+        var yMax = d3.max(dataSet, function(d) { return +d[filterValues.metric];} );
 
 //        xScale = d3.scale.ordinal().rangeRoundBands([margin.left, width], .1);
         xScale = d3.scale.linear()
@@ -87,7 +87,8 @@ var createAgeBars = function(dataSet, div) {
         ageBars.selectAll(".bar")
             .data(dataSet)
             .enter().append("rect")
-                .attr("class", "agebar bar")
+//                .attr("class", "agebar bar")
+                .attr("class", function(d){ return "bar pointer bar" + d.year; })
                 .attr("x", function(d, i) { return xScale(i); })
 //              .attr("width", xScale.rangeBand())
                 .attr("width", (width/dataSet.length)-5)
@@ -95,7 +96,7 @@ var createAgeBars = function(dataSet, div) {
                 //if the value is too small to be displayed, set the height to a minimum 0.001 to enable the tooltip to be displayed to show data on hover
                 .attr("height", function(d) { if (height != yScale(+d[filterValues.metric])) return height - yScale(+d[filterValues.metric]); else return 0.001; })
                 .append("title")
-                .html(function(d) { return (region_short[d.region_name] + ", " + d.cause_medium + ", " + d.age_name + ", Sex-" + d.sex_name + " : " +d[filterValues.metric])});
+                .html(function(d) { return (d.year + ": " + mappings[d.region_name] + ", " + d.cause_medium + ", " + d.age_name + ", Sex-" + d.sex_name + " : " +d[filterValues.metric])});
 
                 
  }
