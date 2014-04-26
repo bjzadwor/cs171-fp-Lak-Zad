@@ -70,6 +70,10 @@ function filter(){
     trendChartData["1990"] = [];
     trendChartData["2005"] = [];
     trendChartData["2010"] = [];
+    trendBarData = {};
+    trendBarData["1990"] = [];
+    trendBarData["2005"] = [];
+    trendBarData["2010"] = [];
 
     // Loop through the data, testing each data point and adding it to the appropriate array if it
     // is one of the data points needed for the visualization.
@@ -109,6 +113,14 @@ function filter(){
             trendChartData[element.year.trim()].push(element);
         }
 
+        if (((element.cause_medium.trim() == cause_value[filterValues.cause]))
+//            && (element.year.trim() == filterValues.year)
+            && (element.sex_name.trim() == filterValues.sex)
+            && (element.age_name.trim() == age_value[filterValues.age]))
+        {
+            trendBarData[element.year.trim()].push(element);
+        }
+
         return true;
     })//end fullData.every
 
@@ -121,6 +133,7 @@ function filter(){
     ageGroupBarChartDivString = "#vis1"
     regionalBarChartDivString =  "#vis2"
     ageLineChartDivString = "#vis3"
+    regionTrendChartString = "#vis6"
 
 
     switch (filterValues.main){
@@ -147,6 +160,11 @@ function filter(){
             mapDivString="#vis3";
         break;
 
+        case "trendBarChart":
+            regionTrendChartString = "#mainVis";
+            mapDivString="#vis6";
+        break;
+
     default:
         console.log("Default Fired You should not be seeing this");
     break;
@@ -158,4 +176,5 @@ function filter(){
     createAgeBars(barChartData, ageGroupBarChartDivString);
     regionBarChart(filteredData, regionalBarChartDivString);
     trendLineGraph(trendChartData, ageLineChartDivString);
+    regionTrendChart(trendBarData, regionTrendChartString);
 }// end filter()
