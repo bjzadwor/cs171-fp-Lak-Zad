@@ -14,7 +14,7 @@ var createAgeBars = function(dataSet, div) {
 	var xAxisMetric = "age_name";
     if (div == "#mainVis") height = (250)
 
-console.log("**** div1", $("#div1, vis floatL"));
+
     ageBars = d3.select(div).append("svg")
         .attr({ width: width + margin.left + margin.right,
                 height: height + margin.top + margin.bottom,

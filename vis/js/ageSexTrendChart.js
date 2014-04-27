@@ -89,20 +89,20 @@ function ageSexTrendChart (ageSexTrendDataSet, ageSexTrendDiv) {
         .style("text-anchor", "middle")
         .text(mappings[xAxisMetric])
         .attr("class", "caption");
-console.log("** LENGTH", dataLength);
+
     var wdBar = width / (dataLength * 3), j=0, padding = 0;
     wdBar = wdBar - (wdBar/3);
-console.log("width", width, wdBar); 
+
     for (var key in ageSexTrendDataSet) {
-console.log("key", key, ageSexTrendDataSet[key]); 
+
 		var keyClass = ".bar" + key;
-		console.log(keyClass);
+
         var bars = svg.selectAll(keyClass)
             .data(ageSexTrendDataSet[key])
             .enter().append("rect")
             .attr("class",
             function(d){ return "bar pointer bar" + d.sex_name; })
-            .attr("x", function(d, i) { console.log("x", j, i, padding + xScale(i) + wdBar * j); return padding + xScale(i) + wdBar * j; })
+            .attr("x", function(d, i) { return padding + xScale(i) + wdBar * j; })
     //              .attr("width", xScale.rangeBand())
             .attr("width", wdBar)
             .attr("y", function(d, i) { return yScale(+d[filterValues.metric]); })

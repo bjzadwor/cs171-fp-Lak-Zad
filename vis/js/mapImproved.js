@@ -138,8 +138,6 @@ function zoomed() {
 
 function drawChartColors2(){
 
-console.log("Drawing Chart Colors 2")
-
     scaleValues = d3.extent(filteredData, function(d){
         return +d[filterValues.metric]
     })

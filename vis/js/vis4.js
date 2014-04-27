@@ -97,24 +97,23 @@ d3.csv("data/mappings.csv", function(csv){
 
 // Load the data set
 function processData(csv){
-//d3.csv("http://www.zadworney.com/z/vis/filter.php", function(csv){
+
     globalCSV = csv;
 
 
-console.log(globalCSV);
-
-console.log("Expanding Data:");
+    console.log("Processing Data:");
     csv.forEach( function(row){
         row.cause_medium = mappings[row.cause_medium];
         row.age_name = mappings[row.age_name]
-    if (!(row.cause_medium in cause_medium)){
-            cause_medium[row.cause_medium] = cause_value_var;
-            cause_value[cause_value_var] = row.cause_medium;
-            $("#causeSelect")
-                .append($("<option></option>")
-                    .attr("value",cause_value_var)
-                    .text(row.cause_medium));
-            cause_value_var++;
+
+        if (!(row.cause_medium in cause_medium)){
+                cause_medium[row.cause_medium] = cause_value_var;
+                cause_value[cause_value_var] = row.cause_medium;
+                $("#causeSelect")
+                    .append($("<option></option>")
+                        .attr("value",cause_value_var)
+                        .text(row.cause_medium));
+                cause_value_var++;
         }
 
         if (!(row.age_name in age_name)){
@@ -127,9 +126,7 @@ console.log("Expanding Data:");
             age_value_var++;
         }
 
-  //      console.log("Before:", row.cause_medium)
 
-   //     console.log("After:", row.cause_medium);
         switch(row.year){
             case "90":
                 row.year = "1990";

@@ -89,10 +89,10 @@ function regionTrendChart (trendBarDataSet, regionTrendDiv) {
 
     var wdBar = width / (trendBarDataSet["1990"].length * 3), j=0, padding = 0;
     wdBar = wdBar - (wdBar/3);
-console.log("width", width, wdBar); 
+
     for (var key in trendBarDataSet) {
 		var keyClass = ".bar" + key;
-		console.log(keyClass);
+
         var bars = svg.selectAll(keyClass)
             .data(trendBarDataSet[key])
             .enter().append("rect")
@@ -128,9 +128,9 @@ console.log("width", width, wdBar);
                 .attr("stroke", "yellow");
         })
         .on("mouseout", function(d){
-            console.log("mouseout!");
+
             className = ".bar" + d.year;
-        console.log(className);
+
         d3.selectAll(className).filter("path")
            .attr("fill", function(){return d3.select(this).attr("fill2")});
 
