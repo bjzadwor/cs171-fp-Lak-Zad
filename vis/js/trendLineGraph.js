@@ -102,7 +102,7 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
 
         yrData.append("path")
             .attr("class", "line")
-            .attr("d", function(d) { return line(d);})
+            .attr("d", function(d) {console.log("Here", d); return line(d);})
             .attr("data-legend",function(d) { return d[0].year})
             .attr("class", function(d, i) { return "line line" + d[0].year;})
             .append("title")

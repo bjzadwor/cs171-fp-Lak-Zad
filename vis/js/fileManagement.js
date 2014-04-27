@@ -6,7 +6,7 @@
 var data; var jsonCsv; var readData;
 var fileSystem;
 var fileName;
-fileName = "data.json";
+fileName = "datasmall4.json";
 var start = new Date();
 console.log("starting");
 console.log(start);
@@ -53,11 +53,12 @@ function getAndSaveFile() {
 }
 function saveFile(fs){
     //d3.csv("http://www.zadworney.com/z/vis/filter.php", function(csv){
-    d3.csv("data/fullsmall.csv",function(csv){
+    d3.csv("data/fullsmall2.csv",function(csv){
 
         fullData = csv;
         console.log("We donloaded the data using d3.csv fullData now contains our data.")
         processData(fullData);
+
         console.log("Now we will save it to the local storage so future loads will be faster.")
         jsonCsv = JSON.stringify(csv);
 
@@ -146,7 +147,7 @@ function getMyFile(fs,filename){
 
 function downloadTheHardWay(){
     console.log("Processing the data the hard way");
-    d3.csv("data/fullsmall.csv", function (csv) {
+    d3.csv("data/fullsmall2.csv", function (csv) {
 
         fullData = csv;
         console.log("Data is downloaded.  Time to draw the page.");
