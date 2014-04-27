@@ -106,7 +106,7 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
             .attr("data-legend",function(d) { return d[0].year})
             .attr("class", function(d, i) { return "line line" + d[0].year;})
             .append("title")
-            .html(function(d) { console.log("LINE", d);
+            .html(function(d) { 
                 return  (d[0].year + ": " + mappings[d[0].region_name] + ", " 
                     + d[0].cause_medium + ", " + d.age_name + ", Sex-" + d[0].sex_name + " : " +d[filterValues.metric]) } );
 ;

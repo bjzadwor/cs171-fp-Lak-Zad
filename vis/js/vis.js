@@ -26,6 +26,7 @@ var fullData;
 var filteredData;
 var barChartData;
 var trendChartData;
+var ageSexTrendData;
 var geoJSON;
 var dataLoaded;
 var geoJSONLoaded;
