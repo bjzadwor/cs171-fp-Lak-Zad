@@ -162,6 +162,8 @@ function drawPage() {
         $('#ageSelect').val(filterValues.age);
         $('#metricSelect').val(filterValues.metric);
         $(".sexButton").removeClass("btn-primary");
+        $(".yrButton").removeClass("btn-primary")
+
         switch(filterValues.sex)
         {
             case "Male":
@@ -173,6 +175,19 @@ function drawPage() {
             case "Female":
                 $("#femaleButton").addClass("btn-primary")
             break;
+        }
+
+        switch(filterValues.year)
+        {
+            case "1990":
+                $("#yr1990Button").addClass("btn-primary")
+                break;
+            case "2005":
+                $("#yr2005Button").addClass("btn-primary")
+                break;
+            case "2010":
+                $("#yr2010Button").addClass("btn-primary")
+                break;
         }
     }
 

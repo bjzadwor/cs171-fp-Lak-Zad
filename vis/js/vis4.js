@@ -191,8 +191,9 @@ function drawPageStepTwo() {
         $('#causeSelect').val(filterValues.cause);
         $('#ageSelect').val(filterValues.age);
         $('#metricSelect').val(filterValues.metric);
-        /*       $(".sexButton").removeClass("btn-primary");
-       switch(filterValues.sex)
+        $(".third").removeClass("btn-primary"); // all 6 of our buttons have class third so we use this to select them all
+
+        switch(filterValues.sex)
         {
             case "Male":
                 $("#maleButton").addClass("btn-primary")
@@ -204,8 +205,21 @@ function drawPageStepTwo() {
                 $("#femaleButton").addClass("btn-primary")
             break;
         }
-    */
+        switch(filterValues.year)
+        {
+            case "1990":
+                $("#yr1990Button").addClass("btn-primary")
+                break;
+            case "2005":
+                $("#yr2005Button").addClass("btn-primary")
+                break;
+            case "2010":
+                $("#yr2010Button").addClass("btn-primary")
+                break;
+        }
     }
+
+
 
 
      $("#filterForm").change();
