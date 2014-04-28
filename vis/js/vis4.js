@@ -97,18 +97,23 @@ d3.csv("data/mappings.csv", function(csv){
 
 // Load the data set
 function processData(csv){
-//d3.csv("http://www.zadworney.com/z/vis/filter.php", function(csv){
+
     globalCSV = csv;
-	csv.forEach( function(row){
+
+
+    console.log("Processing Data:");
+    csv.forEach( function(row){
+        row.cause_medium = mappings[row.cause_medium];
+        row.age_name = mappings[row.age_name]
 
         if (!(row.cause_medium in cause_medium)){
-            cause_medium[row.cause_medium] = cause_value_var;
-            cause_value[cause_value_var] = row.cause_medium;
-            $("#causeSelect")
-                .append($("<option></option>")
-                    .attr("value",cause_value_var)
-                    .text(row.cause_medium));
-            cause_value_var++;
+                cause_medium[row.cause_medium] = cause_value_var;
+                cause_value[cause_value_var] = row.cause_medium;
+                $("#causeSelect")
+                    .append($("<option></option>")
+                        .attr("value",cause_value_var)
+                        .text(row.cause_medium));
+                cause_value_var++;
         }
 
         if (!(row.age_name in age_name)){
@@ -121,6 +126,7 @@ function processData(csv){
             age_value_var++;
         }
 
+
         switch(row.year){
             case "90":
                 row.year = "1990";
@@ -130,6 +136,18 @@ function processData(csv){
                 break;
             case "10":
                 row.year = "2010";
+                break;
+        }
+
+        switch(row.sex_name){
+            case "M":
+                row.sex_name = "Male";
+                break;
+            case "F":
+                row.sex_name = "Female";
+                break;
+            case "B":
+                row.sex_name = "Both";
                 break;
         }
 

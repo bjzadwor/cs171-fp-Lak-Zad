@@ -80,13 +80,15 @@ function filter(){
     ageSexTrendData["Female"] = [];
     ageSexTrendData["Both"] = [];
 
+
+    // set the cookie with the filter data.
+    setJsonCookie("filter", filterValues, 365);
+
     // Loop through the data, testing each data point and adding it to the appropriate array if it
     // is one of the data points needed for the visualization.
     fullData.every(function(element, index, array){
 
-
-        // colorize the map
-        // draw the region metrics bar chart
+      // draw the region metrics bar chart
         if (
                 ((element.cause_medium.trim() == cause_value[filterValues.cause]))
                 && (element.year.trim() == filterValues.year)
@@ -115,14 +117,14 @@ function filter(){
             && (element.sex_name.trim() == filterValues.sex)
             && (element.age_name.trim() != mappings["ALL"])) 
         {
-            trendChartData[element.year.trim()].push(element);
+        trendChartData[element.year.trim()].push(element);
         }
 
         if (((element.cause_medium.trim() == cause_value[filterValues.cause]))
             && (element.sex_name.trim() == filterValues.sex)
             && (element.age_name.trim() == age_value[filterValues.age]))
         {
-            trendBarData[element.year.trim()].push(element);
+        trendBarData[element.year.trim()].push(element);
         }
 
         if ((element.cause_medium.trim() == cause_value[filterValues.cause])
@@ -130,15 +132,20 @@ function filter(){
             && (element.year.trim() == filterValues.year)
             && (element.age_name.trim() != mappings["ALL"]))
         {
-            ageSexTrendData[element.sex_name.trim()].push(element);
+        ageSexTrendData[element.sex_name.trim()].push(element);
         }
 
         return true;
     })//end fullData.every
-    setJsonCookie("filter", filterValues, 365);
 
-    // set the cookie with the filter data.
+
+
+    // remove all the vis so we can re-draw them
     $('svg').remove();
+
+
+
+
 
     mapDivString = "#mainVis"
     ageGroupBarChartDivString = "#vis1"
@@ -192,4 +199,5 @@ function filter(){
     trendLineGraph(trendChartData, ageLineChartDivString);
     regionTrendChart(trendBarData, regionTrendChartDivString);
     ageSexTrendChart(ageSexTrendData, ageSexTrendChartDivString);
+
 }// end filter()
