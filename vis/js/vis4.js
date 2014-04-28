@@ -31,7 +31,7 @@ var dataLoaded;
 var geoJSONLoaded;
 var mappingsLoaded;
 var sex = {male: "Male", female: "Female", both: "Both"};
-var filterValues = {sex: "Both", year:"2010", age: "20", main: "map", region: "GLB", cause:"0"  };
+var filterValues = {sex: "Both", year:"2010", age: "20", main: "map", region: "GLB", metric: "death_rate", cause:"0" };
 var regionsLoaded = true;
 var backgroundColor, male, female, both, ninety, ten, five;
 
@@ -44,9 +44,6 @@ both = "#801ACC";
 ninety = "#005824";
 five   = "#41ae76";
 ten = "#99d8c9";
-
-
-
 
 
 dataLoaded = false;
@@ -99,35 +96,42 @@ d3.csv("data/mappings.csv", function(csv){
 function processData(csv){
 
     globalCSV = csv;
+if (!( geoJSONLoaded && mappingsLoaded && regionsLoaded)){
 
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!waiting a half second to process the data!!!!!!!!!!!!!!!!!!!!!!!!!");
+    setTimeout(function() {
+        processData(csv);
+    }, 500);
 
+}
+    else {
     console.log("Processing Data:");
-    csv.forEach( function(row){
+    csv.forEach(function (row) {
         row.cause_medium = mappings[row.cause_medium];
         row.age_name = mappings[row.age_name]
 
-        if (!(row.cause_medium in cause_medium)){
-                cause_medium[row.cause_medium] = cause_value_var;
-                cause_value[cause_value_var] = row.cause_medium;
-                $("#causeSelect")
-                    .append($("<option></option>")
-                        .attr("value",cause_value_var)
-                        .text(row.cause_medium));
-                cause_value_var++;
+        if (!(row.cause_medium in cause_medium)) {
+            cause_medium[row.cause_medium] = cause_value_var;
+            cause_value[cause_value_var] = row.cause_medium;
+            $("#causeSelect")
+                .append($("<option></option>")
+                    .attr("value", cause_value_var)
+                    .text(row.cause_medium));
+            cause_value_var++;
         }
 
-        if (!(row.age_name in age_name)){
+        if (!(row.age_name in age_name)) {
             age_name[row.age_name] = age_value_var;
-            age_value[age_value_var]= row.age_name;
+            age_value[age_value_var] = row.age_name;
             $("#ageSelect")
                 .append($("<option></option>")
-                    .attr("value",age_value_var)
+                    .attr("value", age_value_var)
                     .text(row.age_name));
             age_value_var++;
         }
 
 
-        switch(row.year){
+        switch (row.year) {
             case "90":
                 row.year = "1990";
                 break;
@@ -139,7 +143,7 @@ function processData(csv){
                 break;
         }
 
-        switch(row.sex_name){
+        switch (row.sex_name) {
             case "M":
                 row.sex_name = "Male";
                 break;
@@ -155,8 +159,8 @@ function processData(csv){
     fullData = csv;
     console.log("Full Data Loaded")
     dataLoaded = true;
-   drawPage();
-
+    drawPage();
+    }
 } // end processData
 
 
@@ -183,9 +187,11 @@ function drawPageStepTwo() {
     console.log("All of the requirements have been met, drawing the page.")
     // Download the cookie into an object
     filterCookieValue = getJsonCookie("filter");
+
     // if the cookie existed set the filter form to the values from the cookie
     if(filterCookieValue != ""){
         filterValues = filterCookieValue;
+    } else console.log("Cooke was blank", filterValues)
         $('#mainSelect').val(filterValues.main);
         $('#regionSelect').val(filterValues.region);
         $('#causeSelect').val(filterValues.cause);
@@ -217,7 +223,7 @@ function drawPageStepTwo() {
                 $("#yr2010Button").addClass("btn-primary")
                 break;
         }
-    }
+
 
 
 
