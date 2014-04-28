@@ -2,7 +2,22 @@
  * library for subgraphs
  */
 
+var noDataToDisplay = function(divNoData) {
+    var noDataContainerWidth = $(divNoData).width()
+    var margin = { left: 40 , right: 0, top: 15, bottom: 40};
+    var width = noDataContainerWidth - margin.left - margin.right;
+    var height = (.65*noDataContainerWidth) - margin.bottom - margin.top;
+    if (divNoData == "#mainVis") height = (250)
 
+    var svg = d3.select(divNoData).append("svg")
+    .attr({ width: width + margin.left + margin.right,
+            height: height + margin.top + margin.bottom });
+    svg.append("text")
+        .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," + (height + margin.top+ margin.bottom)/2 + ")")
+        .style("text-anchor", "middle")
+        .text("NO DATA TO DISPLAY")
+        .attr("class", "caption");
+}
 
 
 var createAgeBars = function(ageDataSet, div) {
@@ -11,11 +26,11 @@ var createAgeBars = function(ageDataSet, div) {
     var margin = { left: 40 , right: 0, top: 15, bottom: 40};
     var width = barChartContainerWidth - margin.left - margin.right;
     var height = (.65*barChartContainerWidth) - margin.bottom - margin.top;
+console.log("**** ageBarChart height", height);
 	var xAxisMetric = "age_name";
     if (div == "#mainVis") height = (250)
 
 console.log("**** div1", $("#div1, vis floatL"));
-console.log("**** ageBarChart", ageDataSet);
     ageBars = d3.select(div).append("svg")
         .attr({ width: width + margin.left + margin.right,
                 height: height + margin.top + margin.bottom,

@@ -52,6 +52,14 @@ $("#yr2010Button").click(function(){
     filter();
 });
 
+var isDataEmpty = function(validateDataSet) {
+    var emptyData=true;
+    for (var key in validateDataSet) 
+        if (validateDataSet[key] != null && validateDataSet[key].length != 0) 
+            emptyData = false;
+    return emptyData;
+}
+
 /*
 *  filter()  This function loops through the data set testing each data point
 *  adding it to the appropriate array if it is one of the data points needed for the visualization.
@@ -149,10 +157,10 @@ function filter(){
 
     mapDivString = "#mainVis"
     ageGroupBarChartDivString = "#vis1"
-    regionalBarChartDivString =  "#vis2"
-    ageLineChartDivString = "#vis3"
-    regionTrendChartDivString = "#vis6"
-    ageSexTrendChartDivString = "#vis5"
+    regionalBarChartDivString =  "#vis5"
+    ageLineChartDivString = "#vis4"
+    regionTrendChartDivString = "#vis7"
+    ageSexTrendChartDivString = "#vis2"
 
     switch (filterValues.main){
     case "map":
@@ -168,22 +176,22 @@ function filter(){
 
         case "regionBarChart":
             regionalBarChartDivString = "#mainVis";
-            mapDivString="#vis2";
+            mapDivString="#vis5";
         break;
 
         case "trendLineChart":
             ageLineChartDivString = "#mainVis";
-            mapDivString="#vis3";
+            mapDivString="#vis4";
         break;
 
         case "trendAgeSexChart":
             ageSexTrendChartDivString = "#mainVis";
-            mapDivString="#vis5";
+            mapDivString="#vis2";
         break;
 
         case "trendBarChart":
             regionTrendChartDivString = "#mainVis";
-            mapDivString="#vis6";
+            mapDivString="#vis7";
         break;
 
     default:
@@ -194,10 +202,21 @@ function filter(){
 
     // drawMap(mapDivString);
     drawImprovedMap(mapDivString);
-    createAgeBars(barChartData, ageGroupBarChartDivString);
-    regionBarChart(filteredData, regionalBarChartDivString);
-    trendLineGraph(trendChartData, ageLineChartDivString);
-    regionTrendChart(trendBarData, regionTrendChartDivString);
-    ageSexTrendChart(ageSexTrendData, ageSexTrendChartDivString);
+    
+    // checking if the filtered data is an empty dataset and display the viz accordingly
+    if (isDataEmpty(barChartData)) noDataToDisplay(ageGroupBarChartDivString);
+    else createAgeBars(barChartData, ageGroupBarChartDivString);
+
+    if (isDataEmpty(filteredData)) noDataToDisplay(regionalBarChartDivString);
+    else regionBarChart(filteredData, regionalBarChartDivString);
+
+    if (isDataEmpty(trendChartData)) noDataToDisplay(ageLineChartDivString);
+    else trendLineGraph(trendChartData, ageLineChartDivString);
+
+    if (isDataEmpty(trendBarData)) noDataToDisplay(regionTrendChartDivString);
+    else regionTrendChart(trendBarData, regionTrendChartDivString);
+
+    if (isDataEmpty(ageSexTrendData)) noDataToDisplay(ageSexTrendChartDivString);
+    else ageSexTrendChart(ageSexTrendData, ageSexTrendChartDivString);
 
 }// end filter()
