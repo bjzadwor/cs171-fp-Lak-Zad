@@ -31,7 +31,7 @@ var dataLoaded;
 var geoJSONLoaded;
 var mappingsLoaded;
 var sex = {male: "Male", female: "Female", both: "Both"};
-var filterValues = {sex: "Both", year:"2010", age: "20", main: "map", region: "GLB", cause:"0"  };
+var filterValues = {sex: "Both", year:"2010", age: "20", main: "map", region: "GLB", metric: "death_rate"};
 var regionsLoaded = true;
 var backgroundColor, male, female, both, ninety, ten, five;
 
