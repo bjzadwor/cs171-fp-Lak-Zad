@@ -5,8 +5,8 @@
 
 
 
-var createAgeBars = function(dataSet, div) {
-    var ageBars, xAxis, xScale, yAxis,  yScale;
+var createAgeBars = function(ageDataSet, div) {
+    var ageBars, xAxis, xScale, yAxis,  yScale, tickCt=10;
     var barChartContainerWidth = $(div).width()
     var margin = { left: 40 , right: 0, top: 15, bottom: 40};
     var width = barChartContainerWidth - margin.left - margin.right;
@@ -15,6 +15,7 @@ var createAgeBars = function(dataSet, div) {
     if (div == "#mainVis") height = (250)
 
 console.log("**** div1", $("#div1, vis floatL"));
+console.log("**** ageBarChart", ageDataSet);
     ageBars = d3.select(div).append("svg")
         .attr({ width: width + margin.left + margin.right,
                 height: height + margin.top + margin.bottom,
@@ -27,12 +28,20 @@ console.log("**** div1", $("#div1, vis floatL"));
         // .append("g").attr({ 
         //     transform: "translate(" + margin.left + "," + margin.top + ")"
         // });
-        var yMin = d3.min(dataSet, function(d) { return +d[filterValues.metric];} );
-        var yMax = d3.max(dataSet, function(d) { return +d[filterValues.metric];} );
+        var yMin = d3.min(ageDataSet, function(d) { return +d[filterValues.metric];} );
+        var yMax = d3.max(ageDataSet, function(d) { return +d[filterValues.metric];} );
+        if (yMin == yMax) { yMax = yMax + 0.01; tickCt=1;}
+
+        var dataLength = ageDataSet.length, 
+            wdBar = width / dataLength, j=0, padding = 0;
+console.log("ageSexTrendChart wdBar", wdBar); 
+    wdBar = wdBar - (wdBar/3);
+console.log("ageSexTrendChart wdBar", wdBar); 
+console.log("ageSexTrendChart width", width, dataLength); 
 
 //        xScale = d3.scale.ordinal().rangeRoundBands([margin.left, width], .1);
         xScale = d3.scale.linear()
-            .domain([0, dataSet.length-1])
+            .domain([0, dataLength-1])
             .range([margin.left, width]);
 
         yScale = d3.scale.linear()
@@ -42,13 +51,13 @@ console.log("**** div1", $("#div1, vis floatL"));
         xAxis = d3.svg.axis()
             .scale(xScale)
             .orient("bottom")
-            .ticks(dataSet.length-1)
-            .tickFormat(function(i) { return dataSet[i][xAxisMetric]; });
+            .ticks(dataLength-1)
+            .tickFormat(function(i) { return ageDataSet[i][xAxisMetric]; });
 
         yAxis = d3.svg.axis()
             .scale(yScale)
             .orient("left")
-            .ticks(10);
+            .ticks(tickCt);
 
         ageBars.append("g")
             .attr("class", "axis")
@@ -85,20 +94,24 @@ console.log("**** div1", $("#div1, vis floatL"));
             .attr("class", "caption");
 
         ageBars.selectAll(".bar")
-            .data(dataSet)
+            .data(ageDataSet)
             .enter().append("rect")
 //                .attr("class", "agebar bar")
                 .attr("class", function(d){ return "bar pointer bar" + d.year; })
                 .attr("x", function(d, i) { return xScale(i); })
 //              .attr("width", xScale.rangeBand())
-                .attr("width", (width/dataSet.length)-5)
+                .attr("width", wdBar)
                 .attr("y", function(d, i) { return yScale(+d[filterValues.metric]); })
                 //if the value is too small to be displayed, set the height to a minimum 0.001 to enable the tooltip to be displayed to show data on hover
-                .attr("height", function(d) { if (height != yScale(+d[filterValues.metric])) return height - yScale(+d[filterValues.metric]); else return 0.001; })
+                .attr("height", function(d) { 
+                    if (height != yScale(+d[filterValues.metric])) 
+                        return height - yScale(+d[filterValues.metric]); else return 0.001; })
                 .append("title")
-                .html(function(d) { return (d.year + ": " + mappings[d.region_name] + ", " + d.cause_medium + ", " + d.age_name + ", Sex-" + d.sex_name + " : " +d[filterValues.metric])});
+                .html(function(d) { 
+                    return (d.year + ": " + mappings[d.region_name] + ", " + d.cause_medium + ", " 
+                        + d.age_name + ", Sex-" + d.sex_name + " : " +d[filterValues.metric])
+                });
 
-                
  }
 
 

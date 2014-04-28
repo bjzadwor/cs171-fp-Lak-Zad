@@ -3,7 +3,7 @@
  */
 
 var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
-    var lineChart, xAxis, xScale, yAxis,  yScale;
+    var lineChart, xAxis, xScale, yAxis,  yScale, tickCt=10;
     var lineChartContainerWidth = $(trendGraphDiv).width()
     var margin = { left: 40 , right: 0, top: 15, bottom: 40};
     var width = lineChartContainerWidth - margin.left - margin.right;
@@ -11,6 +11,7 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
     if (trendGraphDiv == "#mainVis") height = (250)
     var xAxisMetric = "age_name";
 
+console.log("**** trendLineGraph", dataSet);
     lineChart = d3.select(trendGraphDiv).append("svg")
         .attr({ width: width + margin.left + margin.right,
             height: height + margin.top + margin.bottom,
@@ -21,17 +22,23 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
             $('#filterForm').change();
         });
 
-        var arrData = [];
+        var arrData = [], dataLength=0, maxKeys;
         for (var key in dataSet) {
             arrData.push(dataSet[key]);
+            if (dataSet[key].length > dataLength) { 
+                dataLength = dataSet[key].length;
+                maxKeys = key;
+            }
         }
         
         var yMin = d3.min(arrData, function(d, i) { return d3.min(d, function(e, i) { return +e[filterValues.metric]; }); });
         var yMax = d3.max(arrData, function(d, i) { return d3.max(d, function(e, i) { return +e[filterValues.metric]; }); });
+        if (yMin == yMax) { yMax = yMax + 0.01; tickCt=1;}
+
 
 //        xScale = d3.scale.ordinal().rangeRoundBands([margin.left, width], .1);
         xScale = d3.scale.linear()
-            .domain([0, dataSet["1990"].length-1])
+            .domain([0, dataLength-1])
             .range([margin.left, width]);
 
         yScale = d3.scale.linear()
@@ -41,13 +48,13 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
         xAxis = d3.svg.axis()
             .scale(xScale)
             .orient("bottom")
-            .ticks(dataSet["1990"].length-1)
-            .tickFormat(function(i) { return dataSet["1990"][i][xAxisMetric]; });
+            .ticks(dataLength-1)
+            .tickFormat(function(i) { return dataSet[maxKeys][i][xAxisMetric]; });
 
         yAxis = d3.svg.axis()
             .scale(yScale)
             .orient("left")
-            .ticks(10);
+            .ticks(tickCt);
 
         lineChart.append("g")
             .attr("class", "axis")
@@ -103,11 +110,11 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
         yrData.append("path")
             .attr("class", "line")
             .attr("d", function(d) { return line(d);})
-            .attr("data-legend",function(d) { return d[0].year})
-            .attr("class", function(d, i) { return "line line" + d[0].year;})
+            .attr("data-legend",function(d) { if (d.length > 0) return d[0].year})
+            .attr("class", function(d, i) { if (d.length > 0) return "line line" + d[0].year;})
             .append("title")
             .html(function(d) { 
-                return  (d[0].year + ": " + mappings[d[0].region_name] + ", " 
+                if (d.length > 0) return  (d[0].year + ": " + mappings[d[0].region_name] + ", " 
                     + d[0].cause_medium + ", " + d.age_name + ", Sex-" + d[0].sex_name + " : " +d[filterValues.metric]) } );
 ;
 

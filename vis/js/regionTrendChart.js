@@ -3,7 +3,7 @@
  */
 
 function regionTrendChart (trendBarDataSet, regionTrendDiv) {
-    var barChart, xAxis, xScale, yAxis,  yScale;
+    var barChart, xAxis, xScale, yAxis,  yScale, tickCt=10;
     var barChartContainerWidth = $(regionTrendDiv).width();
     var margin = { left: 40 , right: 0, top: 15, bottom: 40};
     var width = barChartContainerWidth - margin.left - margin.right;
@@ -11,6 +11,7 @@ function regionTrendChart (trendBarDataSet, regionTrendDiv) {
     if (regionTrendDiv == "#mainVis") height = (250)
     var xAxisMetric = "region_name";
 
+console.log("**** regionTrendChart", trendBarDataSet);
     var backgroundColor = $('body').css("background-color");
     svg = d3.select(regionTrendDiv).append("svg")
         .attr({ width: width + margin.left + margin.right,
@@ -30,15 +31,21 @@ function regionTrendChart (trendBarDataSet, regionTrendDiv) {
 
         });
 
-    var arrData = [];
+    var arrData = [], dataLength=0, maxKeys;
     for (var key in trendBarDataSet) {
         arrData.push(trendBarDataSet[key]);
+        if (trendBarDataSet[key].length > dataLength) { 
+            dataLength = trendBarDataSet[key].length;
+            maxKeys = key;
+        }
     }
+
     var yMin = d3.min(arrData, function(d, i) { return d3.min(d, function(e, i) { return +e[filterValues.metric]; }); });
     var yMax = d3.max(arrData, function(d, i) { return d3.max(d, function(e, i) { return +e[filterValues.metric]; }); });
+    if (yMin == yMax) { yMax = yMax + 0.01; tickCt=1;}
 
     xScale = d3.scale.linear()
-        .domain([0, trendBarDataSet["1990"].length-1])
+        .domain([0, trendBarDataSet[maxKeys].length-1])
         .range([margin.left, width]);
 
     yScale = d3.scale.linear()
@@ -48,13 +55,13 @@ function regionTrendChart (trendBarDataSet, regionTrendDiv) {
     xAxis = d3.svg.axis()
         .scale(xScale)
         .orient("bottom")
-        .ticks(trendBarDataSet["1990"].length-1)
-        .tickFormat(function(i) { return trendBarDataSet["1990"][i][xAxisMetric]; });
+        .ticks(trendBarDataSet[maxKeys].length-1)
+        .tickFormat(function(i) { return trendBarDataSet[maxKeys][i][xAxisMetric]; });
 
     yAxis = d3.svg.axis()
         .scale(yScale)
         .orient("left")
-        .ticks(10);
+        .ticks(tickCt);
 
     var  xAxisDrawing = svg.append("g") // xAxis
         .attr("class", "axis")
@@ -87,7 +94,7 @@ function regionTrendChart (trendBarDataSet, regionTrendDiv) {
         .text(mappings[xAxisMetric])
         .attr("class", "caption");
 
-    var wdBar = width / (trendBarDataSet["1990"].length * 3), j=0, padding = 0;
+    var wdBar = width / (trendBarDataSet[maxKeys].length * 3), j=0, padding = 0;
     wdBar = wdBar - (wdBar/3);
 console.log("width", width, wdBar); 
     for (var key in trendBarDataSet) {
