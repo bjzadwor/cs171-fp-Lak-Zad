@@ -69,6 +69,16 @@ var isDataEmpty = function(validateDataSet) {
 var yearChartData;
 function filter(){
 
+    var visTitleMap = "Choropleth"
+        visTitle1 = "Age Group Metrics Distribution for sel. Cause & Region for " + filterValues.year, 
+        visTitle2 = "Age Group/Sex-wise Metrics for sel. Cause & Region for " + filterValues.year, 
+        visTitle3 = "Tabular Visualization 3 - Top regions affected by sel. Cause" + filterValues.cause, 
+        visTitle4 = "Age Group Metrics Trend 1990-2010 for sel. Cause & Region", 
+        visTitle5 = "Region-wise Metrics Distribution for sel. Cause, Sex & Region for " + filterValues.year, 
+        visTitle6 = "Region/Sex-wise Metrics Distribution for sel. Cause & Age Group for " + filterValues.year, 
+        visTitle7 = "Region-wise Metrics Trend 1990-2010 for sel. Cause, Sex & Age Group", 
+        visTitle8 = "Tabular Visualization 8 - Top Mortality Causes for " + mappings[filterValues.region];
+
     var mapDivString, ageGroupBarChartDivString, regionalBarChartDivString, ageLineChartDivString;
     var regionTrendChartDivString, ageSexTrendChartDivString;
     filteredData = [];
@@ -157,11 +167,21 @@ function filter(){
 
     mapDivString = "#mainVis"
     ageGroupBarChartDivString = "#vis1"
-    regionalBarChartDivString =  "#vis5"
-    ageLineChartDivString = "#vis4"
-    regionTrendChartDivString = "#vis7"
     ageSexTrendChartDivString = "#vis2"
+    ageLineChartDivString = "#vis4"
+    regionalBarChartDivString =  "#vis5"
+    regionTrendChartDivString = "#vis7"
 
+    $('#vis1 span').text(visTitle1);
+    $('#vis2 span').text(visTitle2);
+    $('#vis3 span').text(visTitle3);
+    $('#vis4 span').text(visTitle4);
+    $('#vis5 span').text(visTitle5);
+    $('#vis6 span').text(visTitle6);
+    $('#vis7 span').text(visTitle7);
+    $('#vis8 span').text(visTitle8);
+
+    
     switch (filterValues.main){
     case "map":
 
@@ -172,26 +192,36 @@ function filter(){
             console.log("drawing Age Groups in Main Vis");
             ageGroupBarChartDivString = "#mainVis";
             mapDivString="#vis1";
+            $(mapDivString + ' span').text(visTitleMap);
+            $(ageGroupBarChartDivString + ' span').text(visTitle1);
         break;
 
         case "regionBarChart":
             regionalBarChartDivString = "#mainVis";
             mapDivString="#vis5";
+            $(mapDivString + ' span').text(visTitleMap);
+            $(regionalBarChartDivString + ' span').text(visTitle5);
         break;
 
         case "trendLineChart":
             ageLineChartDivString = "#mainVis";
             mapDivString="#vis4";
+            $(mapDivString + ' span').text(visTitleMap);
+            $(ageLineChartDivString + ' span').text(visTitle4);
         break;
 
         case "trendAgeSexChart":
             ageSexTrendChartDivString = "#mainVis";
             mapDivString="#vis2";
+            $(mapDivString + ' span').text(visTitleMap);
+            $(ageSexTrendChartDivString + ' span').text(visTitle2);
         break;
 
         case "trendBarChart":
             regionTrendChartDivString = "#mainVis";
             mapDivString="#vis7";
+            $(mapDivString + ' span').text(visTitleMap);
+            $(regionTrendChartDivString + ' span').text(visTitle7);
         break;
 
     default:
