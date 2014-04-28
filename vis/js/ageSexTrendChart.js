@@ -33,10 +33,8 @@ console.log("**** ageSexTrendChart", ageSexTrendDataSet);
     var arrData = [], dataLength=0, maxKeys;
     for (var key in ageSexTrendDataSet) {
         arrData.push(ageSexTrendDataSet[key]);
-
         if (ageSexTrendDataSet[key].length > dataLength) {
             dataLength = ageSexTrendDataSet[key].length;
-
             maxKeys = key;
         }
     }
@@ -56,8 +54,7 @@ console.log("**** ageSexTrendChart", ageSexTrendDataSet);
         .scale(xScale)
         .orient("bottom")
         .ticks(dataLength-1)
-        .tickFormat(function(i) { console.log("tickFormat", i, ageSexTrendDataSet[maxKeys][i][xAxisMetric]);
-            return ageSexTrendDataSet[maxKeys][i][xAxisMetric]; });
+        .tickFormat(function(i) { return ageSexTrendDataSet[maxKeys][i][xAxisMetric]; });
 
     yAxis = d3.svg.axis()
         .scale(yScale)
@@ -90,7 +87,7 @@ console.log("**** ageSexTrendChart", ageSexTrendDataSet);
         .attr("class", "caption");
 
     var bottomLabel =  svg.append("text")   // Bottom Label
-        .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," + (height + 2* margin.top) + ")")
+        .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," + (height + margin.top + margin.bottom) + ")")
         .style("text-anchor", "middle")
         .text(mappings[xAxisMetric])
         .attr("class", "caption");

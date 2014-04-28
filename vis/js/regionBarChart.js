@@ -12,7 +12,6 @@ function regionBarChart (dataSet, regionGraphDiv) {
     if (regionGraphDiv == "#mainVis") height = (250)
     var xAxisMetric = "region_name";
 
-console.log("**** regionBarChart", dataSet);
     var backgroundColor = $('body').css("background-color");
     svg = d3.select(regionGraphDiv).append("svg")
         .attr({ width: width + margin.left + margin.right,
@@ -36,7 +35,6 @@ console.log("**** regionBarChart", dataSet);
     var yMax = d3.max(dataSet, function(d) { return +d[filterValues.metric];} );
     if (yMin == yMax) { yMax = yMax + 0.01; tickCt=1;}
 
-
     xScale = d3.scale.linear()
         .domain([0, dataSet.length-1])
         .range([margin.left, width]);
@@ -56,7 +54,7 @@ console.log("**** regionBarChart", dataSet);
         .orient("left")
         .ticks(tickCt);
 
-  var  xAxisDrawing = svg.append("g") // xAxis
+    var  xAxisDrawing = svg.append("g") // xAxis
         .attr("class", "axis")
         .attr("transform", "translate(0, " + height + ")")
         .call(xAxis)
@@ -66,12 +64,12 @@ console.log("**** regionBarChart", dataSet);
         .attr("dy", ".15em")
         .attr("transform", "rotate(-90)");
 
-  var yAxisDrawing = svg.append("g") // Y Axis
+    var yAxisDrawing = svg.append("g") // Y Axis
         .attr("class", "axis")
         .attr("transform", "translate(" + margin.left + ",0)")
         .call(yAxis);
 
-  var leftSideLabel =   svg.append("text")  // Left Side Label
+    var leftSideLabel =   svg.append("text")  // Left Side Label
         .attr("transform", "rotate(-90)")
         .attr("x", 0 - (height + margin.top)/2)
         .attr("y", margin.top )
@@ -81,13 +79,13 @@ console.log("**** regionBarChart", dataSet);
         })
         .attr("class", "caption");
 
-  var bottomLabel =  svg.append("text")   // Bottom Label
+    var bottomLabel =  svg.append("text")   // Bottom Label
         .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," + (height + 2* margin.top) + ")")
         .style("text-anchor", "middle")
         .text(mappings[xAxisMetric])
         .attr("class", "caption");
 
-   var bars = svg.selectAll(".bar")
+    var bars = svg.selectAll(".bar")
         .data(dataSet)
         .enter().append("rect")
         .attr("class", function(d){ return "bar pointer bar" + d.year; })

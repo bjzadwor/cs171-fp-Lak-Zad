@@ -11,7 +11,6 @@ function regionTrendChart (trendBarDataSet, regionTrendDiv) {
     if (regionTrendDiv == "#mainVis") height = (250)
     var xAxisMetric = "region_name";
 
-console.log("**** regionTrendChart", trendBarDataSet);
     var backgroundColor = $('body').css("background-color");
     svg = d3.select(regionTrendDiv).append("svg")
         .attr({ width: width + margin.left + margin.right,
@@ -33,10 +32,12 @@ console.log("**** regionTrendChart", trendBarDataSet);
 
     var arrData = [], dataLength=0, maxKeys;
     for (var key in trendBarDataSet) {
-        arrData.push(trendBarDataSet[key]);
-        if (trendBarDataSet[key].length > dataLength) { 
-            dataLength = trendBarDataSet[key].length;
-            maxKeys = key;
+        if (trendBarDataSet[key] != null && trendBarDataSet[key].length != 0) {
+            arrData.push(trendBarDataSet[key]);
+            if (trendBarDataSet[key].length > dataLength) { 
+                dataLength = trendBarDataSet[key].length;
+                maxKeys = key;
+            }
         }
     }
 

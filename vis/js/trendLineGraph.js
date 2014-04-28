@@ -11,7 +11,6 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
     if (trendGraphDiv == "#mainVis") height = (250)
     var xAxisMetric = "age_name";
 
-console.log("**** trendLineGraph", dataSet);
     lineChart = d3.select(trendGraphDiv).append("svg")
         .attr({ width: width + margin.left + margin.right,
             height: height + margin.top + margin.bottom,
@@ -34,7 +33,6 @@ console.log("**** trendLineGraph", dataSet);
         var yMin = d3.min(arrData, function(d, i) { return d3.min(d, function(e, i) { return +e[filterValues.metric]; }); });
         var yMax = d3.max(arrData, function(d, i) { return d3.max(d, function(e, i) { return +e[filterValues.metric]; }); });
         if (yMin == yMax) { yMax = yMax + 0.01; tickCt=1;}
-
 
 //        xScale = d3.scale.ordinal().rangeRoundBands([margin.left, width], .1);
         xScale = d3.scale.linear()
