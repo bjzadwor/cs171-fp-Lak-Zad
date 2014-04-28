@@ -32,12 +32,21 @@ console.log("**** ageBarChart", ageDataSet);
         var yMax = d3.max(ageDataSet, function(d) { return +d[filterValues.metric];} );
         if (yMin == yMax) { yMax = yMax + 0.01; tickCt=1;}
 
+<<<<<<< HEAD
         var dataLength = ageDataSet.length,
             wdBar = width / dataLength, j=0, padding = 0;
 console.log("ageSexTrendChart wdBar", wdBar);
     wdBar = wdBar - (wdBar/3);
 console.log("ageSexTrendChart wdBar", wdBar);
 console.log("ageSexTrendChart width", width, dataLength);
+=======
+        var dataLength = ageDataSet.length, 
+            wdBar = width / dataLength, j=0, padding = 0;
+console.log("ageSexTrendChart wdBar", wdBar); 
+    wdBar = wdBar - (wdBar/3);
+console.log("ageSexTrendChart wdBar", wdBar); 
+console.log("ageSexTrendChart width", width, dataLength); 
+>>>>>>> ad8a04cefee1951ebe72ffe59adb152fe5bd4c81
 
 //        xScale = d3.scale.ordinal().rangeRoundBands([margin.left, width], .1);
         xScale = d3.scale.linear()
@@ -103,12 +112,21 @@ console.log("ageSexTrendChart width", width, dataLength);
                 .attr("width", wdBar)
                 .attr("y", function(d, i) { return yScale(+d[filterValues.metric]); })
                 //if the value is too small to be displayed, set the height to a minimum 0.001 to enable the tooltip to be displayed to show data on hover
+<<<<<<< HEAD
                 .attr("height", function(d) {
                     if (height != yScale(+d[filterValues.metric]))
                         return height - yScale(+d[filterValues.metric]); else return 0.001; })
                 .append("title")
                 .html(function(d) {
                     return (d.year + ": " + mappings[d.region_name] + ", " + d.cause_medium + ", "
+=======
+                .attr("height", function(d) { 
+                    if (height != yScale(+d[filterValues.metric])) 
+                        return height - yScale(+d[filterValues.metric]); else return 0.001; })
+                .append("title")
+                .html(function(d) { 
+                    return (d.year + ": " + mappings[d.region_name] + ", " + d.cause_medium + ", " 
+>>>>>>> ad8a04cefee1951ebe72ffe59adb152fe5bd4c81
                         + d.age_name + ", Sex-" + d.sex_name + " : " +d[filterValues.metric])
                 });
 

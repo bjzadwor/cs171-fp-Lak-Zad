@@ -33,8 +33,13 @@ console.log("**** ageSexTrendChart", ageSexTrendDataSet);
     var arrData = [], dataLength=0, maxKeys;
     for (var key in ageSexTrendDataSet) {
         arrData.push(ageSexTrendDataSet[key]);
+<<<<<<< HEAD
         if (ageSexTrendDataSet[key].length > dataLength) {
             dataLength = ageSexTrendDataSet[key].length;
+=======
+        if (ageSexTrendDataSet[key].length > dataLength) { 
+            dataLength = ageSexTrendDataSet[key].length; 
+>>>>>>> ad8a04cefee1951ebe72ffe59adb152fe5bd4c81
             maxKeys = key;
         }
     }
@@ -94,12 +99,21 @@ console.log("**** ageSexTrendChart", ageSexTrendDataSet);
         .attr("class", "caption");
 console.log("ageSexTrendChart** LENGTH", dataLength);
     var wdBar = width / (dataLength * 3), j=0, padding = 0;
+<<<<<<< HEAD
 console.log("ageSexTrendChart wdBar", wdBar);
     wdBar = wdBar - (wdBar/3);
 console.log("ageSexTrendChart wdBar", wdBar);
 console.log("ageSexTrendChart width", width, dataLength);
     for (var key in ageSexTrendDataSet) {
 console.log("ageSexTrendChart key", key, ageSexTrendDataSet[key]);
+=======
+console.log("ageSexTrendChart wdBar", wdBar); 
+    wdBar = wdBar - (wdBar/3);
+console.log("ageSexTrendChart wdBar", wdBar); 
+console.log("ageSexTrendChart width", width, dataLength); 
+    for (var key in ageSexTrendDataSet) {
+console.log("ageSexTrendChart key", key, ageSexTrendDataSet[key]); 
+>>>>>>> ad8a04cefee1951ebe72ffe59adb152fe5bd4c81
 		var keyClass = ".bar" + key;
 		console.log(keyClass);
         var bars = svg.selectAll(keyClass)

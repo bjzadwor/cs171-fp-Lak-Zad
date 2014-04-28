@@ -4,7 +4,7 @@
 var barChart;
 var regionGraphLoaded = false;
 function regionBarChart (dataSet, regionGraphDiv) {
-    var barChart, xAxis, xScale, yAxis,  yScale;
+    var barChart, xAxis, xScale, yAxis,  yScale, tickCt=10;
     var barChartContainerWidth = $(regionGraphDiv).width();
     var margin = { left: 40 , right: 0, top: 15, bottom: 40};
     var width = barChartContainerWidth - margin.left - margin.right;
@@ -12,14 +12,13 @@ function regionBarChart (dataSet, regionGraphDiv) {
     if (regionGraphDiv == "#mainVis") height = (250)
     var xAxisMetric = "region_name";
 
-
+console.log("**** regionBarChart", dataSet);
     var backgroundColor = $('body').css("background-color");
     svg = d3.select(regionGraphDiv).append("svg")
         .attr({ width: width + margin.left + margin.right,
             height: height + margin.top + margin.bottom,
             class: "barChart"
         });
-
 
     var barChartBackgroundRect = svg.append("rect")
         .attr({ width: width + margin.left + margin.right,
@@ -33,8 +32,9 @@ function regionBarChart (dataSet, regionGraphDiv) {
 
         });
 
-    var yMin = d3.min(dataSet, function(d) { return +d[filterValues.metric];} );   //<-------------------------------------------------------------------------------------------------
-    var yMax = d3.max(dataSet, function(d) { return +d[filterValues.metric];} );   //<-------------------------------------------------------------------------------------------------
+    var yMin = d3.min(dataSet, function(d) { return +d[filterValues.metric];} );
+    var yMax = d3.max(dataSet, function(d) { return +d[filterValues.metric];} );
+    if (yMin == yMax) { yMax = yMax + 0.01; tickCt=1;}
 
 
     xScale = d3.scale.linear()
@@ -54,7 +54,7 @@ function regionBarChart (dataSet, regionGraphDiv) {
     yAxis = d3.svg.axis()
         .scale(yScale)
         .orient("left")
-        .ticks(10);
+        .ticks(tickCt);
 
   var  xAxisDrawing = svg.append("g") // xAxis
         .attr("class", "axis")
