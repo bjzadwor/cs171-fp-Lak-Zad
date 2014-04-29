@@ -300,19 +300,19 @@ YLL_abs,Number of Years of Life Lost (YLL)
 YLL_abs_ui,Number of Years of Life Lost (YLL) - 95% Uncertainty Interval
 YLL_pct,Years of Life Lost (YLL) Percent of All Causes
 YLL_pct_ui,Years of Life Lost (YLL) Percent of All Causes - 95% Uncertainty Interval
-YLL_rate,"Years of Life Lost (YLL) Rate Per 100,000"
+YLL_rate,"YLL Rate Per 100,000"
 YLL_rate_ui,"Years of Life Lost (YLL) Rate Per 100,000 - 95% Uncertainty Interval"
 YLD_abs,Number of Years Lived with Disability (YLD)
 YLD_abs_ui,Number of Years Lived with Disability (YLD) - 95% Uncertainty Interval
 YLD_pct,Years Lived with Disability (YLD) Percent of All Causes
 YLD_pct_ui,Years Lived with Disability (YLD) Percent of All Causes - 95% Uncertainty Interval
-YLD_rate,"Years Lived with Disability (YLD) Rate Per 100,000"
+YLD_rate,"YLD Rate Per 100,000"
 YLD_rate_ui,"Years Lived with Disability (YLD) Rate Per 100,000 - 95% Uncertainty Interval"
 DALY_abs,Number of Disability Adjusted Life Years (DALY)
 DALY_abs_ui,Number of Disability Adjusted Life Years (DALY) - 95% Uncertainty Interval
 DALY_pct,Disability Adjusted Life Years (DALY) Percent of All Causes
 DALY_pct_ui,Disability Adjusted Life Years (DALY) Percent of All Causes - 95% Uncertainty Interval
-DALY_rate,"Disability Adjusted Life Years (DALY) Rate Per 100,000"
+DALY_rate,"DALY Rate Per 100,000"
 DALY_rate_ui,"Disability Adjusted Life Years (DALY) Rate Per 100,000 - 95% Uncertainty Interval"
 B,Both
 M,Male
@@ -326,3 +326,6 @@ Female,F
 1990,90
 2005,5
 2010,10
+DALY,Disability Adjusted Life Years
+YLD,Years Lived with Disability
+YLL,Years of Life Lost
