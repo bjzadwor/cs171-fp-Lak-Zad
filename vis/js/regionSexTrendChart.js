@@ -25,7 +25,7 @@ function regionSexTrendChart (trendBarDataSet, regionTrendDiv) {
             fill: backgroundColor
         })
         .on("click", function(d){ // if a user click on the chart(not a bar) open in big window
-            $("#mainSelect").val("trendYearBarChart");
+            $("#mainSelect").val("trendSexBarChart");
             $('#filterForm').change();
         });
 
