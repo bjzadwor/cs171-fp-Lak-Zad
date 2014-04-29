@@ -73,11 +73,11 @@ function filter(){
          visTitle1 = "Age Bar Chart",
          visTitle2 = "Age/Sex Bar Chart",
          visTitle3 = "Age/Year Line Chart",
-         visTitle4 = "Top Regions",
+         visTitle4 = "Top Diseases",
          visTitle5 = "Region Bar Chart",
          visTitle6 = "Region/Sex Bar Chart",
          visTitle7 = "Region/Year Bar Chart",
-         visTitle8 = "Top Diseases";
+         visTitle8 = "Top Regions";
 
         /* visTitle1 = "Age Group Metrics Distribution for sel. Cause & Region for " + filterValues.year,
         visTitle2 = "Age Group/Sex-wise Metrics for sel. Cause & Region for " + filterValues.year, 

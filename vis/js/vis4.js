@@ -83,7 +83,7 @@ $("#vis3Span").click(function(){
     handleSpanClick("trendLineChart");
 })
 $("#vis4Span").click(function(){
-    handleSpanClick("vis4");
+    handleSpanClick("topDiseases");
 })
 $("#vis5Span").click(function(){
     handleSpanClick("regionBarChart");
@@ -95,7 +95,7 @@ $("#vis7Span").click(function(){
     handleSpanClick("trendYearBarChart");
 })
 $("#vis8Span").click(function(){
-    handleSpanClick("vis9");
+    handleSpanClick("topRegions");
 })
 
 
