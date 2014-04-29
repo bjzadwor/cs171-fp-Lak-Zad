@@ -91,7 +91,7 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
         .attr("class", "caption");
 
     var line = d3.svg.line()
-        .interpolate("basis")
+        .interpolate("cardinal")
         .x(function(d, i) { return xScale(i) + width / (3 * dataLength); })
         .y(function(d, i) { return yScale(d[filterValues.metric]); });
 
@@ -112,7 +112,7 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
                 + d[0].cause_medium + ", " + /*d.age_name + */ ", Sex-" + d[0].sex_name + " : " +d[filterValues.metric]) 
         });
 
-    zzzzz = arrData;
+
     lineChart.selectAll("circle") 
        // .data(arrData, function(d, i) { console.log("arrData2", d, i); return d[i]; })
         .data(arrData[1])
