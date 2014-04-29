@@ -69,15 +69,24 @@ var isDataEmpty = function(validateDataSet) {
 var yearChartData;
 function filter(){
 
-    var visTitleMap = "Choropleth"
-        visTitle1 = "Age Group Metrics Distribution for sel. Cause & Region for " + filterValues.year, 
+    var visTitleMap = "Choropleth Map"
+         visTitle1 = "Age Bar Chart",
+         visTitle2 = "Age/Sex Bar Chart",
+         visTitle3 = "Age/Year Line Chart",
+         visTitle4 = "Top Regions",
+         visTitle5 = "Region Bar Chart",
+         visTitle6 = "Region/Sex Bar Chart",
+         visTitle7 = "Region/Year Bar Chart",
+         visTitle8 = "Top Diseases";
+
+        /* visTitle1 = "Age Group Metrics Distribution for sel. Cause & Region for " + filterValues.year,
         visTitle2 = "Age Group/Sex-wise Metrics for sel. Cause & Region for " + filterValues.year, 
         visTitle3 = "Age Group Metrics Trend 1990-2010 for sel. Cause & Region", 
         visTitle4 = "Tabular Visualization 4 - Top regions affected by sel. Cause", 
         visTitle5 = "Region-wise Metrics Distribution for sel. Cause, Sex & Region for " + filterValues.year, 
         visTitle6 = "Region-wise/Sex Metrics Distribution for sel. Cause & Age Group for " + filterValues.year, 
         visTitle7 = "Region-wise Metrics Trend 1990-2010 for sel. Cause, Sex & Age Group", 
-        visTitle8 = "Tabular Visualization 8 - Top Mortality Causes for " + mappings[filterValues.region];
+        visTitle8 = "Tabular Visualization 8 - Top Mortality Causes for " + mappings[filterValues.region];*/
 
     var mapDivString, ageGroupBarChartDivString, regionalBarChartDivString, ageLineChartDivString;
     var regionYearTrendChartDivString, ageSexTrendChartDivString;

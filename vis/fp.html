@@ -250,6 +250,8 @@
 
         .third{
             width: 95px;
+            text-shadow : none;
+
 
         }
         .btn-default{
@@ -346,7 +348,7 @@
         #yr1990Button.btn-primary,
         #yr2005Button.btn-primary,
         #yr2010Button.btn-primary{
-
+            font-weight: bolder;
             color:yellow;
             text-shadow:none;
             border-color: black;
@@ -355,6 +357,9 @@
             padding : 2px;
         }
 
+    .underlineText{
+        text-decoration : underline;
+    }
     </style>
 
 </head>
@@ -442,19 +447,19 @@
         </div>
     </div>
     <div class="row">
-        <div id="vis1" class="vis visTitle"><span>vis1</span></div>
-        <div id="vis2" class="vis visTitle"><span>vis2</span></div>
-        <div id="vis3" class="vis visTitle"><span>vis3</span></div>
-        <div id="vis4" class="vis visTitle"><span>vis4</span></div>
+        <div id="vis1" class="vis visTitle"><span id="vis1Span">vis1</span></div>
+        <div id="vis2" class="vis visTitle"><span id="vis2Span">vis2</span></div>
+        <div id="vis3" class="vis visTitle"><span id="vis3Span">vis3</span></div>
+        <div id="vis4" class="vis visTitle"><span id="vis4Span">vis4</span></div>
     </div>
     <div class="row">
-        <div id="vis5" class="vis visTitle"><span>vis5</span></div>
-        <div id="vis6" class="vis visTitle"><span>vis6</span></div>
-        <div id="vis7" class="vis visTitle"><span>vis7</span></div>
-        <div id="vis8" class="vis visTitle"><span>vis8</span></div>
+        <div id="vis5" class="vis visTitle"><span id="vis5Span">vis5</span></div>
+        <div id="vis6" class="vis visTitle"><span id="vis6Span">vis6</span></div>
+        <div id="vis7" class="vis visTitle"><span id="vis7Span">vis7</span></div>
+        <div id="vis8" class="vis visTitle"><span id="vis8Span">vis8</span></div>
     </div>
 </div>
-<div id="loadingOverlay" class="">
+<div id="loadingOverlay" class="z">
     <div id="loadingOuter">
         <div id="loading">
             <h1 class="center">Loading</h1>

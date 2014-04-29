@@ -64,6 +64,39 @@ metric["Years Lived with Disabilty per 100,000"] = "YLD_rate";
 metric["YLL_rate"] = "Years of Life Lost per 100,000";
 metric["Years of Life Lost per 100,000"] = "YLL_rate";
 
+function handleSpanClick (mainSelectValue){
+    if ($("#mainSelect").val() == mainSelectValue)
+        $("#mainSelect").val("map")
+    else
+        $("#mainSelect").val(mainSelectValue);
+    $('#filterForm').change();
+}
+
+
+$("#vis1Span").click(function(){
+    handleSpanClick("ageBarChart");
+})
+$("#vis2Span").click(function(){
+    handleSpanClick("trendAgeSexChart");
+})
+$("#vis3Span").click(function(){
+    handleSpanClick("trendLineChart");
+})
+$("#vis4Span").click(function(){
+    handleSpanClick("vis4");
+})
+$("#vis5Span").click(function(){
+    handleSpanClick("regionBarChart");
+})
+$("#vis6Span").click(function(){
+    handleSpanClick("trendSexBarChart");
+})
+$("#vis7Span").click(function(){
+    handleSpanClick("trendYearBarChart");
+})
+$("#vis8Span").click(function(){
+    handleSpanClick("vis9");
+})
 
 
 /*
