@@ -88,8 +88,9 @@ function filter(){
         visTitle7 = "Region-wise Metrics Trend 1990-2010 for sel. Cause, Sex & Age Group", 
         visTitle8 = "Tabular Visualization 8 - Top Mortality Causes for " + mappings[filterValues.region];*/
 
-    var mapDivString, ageGroupBarChartDivString, regionalBarChartDivString, ageLineChartDivString;
-    var regionYearTrendChartDivString, ageSexTrendChartDivString;
+    var mapDivString, ageGroupBarChartDivString, regionalBarChartDivString, ageLineChartDivString,
+        regionYearTrendChartDivString, ageSexTrendChartDivString, regionSexTrendChartDivString, topDiseasesDivString,
+        topRegionsDivString;
     filteredData = [];
     ageBarChartData = [];
     simpleYearChartData = [];
@@ -183,9 +184,11 @@ function filter(){
     ageGroupBarChartDivString = "#vis1"
     ageSexTrendChartDivString = "#vis2"
     ageLineChartDivString = "#vis3"
+    topDiseasesDivString = "#vis4"
     regionalBarChartDivString =  "#vis5"
     regionSexTrendChartDivString = "#vis6"
     regionYearTrendChartDivString = "#vis7"
+    topRegionsDivString = "#vis8"
 
     $('#vis1 span').text(visTitle1);
     $('#vis2 span').text(visTitle2);
