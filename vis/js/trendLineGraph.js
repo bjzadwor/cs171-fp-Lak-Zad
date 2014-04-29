@@ -112,7 +112,7 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
         .append("title")
         .html(function(d) { 
             if (d.length > 0) return  (d[0].year + ": " + mappings[d[0].region_name] + ", " 
-                + d[0].cause_medium + ", " + d.age_name + ", Sex-" + d[0].sex_name + " : " +d[filterValues.metric]) } );
+                + d[0].cause_medium + ", " + /*d.age_name + */ ", Sex-" + d[0].sex_name + " : " +d[filterValues.metric]) } );
 ;
 
 /*  var legend = svg.append("g")

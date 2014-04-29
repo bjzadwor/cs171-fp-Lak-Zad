@@ -24,8 +24,11 @@ var cause_value_var = 0;
 var age_value_var = 0;
 var fullData;
 var filteredData;
-var barChartData;
-var trendChartData;
+var ageBarChartData;
+var ageYearLineTrendData;
+var regionYearTrendData;
+var ageSexTrendData;
+var regionSexTrendData;
 var geoJSON;
 var dataLoaded;
 var geoJSONLoaded;
@@ -76,7 +79,7 @@ d3.csv("data/region.csv", function(csv){
             $("#regionSelect")
                 .append($("<option></option>")
                     .attr("value",row.shortRegion.trim())
-                    .text(row.fullRegion.trim()));
+                    .text(row.shortRegion.trim() + " - " + row.fullRegion.trim()));
         }
 
         })

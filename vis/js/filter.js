@@ -75,28 +75,32 @@ function filter(){
         visTitle3 = "Age Group Metrics Trend 1990-2010 for sel. Cause & Region", 
         visTitle4 = "Tabular Visualization 4 - Top regions affected by sel. Cause", 
         visTitle5 = "Region-wise Metrics Distribution for sel. Cause, Sex & Region for " + filterValues.year, 
-        visTitle6 = "Region/Sex-wise Metrics Distribution for sel. Cause & Age Group for " + filterValues.year, 
+        visTitle6 = "Region-wise/Sex Metrics Distribution for sel. Cause & Age Group for " + filterValues.year, 
         visTitle7 = "Region-wise Metrics Trend 1990-2010 for sel. Cause, Sex & Age Group", 
         visTitle8 = "Tabular Visualization 8 - Top Mortality Causes for " + mappings[filterValues.region];
 
     var mapDivString, ageGroupBarChartDivString, regionalBarChartDivString, ageLineChartDivString;
     var regionYearTrendChartDivString, ageSexTrendChartDivString;
     filteredData = [];
-    barChartData = [];
+    ageBarChartData = [];
     simpleYearChartData = [];
     console.log("filter firing");
-    trendChartData = {};
-    trendChartData["1990"] = [];
-    trendChartData["2005"] = [];
-    trendChartData["2010"] = [];
-    trendBarData = {};
-    trendBarData["1990"] = [];
-    trendBarData["2005"] = [];
-    trendBarData["2010"] = [];
+    ageYearLineTrendData = {};
+    ageYearLineTrendData["1990"] = [];
+    ageYearLineTrendData["2005"] = [];
+    ageYearLineTrendData["2010"] = [];
+    regionYearTrendData = {};
+    regionYearTrendData["1990"] = [];
+    regionYearTrendData["2005"] = [];
+    regionYearTrendData["2010"] = [];
     ageSexTrendData = {};
     ageSexTrendData["Male"] = [];
     ageSexTrendData["Female"] = [];
     ageSexTrendData["Both"] = [];
+    regionSexTrendData = {};
+    regionSexTrendData["Male"] = [];
+    regionSexTrendData["Female"] = [];
+    regionSexTrendData["Both"] = [];
 
 
     // set the cookie with the filter data.
@@ -119,7 +123,7 @@ function filter(){
             && (element.year.trim() == filterValues.year)
             && (element.sex_name.trim() == filterValues.sex)
             && (element.age_name.trim() != mappings["ALL"]))
-        {barChartData.push(element);}
+        {ageBarChartData.push(element);}
 
         if ((element.cause_medium.trim() == cause_value[filterValues.cause])
             && (element.region_name.trim() == filterValues.region)
@@ -133,14 +137,21 @@ function filter(){
             && (element.sex_name.trim() == filterValues.sex)
             && (element.age_name.trim() != mappings["ALL"])) 
         {
-            trendChartData[element.year.trim()].push(element);
+            ageYearLineTrendData[element.year.trim()].push(element);
+        }
+
+        if (((element.cause_medium.trim() == cause_value[filterValues.cause]))
+            && (element.year.trim() == filterValues.year)
+            && (element.age_name.trim() == age_value[filterValues.age]))
+        {
+            regionSexTrendData[element.sex_name.trim()].push(element);
         }
 
         if (((element.cause_medium.trim() == cause_value[filterValues.cause]))
             && (element.sex_name.trim() == filterValues.sex)
             && (element.age_name.trim() == age_value[filterValues.age]))
         {
-            trendBarData[element.year.trim()].push(element);
+            regionYearTrendData[element.year.trim()].push(element);
         }
 
         if ((element.cause_medium.trim() == cause_value[filterValues.cause])
@@ -236,20 +247,20 @@ function filter(){
     drawImprovedMap(mapDivString);
     
     // checking if the filtered data is an empty dataset and display the viz accordingly
-    if (isDataEmpty(barChartData)) noDataToDisplay(ageGroupBarChartDivString);
-    else createAgeBars(barChartData, ageGroupBarChartDivString);
+    if (isDataEmpty(ageBarChartData)) noDataToDisplay(ageGroupBarChartDivString);
+    else createAgeBars(ageBarChartData, ageGroupBarChartDivString);
 
     if (isDataEmpty(filteredData)) noDataToDisplay(regionalBarChartDivString);
     else regionBarChart(filteredData, regionalBarChartDivString);
 
-    if (isDataEmpty(trendChartData)) noDataToDisplay(ageLineChartDivString);
-    else trendLineGraph(trendChartData, ageLineChartDivString);
+    if (isDataEmpty(ageYearLineTrendData)) noDataToDisplay(ageLineChartDivString);
+    else trendLineGraph(ageYearLineTrendData, ageLineChartDivString);
 
-    if (isDataEmpty(trendBarData)) noDataToDisplay(regionSexTrendChartDivString);
-    else regionYearTrendChart(trendBarData, regionSexTrendChartDivString);
+    if (isDataEmpty(regionSexTrendData)) noDataToDisplay(regionSexTrendChartDivString);
+    else regionSexTrendChart(regionSexTrendData, regionSexTrendChartDivString);
 
-    if (isDataEmpty(trendBarData)) noDataToDisplay(regionYearTrendChartDivString);
-    else regionYearTrendChart(trendBarData, regionYearTrendChartDivString);
+    if (isDataEmpty(regionYearTrendData)) noDataToDisplay(regionYearTrendChartDivString);
+    else regionYearTrendChart(regionYearTrendData, regionYearTrendChartDivString);
 
     if (isDataEmpty(ageSexTrendData)) noDataToDisplay(ageSexTrendChartDivString);
     else ageSexTrendChart(ageSexTrendData, ageSexTrendChartDivString);
