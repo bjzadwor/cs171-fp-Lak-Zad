@@ -212,7 +212,14 @@ function filter(){
             $(regionalBarChartDivString + ' span').text(visTitle5);
         break;
 
-        case "trendBarChart":
+        case "trendSexBarChart":
+            regionSexTrendChartDivString = "#mainVis";
+            mapDivString="#vis6";
+            $(mapDivString + ' span').text(visTitleMap);
+            $(regionSexTrendChartDivString + ' span').text(visTitle6);
+        break;
+
+        case "trendYearBarChart":
             regionYearTrendChartDivString = "#mainVis";
             mapDivString="#vis7";
             $(mapDivString + ' span').text(visTitleMap);
@@ -237,6 +244,9 @@ function filter(){
 
     if (isDataEmpty(trendChartData)) noDataToDisplay(ageLineChartDivString);
     else trendLineGraph(trendChartData, ageLineChartDivString);
+
+    if (isDataEmpty(trendBarData)) noDataToDisplay(regionSexTrendChartDivString);
+    else regionYearTrendChart(trendBarData, regionSexTrendChartDivString);
 
     if (isDataEmpty(trendBarData)) noDataToDisplay(regionYearTrendChartDivString);
     else regionYearTrendChart(trendBarData, regionYearTrendChartDivString);

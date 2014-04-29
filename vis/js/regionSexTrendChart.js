@@ -2,7 +2,7 @@
  * Created by Bijish on 4/24/2014.
  */
 
-function regionYearTrendChart (trendBarDataSet, regionTrendDiv) {
+function regionTrendChart (trendBarDataSet, regionTrendDiv) {
     var barChart, xAxis, xScale, yAxis,  yScale, tickCt=10;
     var barChartContainerWidth = $(regionTrendDiv).width();
     var margin = { left: 40 , right: 0, top: 15, bottom: 40};
@@ -143,4 +143,4 @@ function regionYearTrendChart (trendBarDataSet, regionTrendDiv) {
             .attr("stroke", "black");
         });
 
-    } // end regionYearTrendChart function.
+    } // end regionTrendChart function.
