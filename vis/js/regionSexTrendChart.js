@@ -2,7 +2,7 @@
  * Created by Bijish on 4/24/2014.
  */
 
-function regionTrendChart (trendBarDataSet, regionTrendDiv) {
+function regionSexTrendChart (trendBarDataSet, regionTrendDiv) {
     var barChart, xAxis, xScale, yAxis,  yScale, tickCt=10;
     var barChartContainerWidth = $(regionTrendDiv).width();
     var margin = { left: 40 , right: 0, top: 15, bottom: 40};
@@ -96,12 +96,14 @@ function regionTrendChart (trendBarDataSet, regionTrendDiv) {
         padding = wdBar/2;
     wdBar = wdBar - (wdBar/3);
 
-    for (var key in trendBarDataSet) {
-		var keyClass = ".bar" + key;
+    var keySet = ["Male", "Both", "Female"];
+    for (var j=0; j < keySet.length; j++) { //for (var key in keySet) {
+		var keyClass = ".bar" + keySet[j];
+console.log("ageSexTrendDataSet", keySet[j], ageSexTrendDataSet[keySet[j]]);
         var bars = svg.selectAll(keyClass)
-            .data(trendBarDataSet[key])
+            .data(trendBarDataSet[keySet[j]])
             .enter().append("rect")
-            .attr("class", function(d) { return "bar pointer bar" + d.year; })
+            .attr("class", function(d) { return "bar pointer bar" + d.sex_name; })
             .attr("x", function(d, i) { return padding + xScale(i) + wdBar * j; })
             .attr("width", wdBar)
             .attr("y", function(d, i) { return yScale(+d[filterValues.metric]); })
@@ -143,4 +145,4 @@ function regionTrendChart (trendBarDataSet, regionTrendDiv) {
             .attr("stroke", "black");
         });
 
-    } // end regionTrendChart function.
+    } // end regionSexTrendChart function.
