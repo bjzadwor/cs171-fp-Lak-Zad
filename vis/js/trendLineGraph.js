@@ -115,15 +115,30 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
 
     for (var key in dataSet) {
 console.log(key, dataSet[key]);
-    lineChart.selectAll("circle") 
+        switch (dataSet[key][0].year){
+            case "1990":
+                chosenColor = ninety;
+            break;
+            case "2010":
+                chosenColor = ten;
+            break;
+            case "2005":
+                chosenColor = five;
+            break;
+        }
+
+       var computedClass = "circle" + dataSet[key][0].year
+       console.log(computedClass)
+    lineChart.selectAll(computedClass)
        // .data(arrData, function(d, i) { console.log("arrData2", d, i); return d[i]; })
         .data(dataSet[key])
         .enter()
         .append("circle")
-            .attr("class", function(d) { return "bar"+ d.year})
+            .attr("class", computedClass)
             .attr("cx", function(d, i) { return xScale(i) + width / (3 * dataLength); })
             .attr("cy", function(d, i) { return yScale(d[filterValues.metric]); })
-            .attr("r", 2);
+            .attr("r", 2)
+        .attr("fill", chosenColor);
     }
 
 /*  var legend = svg.append("g")
