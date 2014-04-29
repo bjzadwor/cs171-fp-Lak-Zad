@@ -1,10 +1,8 @@
 /**
  * Created by Zadworney on 4/20/2014.
  */
-var barChart;
-var regionGraphLoaded = false;
 function regionBarChart (dataSet, regionGraphDiv) {
-    var barChart, xAxis, xScale, yAxis,  yScale, tickCt=10;
+    var xAxis, xScale, yAxis,  yScale, tickCt=10;
     var barChartContainerWidth = $(regionGraphDiv).width();
     var margin = { left: 40 , right: 0, top: 15, bottom: 40};
     var width = barChartContainerWidth - margin.left - margin.right;
@@ -35,8 +33,13 @@ function regionBarChart (dataSet, regionGraphDiv) {
     var yMax = d3.max(dataSet, function(d) { return +d[filterValues.metric];} );
     if (yMin == yMax) { yMax = yMax + 0.01; tickCt=1;}
 
+    var dataLength = dataSet.length,
+        wdBar = width/dataLength, j=0, 
+        padding = wdBar/6;
+    wdBar = wdBar - (wdBar/3);
+
     xScale = d3.scale.linear()
-        .domain([0, dataSet.length-1])
+        .domain([0, dataLength])
         .range([margin.left, width]);
 
     yScale = d3.scale.linear()
@@ -46,8 +49,8 @@ function regionBarChart (dataSet, regionGraphDiv) {
     xAxis = d3.svg.axis()
         .scale(xScale)
         .orient("bottom")
-        .ticks(dataSet.length-1)
-        .tickFormat(function(i) { return dataSet[i][xAxisMetric]; });
+        .ticks(dataLength)
+        .tickFormat(function(i) { if (i < dataLength) return dataSet[i][xAxisMetric]; });
 
     yAxis = d3.svg.axis()
         .scale(yScale)
@@ -61,7 +64,7 @@ function regionBarChart (dataSet, regionGraphDiv) {
         .selectAll("text")
         .style("text-anchor", "end")
         .attr("dx", "-.2em")
-        .attr("dy", ".15em")
+        .attr("dy", width / (3 * dataLength)) //".15em")
         .attr("transform", "rotate(-90)");
 
     var yAxisDrawing = svg.append("g") // Y Axis
@@ -69,10 +72,10 @@ function regionBarChart (dataSet, regionGraphDiv) {
         .attr("transform", "translate(" + margin.left + ",0)")
         .call(yAxis);
 
-    var leftSideLabel =   svg.append("text")  // Left Side Label
+    var leftSideLabel = svg.append("text")  // Left Side Label
         .attr("transform", "rotate(-90)")
         .attr("x", 0 - (height + margin.top)/2)
-        .attr("y", margin.top )
+        .attr("y", margin.top-5)
         .style("text-anchor", "middle")
         .text(function() {
             return mappings[filterValues.metric];
@@ -89,15 +92,20 @@ function regionBarChart (dataSet, regionGraphDiv) {
         .data(dataSet)
         .enter().append("rect")
         .attr("class", function(d){ return "bar pointer bar" + d.year; })
-        .attr("x", function(d, i) { return xScale(i)+2; })
+        .attr("x", function(d, i) { return padding + xScale(i); })
 //              .attr("width", xScale.rangeBand())
-        .attr("width", (width/dataSet.length)-5)
+        .attr("width", wdBar)
         .attr("y", function(d, i) { return yScale(+d[filterValues.metric]); })
-        //if the value is too small to be displayed, set the height to a minimum 0.001 to enable the tooltip to be displayed to show data on hover
-        .attr("height", function(d) { if (height != yScale(+d[filterValues.metric])) return height - yScale(+d[filterValues.metric]); else return 0.001; })
+        //if the value is too small to be displayed, set the height to a minimum 0.001 
+        //to enable the tooltip to be displayed to show data on hover
+        .attr("height", function(d) { 
+            if (height != yScale(+d[filterValues.metric])) 
+                return height - yScale(+d[filterValues.metric]); else return 0.001; })
         .append("title")
-        .html(function(d) { return  (d.year + ": " + mappings[d.region_name] + ", " + d.cause_medium + ", " + d.age_name + ", Sex-" + d.sex_name + " : " +d[filterValues.metric]) } )
-
+        .html(function(d) { 
+            return (d.year + ": " + mappings[d.region_name] + ", " + d.cause_medium 
+                + ", " + d.age_name + ", Sex-" + d.sex_name + " : " +d[filterValues.metric]) 
+        });
 
         svg.selectAll(".bar")
             .on("click", function(d){

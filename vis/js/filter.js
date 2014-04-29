@@ -72,15 +72,15 @@ function filter(){
     var visTitleMap = "Choropleth"
         visTitle1 = "Age Group Metrics Distribution for sel. Cause & Region for " + filterValues.year, 
         visTitle2 = "Age Group/Sex-wise Metrics for sel. Cause & Region for " + filterValues.year, 
-        visTitle3 = "Tabular Visualization 3 - Top regions affected by sel. Cause" + filterValues.cause, 
-        visTitle4 = "Age Group Metrics Trend 1990-2010 for sel. Cause & Region", 
+        visTitle3 = "Age Group Metrics Trend 1990-2010 for sel. Cause & Region", 
+        visTitle4 = "Tabular Visualization 4 - Top regions affected by sel. Cause", 
         visTitle5 = "Region-wise Metrics Distribution for sel. Cause, Sex & Region for " + filterValues.year, 
         visTitle6 = "Region/Sex-wise Metrics Distribution for sel. Cause & Age Group for " + filterValues.year, 
         visTitle7 = "Region-wise Metrics Trend 1990-2010 for sel. Cause, Sex & Age Group", 
         visTitle8 = "Tabular Visualization 8 - Top Mortality Causes for " + mappings[filterValues.region];
 
     var mapDivString, ageGroupBarChartDivString, regionalBarChartDivString, ageLineChartDivString;
-    var regionTrendChartDivString, ageSexTrendChartDivString;
+    var regionYearTrendChartDivString, ageSexTrendChartDivString;
     filteredData = [];
     barChartData = [];
     simpleYearChartData = [];
@@ -107,12 +107,10 @@ function filter(){
     fullData.every(function(element, index, array){
 
       // draw the region metrics bar chart
-        if (
-                ((element.cause_medium.trim() == cause_value[filterValues.cause]))
+        if (((element.cause_medium.trim() == cause_value[filterValues.cause]))
                 && (element.year.trim() == filterValues.year)
                 && (element.sex_name.trim() == filterValues.sex)
-                && (element.age_name.trim() == age_value[filterValues.age])
-            )
+                && (element.age_name.trim() == age_value[filterValues.age]))
         {filteredData.push(element);}
 
         // build the dataset required to draw the bar chart of ages
@@ -135,14 +133,14 @@ function filter(){
             && (element.sex_name.trim() == filterValues.sex)
             && (element.age_name.trim() != mappings["ALL"])) 
         {
-        trendChartData[element.year.trim()].push(element);
+            trendChartData[element.year.trim()].push(element);
         }
 
         if (((element.cause_medium.trim() == cause_value[filterValues.cause]))
             && (element.sex_name.trim() == filterValues.sex)
             && (element.age_name.trim() == age_value[filterValues.age]))
         {
-        trendBarData[element.year.trim()].push(element);
+            trendBarData[element.year.trim()].push(element);
         }
 
         if ((element.cause_medium.trim() == cause_value[filterValues.cause])
@@ -150,7 +148,7 @@ function filter(){
             && (element.year.trim() == filterValues.year)
             && (element.age_name.trim() != mappings["ALL"]))
         {
-        ageSexTrendData[element.sex_name.trim()].push(element);
+            ageSexTrendData[element.sex_name.trim()].push(element);
         }
 
         return true;
@@ -161,16 +159,13 @@ function filter(){
     // remove all the vis so we can re-draw them
     $('svg').remove();
 
-
-
-
-
     mapDivString = "#mainVis"
     ageGroupBarChartDivString = "#vis1"
     ageSexTrendChartDivString = "#vis2"
-    ageLineChartDivString = "#vis4"
+    ageLineChartDivString = "#vis3"
     regionalBarChartDivString =  "#vis5"
-    regionTrendChartDivString = "#vis7"
+    regionSexTrendChartDivString = "#vis6"
+    regionYearTrendChartDivString = "#vis7"
 
     $('#vis1 span').text(visTitle1);
     $('#vis2 span').text(visTitle2);
@@ -196,20 +191,6 @@ function filter(){
             $(ageGroupBarChartDivString + ' span').text(visTitle1);
         break;
 
-        case "regionBarChart":
-            regionalBarChartDivString = "#mainVis";
-            mapDivString="#vis5";
-            $(mapDivString + ' span').text(visTitleMap);
-            $(regionalBarChartDivString + ' span').text(visTitle5);
-        break;
-
-        case "trendLineChart":
-            ageLineChartDivString = "#mainVis";
-            mapDivString="#vis4";
-            $(mapDivString + ' span').text(visTitleMap);
-            $(ageLineChartDivString + ' span').text(visTitle4);
-        break;
-
         case "trendAgeSexChart":
             ageSexTrendChartDivString = "#mainVis";
             mapDivString="#vis2";
@@ -217,11 +198,25 @@ function filter(){
             $(ageSexTrendChartDivString + ' span').text(visTitle2);
         break;
 
+        case "trendLineChart":
+            ageLineChartDivString = "#mainVis";
+            mapDivString="#vis3";
+            $(mapDivString + ' span').text(visTitleMap);
+            $(ageLineChartDivString + ' span').text(visTitle3);
+        break;
+
+        case "regionBarChart":
+            regionalBarChartDivString = "#mainVis";
+            mapDivString="#vis5";
+            $(mapDivString + ' span').text(visTitleMap);
+            $(regionalBarChartDivString + ' span').text(visTitle5);
+        break;
+
         case "trendBarChart":
-            regionTrendChartDivString = "#mainVis";
+            regionYearTrendChartDivString = "#mainVis";
             mapDivString="#vis7";
             $(mapDivString + ' span').text(visTitleMap);
-            $(regionTrendChartDivString + ' span').text(visTitle7);
+            $(regionYearTrendChartDivString + ' span').text(visTitle7);
         break;
 
     default:
@@ -243,8 +238,8 @@ function filter(){
     if (isDataEmpty(trendChartData)) noDataToDisplay(ageLineChartDivString);
     else trendLineGraph(trendChartData, ageLineChartDivString);
 
-    if (isDataEmpty(trendBarData)) noDataToDisplay(regionTrendChartDivString);
-    else regionTrendChart(trendBarData, regionTrendChartDivString);
+    if (isDataEmpty(trendBarData)) noDataToDisplay(regionYearTrendChartDivString);
+    else regionYearTrendChart(trendBarData, regionYearTrendChartDivString);
 
     if (isDataEmpty(ageSexTrendData)) noDataToDisplay(ageSexTrendChartDivString);
     else ageSexTrendChart(ageSexTrendData, ageSexTrendChartDivString);

@@ -11,7 +11,6 @@ function ageSexTrendChart (ageSexTrendDataSet, ageSexTrendDiv) {
     if (ageSexTrendDiv == "#mainVis") height = (250)
 	var xAxisMetric = "age_name";
 
-console.log("**** ageSexTrendChart", ageSexTrendDataSet);
     var backgroundColor = $('body').css("background-color");
     svg = d3.select(ageSexTrendDiv).append("svg")
         .attr({ width: width + margin.left + margin.right,
@@ -30,7 +29,7 @@ console.log("**** ageSexTrendChart", ageSexTrendDataSet);
             $('#filterForm').change();
         });
 
-    var arrData = [], dataLength=0, maxKeys;
+    var arrData = [], dataLength=0, maxKeys=0;
     for (var key in ageSexTrendDataSet) {
         arrData.push(ageSexTrendDataSet[key]);
         if (ageSexTrendDataSet[key].length > dataLength) {
@@ -38,12 +37,13 @@ console.log("**** ageSexTrendChart", ageSexTrendDataSet);
             maxKeys = key;
         }
     }
+
     var yMin = d3.min(arrData, function(d, i) { return d3.min(d, function(e, i) { return +e[filterValues.metric]; }); });
     var yMax = d3.max(arrData, function(d, i) { return d3.max(d, function(e, i) { return +e[filterValues.metric]; }); });
     if (yMin == yMax) { yMax = yMax + 0.01; tickCt=1;}
 
     xScale = d3.scale.linear()
-        .domain([0, dataLength-1])
+        .domain([0, dataLength])
         .range([margin.left, width]);
 
     yScale = d3.scale.linear()
@@ -53,8 +53,8 @@ console.log("**** ageSexTrendChart", ageSexTrendDataSet);
     xAxis = d3.svg.axis()
         .scale(xScale)
         .orient("bottom")
-        .ticks(dataLength-1)
-        .tickFormat(function(i) { return ageSexTrendDataSet[maxKeys][i][xAxisMetric]; });
+        .ticks(dataLength)
+        .tickFormat(function(i) { if (i < dataLength) return ageSexTrendDataSet[maxKeys][i][xAxisMetric]; });
 
     yAxis = d3.svg.axis()
         .scale(yScale)
@@ -68,7 +68,7 @@ console.log("**** ageSexTrendChart", ageSexTrendDataSet);
         .selectAll("text")
         .style("text-anchor", "end")
         .attr("dx", "-.2em")
-        .attr("dy", ".15em")
+        .attr("dy", width / (3 * dataLength)) //".15em")
         .attr("transform", "rotate(-90)");
 
     var yAxisDrawing = svg.append("g") // Y Axis
@@ -79,7 +79,7 @@ console.log("**** ageSexTrendChart", ageSexTrendDataSet);
     var leftSideLabel = svg.append("text")  // Left Side Label
         .attr("transform", "rotate(-90)")
         .attr("x", 0 - (height + margin.top)/2)
-        .attr("y", margin.top )
+        .attr("y", margin.top-5)
         .style("text-anchor", "middle")
         .text(function() {
             return mappings[filterValues.metric];
@@ -91,32 +91,30 @@ console.log("**** ageSexTrendChart", ageSexTrendDataSet);
         .style("text-anchor", "middle")
         .text(mappings[xAxisMetric])
         .attr("class", "caption");
-console.log("ageSexTrendChart** LENGTH", dataLength);
-    var wdBar = width / (dataLength * 3), j=0, padding = 0;
 
-console.log("ageSexTrendChart wdBar", wdBar);
+    var wdBar = width / (dataLength * 3), j=0, 
+        padding = wdBar/2;
     wdBar = wdBar - (wdBar/3);
-console.log("ageSexTrendChart wdBar", wdBar);
-console.log("ageSexTrendChart width", width, dataLength);
-    for (var key in ageSexTrendDataSet) {
-console.log("ageSexTrendChart key", key, ageSexTrendDataSet[key]);
 
-		var keyClass = ".bar" + key;
-		console.log(keyClass);
+    var keySet = ["Male", "Both", "Female"];
+    for (var j=0; j < keySet.length; j++) { //for (var key in keySet) {
+		var keyClass = ".bar" + keySet[j];
         var bars = svg.selectAll(keyClass)
-            .data(ageSexTrendDataSet[key])
+            .data(ageSexTrendDataSet[keySet[j]])
             .enter().append("rect")
-            .attr("class",
-            function(d){ return "bar pointer bar" + d.sex_name; })
-            .attr("x", function(d, i) { console.log("x", j, i, xScale(i), padding + xScale(i) + wdBar * j); return padding + xScale(i) + wdBar * j; })
-    //              .attr("width", xScale.rangeBand())
+            .attr("class", function(d) { return "bar pointer bar" + d.sex_name; })
+            .attr("x", function(d, i) { return padding + xScale(i) + wdBar * j; })
             .attr("width", wdBar)
             .attr("y", function(d, i) { return yScale(+d[filterValues.metric]); })
-            //if the value is too small to be displayed, set the height to a minimum 0.001 to enable the tooltip to be displayed to show data on hover
-            .attr("height", function(d) { if (height != yScale(+d[filterValues.metric])) return height - yScale(+d[filterValues.metric]); else return 0.001; })
+            //if the value is too small to be displayed, set the height to a minimum 0.001 
+            //to enable the tooltip to be displayed to show data on hover
+            .attr("height", function(d) { 
+                if (height != yScale(+d[filterValues.metric])) 
+                    return height - yScale(+d[filterValues.metric]); else return 0.001; })
             .append("title")
-            .html(function(d) { return (d.year + ": " + mappings[d.region_name] + ", " + d.cause_medium + ", " + d.age_name + ", Sex-" + d.sex_name + " : " +d[filterValues.metric]) } )
-        j++;
+            .html(function(d) { 
+                return (d.year + ": " + mappings[d.region_name] + ", " + d.cause_medium 
+                    + ", " + d.age_name + ", Sex-" + d.sex_name + " : " +d[filterValues.metric]) } )
     }
 
     svg.selectAll(".bar")
@@ -135,7 +133,7 @@ console.log("ageSexTrendChart key", key, ageSexTrendDataSet[key]);
         })
         .on("mouseout", function(d){
             console.log("mouseout!");
-            className = ".bar" + d.year;
+            className = ".bar" + d.sex_name;
         console.log(className);
         d3.selectAll(className).filter("path")
            .attr("fill", function(){return d3.select(this).attr("fill2")});
