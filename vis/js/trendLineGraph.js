@@ -113,16 +113,18 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
         });
 
 
+    for (var key in dataSet) {
+console.log(key, dataSet[key]);
     lineChart.selectAll("circle") 
        // .data(arrData, function(d, i) { console.log("arrData2", d, i); return d[i]; })
-        .data(arrData[1])
+        .data(dataSet[key])
         .enter()
         .append("circle")
-            .attr("class", function(d){return "year"+ d.year})
+            .attr("class", function(d) { return "bar"+ d.year})
             .attr("cx", function(d, i) { return xScale(i) + width / (3 * dataLength); })
             .attr("cy", function(d, i) { return yScale(d[filterValues.metric]); })
             .attr("r", 2);
-
+    }
 
 /*  var legend = svg.append("g")
         .attr("class","legend")
