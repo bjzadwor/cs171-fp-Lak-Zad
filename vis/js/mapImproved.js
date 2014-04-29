@@ -194,9 +194,11 @@ function drawChartColors2(){
         .attr("transform", "translate(" + width/3 + ","+ height *.98 + ")")
         .call(axis)
 
+
+    //Reset Zoom
     improvedMapSvg.append("g")
         .attr("transform", "translate(" + 5 + ","+ height *.98 + ")")
-        .attr("class", "pointer")
+        .attr("class", "pointer underlineText")
         .append("text")
         .text("Reset Zoom")
         .on("click", filter);
