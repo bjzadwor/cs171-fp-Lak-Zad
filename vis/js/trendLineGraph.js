@@ -34,7 +34,6 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
     var yMax = d3.max(arrData, function(d, i) { return d3.max(d, function(e, i) { return +e[filterValues.metric]; }); });
     if (yMin == yMax) { yMax = yMax + 0.01; tickCt=1;}
 
-//        xScale = d3.scale.ordinal().rangeRoundBands([margin.left, width], .1);
     xScale = d3.scale.linear()
         .domain([0, dataLength])
         .range([margin.left, width]);
@@ -90,9 +89,6 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
         .text(mappings[xAxisMetric]) 
         .attr("class", "caption");
 
-    var color = d3.scale.category10()
-        .domain(0, 2); 
-
     var line = d3.svg.line()
         .interpolate("basis")
         .x(function(d, i) { return xScale(i) + width / (3 * dataLength); })
@@ -112,8 +108,15 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
         .append("title")
         .html(function(d) { 
             if (d.length > 0) return  (d[0].year + ": " + mappings[d[0].region_name] + ", " 
-                + d[0].cause_medium + ", " + /*d.age_name + */ ", Sex-" + d[0].sex_name + " : " +d[filterValues.metric]) } );
-;
+                + d[0].cause_medium + ", " + /*d.age_name + */ ", Sex-" + d[0].sex_name + " : " +d[filterValues.metric]) 
+        });
+
+    lineChart.selectAll("circle") 
+        .data(arrData, function(d, i) { console.log("arrData", d, i); return d; }) 
+        .enter().append("circle") 
+            .attr("cx", function(d, i) { console.log("cx", d[i], i, xScale(i), d[i][filterValues.metric]); return xScale(i) + width / (3 * dataLength); }) 
+            .attr("cy", function(d, i) { console.log("cy", d[i], i, yScale(d[i][filterValues.metric])); return yScale(d[i][filterValues.metric]); }) 
+            .attr("r", 1);
 
 /*  var legend = svg.append("g")
         .attr("class","legend")
