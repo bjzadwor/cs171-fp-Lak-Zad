@@ -99,7 +99,6 @@ function regionSexTrendChart (trendBarDataSet, regionTrendDiv) {
     var keySet = ["Male", "Both", "Female"];
     for (var j=0; j < keySet.length; j++) { //for (var key in keySet) {
 		var keyClass = ".bar" + keySet[j];
-console.log("ageSexTrendDataSet", keySet[j], ageSexTrendDataSet[keySet[j]]);
         var bars = svg.selectAll(keyClass)
             .data(trendBarDataSet[keySet[j]])
             .enter().append("rect")
@@ -116,7 +115,6 @@ console.log("ageSexTrendDataSet", keySet[j], ageSexTrendDataSet[keySet[j]]);
             .html(function(d) { 
                 return (d.year + ": " + mappings[d.region_name] + ", " + d.cause_medium + ", " 
                     + d.age_name + ", Sex-" + d.sex_name + " : " +d[filterValues.metric]) } )
-        j++;
     }
 
     svg.selectAll(".bar")
