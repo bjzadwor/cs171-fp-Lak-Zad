@@ -223,7 +223,17 @@ function drawChartColors2(){
 
     tip = d3.tip()
         .attr('class', 'd3-tip')
-        .offset([-10,0])
+        //.offset([-10,0])
+      .offset(function(){
+            var calculatedOffset = [-10,0];
+            if (event.pageY < 150) calculatedOffset[0] = 10
+            return calculatedOffset;
+
+        })
+        .direction(function(){
+            if (event.pageY < 150) return 's';
+            else return 'n';
+        })
         .html(function(d) {
             var people;
             switch (filterValues.sex) {
