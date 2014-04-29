@@ -1,6 +1,7 @@
 /**
  * library for subgraphs
  */
+var zzzzz;
 
 var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
     var lineChart, xAxis, xScale, yAxis,  yScale, tickCt=10;
@@ -111,12 +112,17 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
                 + d[0].cause_medium + ", " + /*d.age_name + */ ", Sex-" + d[0].sex_name + " : " +d[filterValues.metric]) 
         });
 
+    zzzzz = arrData;
     lineChart.selectAll("circle") 
-        .data(arrData, function(d, i) { console.log("arrData", d, i); return d; }) 
-        .enter().append("circle") 
-            .attr("cx", function(d, i) { console.log("cx", d[i], i, xScale(i), d[i][filterValues.metric]); return xScale(i) + width / (3 * dataLength); }) 
-            .attr("cy", function(d, i) { console.log("cy", d[i], i, yScale(d[i][filterValues.metric])); return yScale(d[i][filterValues.metric]); }) 
-            .attr("r", 1);
+       // .data(arrData, function(d, i) { console.log("arrData2", d, i); return d[i]; })
+        .data(arrData[1])
+        .enter()
+        .append("circle")
+            .attr("class", function(d){return "year"+ d.year})
+            .attr("cx", function(d, i) { return xScale(i) + width / (3 * dataLength); })
+            .attr("cy", function(d, i) { return yScale(d[filterValues.metric]); })
+            .attr("r", 2);
+
 
 /*  var legend = svg.append("g")
         .attr("class","legend")
