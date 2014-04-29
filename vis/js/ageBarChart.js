@@ -21,6 +21,7 @@ var noDataToDisplay = function(divNoData) {
 
 
 var createAgeBars = function(ageDataSet, div) {
+    console.log("CreateAgeBars is firing", ageDataSet)
     var ageBars, xAxis, xScale, yAxis,  yScale, tickCt=10;
     var barChartContainerWidth = $(div).width()
     var margin = { left: 40 , right: 0, top: 15, bottom: 40};
@@ -30,7 +31,7 @@ console.log("**** ageBarChart height", height);
 	var xAxisMetric = "age_name";
     if (div == "#mainVis") height = (250)
 
-console.log("**** div1", $("#div1, vis floatL"));
+console.log("****div1", $("#div1"));
     ageBars = d3.select(div).append("svg")
         .attr({ width: width + margin.left + margin.right,
                 height: height + margin.top + margin.bottom,
@@ -52,13 +53,22 @@ console.log("**** div1", $("#div1, vis floatL"));
             wdBar = width / dataLength, j=0, padding = 0;
 console.log("ageSexTrendChart wdBar", wdBar);
     wdBar = wdBar - (wdBar/3);
-console.log("ageSexTrendChart wdBar", wdBar);
+console.log("ageSexTrendChart wdBar zz", wdBar);
 console.log("ageSexTrendChart width", width, dataLength);
+    console.log("DivWidth", barChartContainerWidth);
+    console.log("Width", width);
 
 //        xScale = d3.scale.ordinal().rangeRoundBands([margin.left, width], .1);
         xScale = d3.scale.linear()
-            .domain([0, dataLength-1])
+            .domain([0, dataLength])
             .range([margin.left, width]);
+
+    console.log("***************************************************************")
+    console.log("ageDataSet", ageDataSet);
+    console.log("DivWidth", barChartContainerWidth);
+    console.log("Width", width);
+    console.log("^^^^^^^^^^^^^^^^^^^^^^^^xScale max value",xScale(dataLength-1));
+    console.log("***************************************************************")
 
         yScale = d3.scale.linear()
             .domain([yMin, yMax])
@@ -67,8 +77,8 @@ console.log("ageSexTrendChart width", width, dataLength);
         xAxis = d3.svg.axis()
             .scale(xScale)
             .orient("bottom")
-            .ticks(dataLength-1)
-            .tickFormat(function(i) { return ageDataSet[i][xAxisMetric]; });
+            .ticks(dataLength)
+            .tickFormat(function(i) {console.log(i); if (i < dataLength)return ageDataSet[i][xAxisMetric]; });
 
         yAxis = d3.svg.axis()
             .scale(yScale)
