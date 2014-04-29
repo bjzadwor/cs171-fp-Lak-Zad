@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GBD</title>
+    <title>Global Mortality Dashboard</title>
 
     <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     <link href="css/bootstrap.css" rel="stylesheet" type = "text/css">
@@ -104,6 +104,7 @@
         }
         .line {
             fill: none;
+            stroke: 2px;
         }
         .dataArea {
             stroke: 1px steelblue;
@@ -291,17 +292,11 @@
             stroke:#FF6600; //#99aa99;
         }
 
-        .visTitle {
-            text-align: center;
-            float:left;
-        }
-
         .line1990 {
             stroke:#FF6600; //#99aa99
         }
 
         #yr1990Button{
-
             background-color : #FF6600;
             background-image : none;
             color:white;
@@ -318,7 +313,6 @@
             background-color : #41ae76;
             background-image : none;
             color:white;
-
         }
 
         .bar2010 {
@@ -329,12 +323,21 @@
         .line2010 {
             stroke:#990033; //#005805;
         }
+
         #yr2010Button{
 
             background-color :#990033;
             background-image : none;
             color:white;
 
+        }
+
+        .visTitle {
+            text-align: center;
+            float:left;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 12px;
         }
 
         #maleButton.btn-primary,
@@ -389,7 +392,7 @@
                     <option value="vis4">Vis4</option>
                     <!--    <option value="death_abs">Number of Deaths</option> -->
                     <option value="trendLineChart">Yearwise-Age Line Chart</option>
-                    <option value="trendBarChart">Yearwise-Regional Trend Chart</option>
+                    <option value="trendYearBarChart">Yearwise-Regional Trend Chart</option>
                     <option value="trendAgeSexChart">Agewise-Sex Trend Chart</option>
                 </select>
                 <br />
@@ -410,11 +413,11 @@
                 <select id ="metricSelect">
                     <option value="death_rate">Death Rate Per 100,000</option>
                  <!--   <option value="DALY_abs">Disability Adjusted Life Years</option> -->
-                    <option value="DALY_rate">Disability Adjusted Life Years per 100,000</option>
+                    <option value="DALY_rate">Disability Adjusted Life Years (DALY) per 100,000</option>
                  <!--    <option value="YLD_abs">Years Lived with Disability</option> -->
-                    <option value="YLD_rate">Years Lived with Disabilty per 100,000 </option>
+                    <option value="YLD_rate">Years Lived with Disabilty (YLD) per 100,000 </option>
                  <!--    <option value="YLL_abs">Years of Life Lost</option> -->
-                    <option value="YLL_rate">Years of Life Lost per 100,000</option>
+                    <option value="YLL_rate">Years of Life Lost (YLL) per 100,000</option>
                  <!--    <option value="death_abs">Number of Deaths</option> -->
                 </select>
                 <br />
@@ -473,7 +476,8 @@
     <script type="text/javascript" src="js/ageBarChart.js"></script>
     <script type="text/javascript" src="js/regionBarChart.js"></script>
     <script type="text/javascript" src="js/trendLineGraph.js"></script>
-    <script type="text/javascript" src="js/regionTrendChart.js"></script>
+    <script type="text/javascript" src="js/regionYearTrendChart.js"></script>
+    <script type="text/javascript" src="js/regionSexTrendChart.js"></script>
     <script type="text/javascript" src="js/ageSexTrendChart.js"></script>
     <script type="text/javascript" src="js/filter.js"></script>
    <!-- <script type="text/javascript" src="js/modal.js"></script>-->
