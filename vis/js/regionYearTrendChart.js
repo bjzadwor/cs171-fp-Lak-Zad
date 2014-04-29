@@ -2,7 +2,7 @@
  * Created by Bijish on 4/24/2014.
  */
 
-function regionTrendChart (trendBarDataSet, regionTrendDiv) {
+function regionYearTrendChart (trendBarDataSet, regionTrendDiv) {
     var barChart, xAxis, xScale, yAxis,  yScale, tickCt=10;
     var barChartContainerWidth = $(regionTrendDiv).width();
     var margin = { left: 40 , right: 0, top: 15, bottom: 40};
@@ -27,17 +27,14 @@ function regionTrendChart (trendBarDataSet, regionTrendDiv) {
         .on("click", function(d){ // if a user click on the chart(not a bar) open in big window
             $("#mainSelect").val("trendBarChart");
             $('#filterForm').change();
-
         });
 
-    var arrData = [], dataLength=0, maxKeys;
+    var arrData = [], dataLength=0, maxKeys=0;
     for (var key in trendBarDataSet) {
-        if (trendBarDataSet[key] != null && trendBarDataSet[key].length != 0) {
-            arrData.push(trendBarDataSet[key]);
-            if (trendBarDataSet[key].length > dataLength) { 
-                dataLength = trendBarDataSet[key].length;
-                maxKeys = key;
-            }
+        arrData.push(trendBarDataSet[key]);
+        if (trendBarDataSet[key].length > dataLength) { 
+            dataLength = trendBarDataSet[key].length;
+            maxKeys = key;
         }
     }
 
@@ -46,7 +43,7 @@ function regionTrendChart (trendBarDataSet, regionTrendDiv) {
     if (yMin == yMax) { yMax = yMax + 0.01; tickCt=1;}
 
     xScale = d3.scale.linear()
-        .domain([0, trendBarDataSet[maxKeys].length-1])
+        .domain([0, trendBarDataSet[maxKeys].length])
         .range([margin.left, width]);
 
     yScale = d3.scale.linear()
@@ -56,8 +53,8 @@ function regionTrendChart (trendBarDataSet, regionTrendDiv) {
     xAxis = d3.svg.axis()
         .scale(xScale)
         .orient("bottom")
-        .ticks(trendBarDataSet[maxKeys].length-1)
-        .tickFormat(function(i) { return trendBarDataSet[maxKeys][i][xAxisMetric]; });
+        .ticks(trendBarDataSet[maxKeys].length)
+        .tickFormat(function(i) { if (i < trendBarDataSet[maxKeys].length) return trendBarDataSet[maxKeys][i][xAxisMetric]; });
 
     yAxis = d3.svg.axis()
         .scale(yScale)
@@ -71,7 +68,7 @@ function regionTrendChart (trendBarDataSet, regionTrendDiv) {
         .selectAll("text")
         .style("text-anchor", "end")
         .attr("dx", "-.2em")
-        .attr("dy", ".15em")
+        .attr("dy", width / (3 * trendBarDataSet[maxKeys].length)) //".15em")
         .attr("transform", "rotate(-90)");
 
     var yAxisDrawing = svg.append("g") // Y Axis
@@ -82,7 +79,7 @@ function regionTrendChart (trendBarDataSet, regionTrendDiv) {
     var leftSideLabel = svg.append("text")  // Left Side Label
         .attr("transform", "rotate(-90)")
         .attr("x", 0 - (height + margin.top)/2)
-        .attr("y", margin.top )
+        .attr("y", margin.top-5)
         .style("text-anchor", "middle")
         .text(function() {
             return mappings[filterValues.metric];
@@ -95,25 +92,24 @@ function regionTrendChart (trendBarDataSet, regionTrendDiv) {
         .text(mappings[xAxisMetric])
         .attr("class", "caption");
 
-    var wdBar = width / (trendBarDataSet[maxKeys].length * 3), j=0, padding = 0;
+    var wdBar = width / (trendBarDataSet[maxKeys].length * 3), j=0, 
+        padding = wdBar/2;
     wdBar = wdBar - (wdBar/3);
 
     for (var key in trendBarDataSet) {
 		var keyClass = ".bar" + key;
-
         var bars = svg.selectAll(keyClass)
             .data(trendBarDataSet[key])
             .enter().append("rect")
-            .attr("class",
-            function(d){ return "bar pointer bar" + d.year; })
+            .attr("class", function(d) { return "bar pointer bar" + d.year; })
             .attr("x", function(d, i) { return padding + xScale(i) + wdBar * j; })
-    //              .attr("width", xScale.rangeBand())
             .attr("width", wdBar)
             .attr("y", function(d, i) { return yScale(+d[filterValues.metric]); })
-            //if the value is too small to be displayed, set the height to a minimum 0.001 to enable the tooltip to be displayed to show data on hover
+            //if the value is too small to be displayed, set the height to a minimum 0.001 
+            //to enable the tooltip to be displayed to show data on hover
             .attr("height", function(d) { 
-                if (height != yScale(+d[filterValues.metric])) return height - yScale(+d[filterValues.metric]); 
-                else return 0.001; })
+                if (height != yScale(+d[filterValues.metric])) 
+                    return height - yScale(+d[filterValues.metric]); else return 0.001; })
             .append("title")
             .html(function(d) { 
                 return (d.year + ": " + mappings[d.region_name] + ", " + d.cause_medium + ", " 
@@ -147,4 +143,4 @@ function regionTrendChart (trendBarDataSet, regionTrendDiv) {
             .attr("stroke", "black");
         });
 
-    } // end regionTrendChart function.
+    } // end regionYearTrendChart function.
