@@ -3,12 +3,12 @@
  */
 
 var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
-    var lineChart, xAxis, xScale, yAxis,  yScale, tickCt=10;
+    var lineChart, xAxis, xScale, yAxis,  yScale, tickCt=10, rad=2;
     var lineChartContainerWidth = $(trendGraphDiv).width()
     var margin = { left: 40 , right: 0, top: 15, bottom: 40};
     var width = lineChartContainerWidth - margin.left - margin.right;
     var height = (.65*lineChartContainerWidth) - margin.bottom - margin.top;
-    if (trendGraphDiv == "#mainVis") height = (250)
+    if (trendGraphDiv == "#mainVis") { height = 250; rad = 3; }
     var xAxisMetric = "age_name";
 
     lineChart = d3.select(trendGraphDiv).append("svg")
@@ -115,7 +115,7 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
                 .attr("class", computedClass)
                 .attr("cx", function(d, i) { return xScale(i) + width / (3 * dataLength); })
                 .attr("cy", function(d, i) { return yScale(d[filterValues.metric]); })
-                .attr("r", 2)
+                .attr("r", rad)
                 .append("title")
                 .html(function(d, i) { 
                     return  (d.year + ": " + mappings[d.region_name] + ", " + d.cause_medium + ", " 
