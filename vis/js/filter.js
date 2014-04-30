@@ -94,6 +94,7 @@ function filter(){
     filteredData = [];
     ageBarChartData = [];
     simpleYearChartData = [];
+    allDiseasesData=[];
     console.log("filter firing");
     ageYearLineTrendData = {};
     ageYearLineTrendData["1990"] = [];
@@ -255,6 +256,13 @@ function filter(){
             $(mapDivString + ' span').text(visTitleMap);
             $(topRegionsDivString + ' span').text(visTitle8);
         break;
+        case "topDiseases":
+            topDiseasesDivString = "#mainVis";
+            mapDivString="#vis4"
+            $(mapDivString + ' span').text(visTitleMap);
+            $(topRegionsDivString + ' span').text(visTitle4);
+        break;
+
     default:
         console.log("Default Fired You should not be seeing this");
     break;
@@ -274,7 +282,7 @@ function filter(){
     }
     else{
         regionBarChart(filteredData, regionalBarChartDivString);
-        topDiseases(filteredData, topRegionsDivString);
+        topRegions(filteredData, topRegionsDivString);
     }
 
     if (isDataEmpty(ageYearLineTrendData)) noDataToDisplay(ageLineChartDivString);

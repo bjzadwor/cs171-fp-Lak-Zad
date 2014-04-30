@@ -130,7 +130,7 @@ d3.csv("data/mappings.csv", function(csv){
 
 // Load the data set
 function processData(csv){
-
+console.log("Processing the Data.")
     globalCSV = csv;
 if (!( geoJSONLoaded && mappingsLoaded && regionsLoaded)){
 
@@ -141,7 +141,8 @@ if (!( geoJSONLoaded && mappingsLoaded && regionsLoaded)){
 
 }
     else {
-    console.log("Processing Data:");
+    console.log("Continuing to Processing Data:");
+
     csv.forEach(function (row) {
         row.cause_medium = mappings[row.cause_medium];
         row.age_name = mappings[row.age_name]
@@ -192,11 +193,13 @@ if (!( geoJSONLoaded && mappingsLoaded && regionsLoaded)){
         }
 
     })  // csv for each
+
+
     fullData = csv;
     console.log("Full Data Loaded")
     dataLoaded = true;
     drawPage();
-    }
+    } // end else
 } // end processData
 
 
