@@ -15,7 +15,7 @@ var noDataToDisplay = function(divNoData) {
     svg.append("text")
         .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," + (height + margin.top+ margin.bottom)/2 + ")")
         .style("text-anchor", "middle")
-        .text("NO DATA TO DISPLAY")
+        .text("NO DATA TO DISPLAY FOR THE SELECTED CRITERIA!")
         .attr("class", "caption");
 }
 
