@@ -17,10 +17,10 @@ var numToDisplay;
     $(".topRegionsTable").remove();
 
     $(topRegionsDiv).append('<table class="tabularData topRegionsTable" id = '+tableNameShort+'></table>');
-    $(tableName).append("<tr><th>Region Name</th><th>"+mappings[filterValues.metric]+"</th></tr>")
+    $(tableName).append("<tr><th>Region Name</th><th>"+(mappings[filterValues.metric]).replace(" Per 100,000", "")+"</th></tr>")
 
     numToDisplay = 8
-    if (topRegionsDiv=="#mainVis")numToDisplay = 10
+    if (topRegionsDiv=="#mainVis")numToDisplay = 10;
 
     for (var i=0; i<numToDisplay; i++){
        try{
