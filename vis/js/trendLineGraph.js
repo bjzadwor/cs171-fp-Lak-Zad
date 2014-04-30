@@ -1,7 +1,6 @@
 /**
  * library for subgraphs
  */
-var zzzzz;
 
 var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
     var lineChart, xAxis, xScale, yAxis,  yScale, tickCt=10;
@@ -106,39 +105,23 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
         .attr("d", function(d) { return line(d);})
         .attr("data-legend",function(d) { if (d.length > 0) return d[0].year})
         .attr("class", function(d, i) { if (d.length > 0) return "line line" + d[0].year;})
-        .append("title")
-        .html(function(d) { 
-            if (d.length > 0) return  (d[0].year + ": " + mappings[d[0].region_name] + ", " 
-                + d[0].cause_medium + ", " + /*d.age_name + */ ", Sex-" + d[0].sex_name + " : " +d[filterValues.metric]) 
-        });
-
+        .append("title");
 
     for (var key in dataSet) {
-        console.log(key, dataSet[key]);
-        switch (dataSet[key][0].year){
-            case "1990":
-                chosenColor = ninety;
-            break;
-            case "2010":
-                chosenColor = ten;
-            break;
-            case "2005":
-                chosenColor = five;
-            break;
-        }
 
-       var computedClass = "circle" + dataSet[key][0].year
-       console.log(computedClass)
-    lineChart.selectAll(computedClass)
-       // .data(arrData, function(d, i) { console.log("arrData2", d, i); return d[i]; })
-        .data(dataSet[key])
-        .enter()
-        .append("circle")
-            .attr("class", computedClass)
-            .attr("cx", function(d, i) { return xScale(i) + width / (3 * dataLength); })
-            .attr("cy", function(d, i) { return yScale(d[filterValues.metric]); })
-            .attr("r", 2)
-        .attr("fill", chosenColor);
+       var computedClass = "circle" + dataSet[key][0].year;
+        lineChart.selectAll(computedClass)
+            .data(dataSet[key])
+            .enter()
+            .append("circle")
+                .attr("class", computedClass)
+                .attr("cx", function(d, i) { return xScale(i) + width / (3 * dataLength); })
+                .attr("cy", function(d, i) { return yScale(d[filterValues.metric]); })
+                .attr("r", 2)
+                .html(function(d) { 
+                    if (d.length > 0) return  (d[0].year + ": " + mappings[d[0].region_name] + ", " 
+                        + d[0].cause_medium + ", " + d.age_name + ", Sex-" + d[0].sex_name + " : " +d[filterValues.metric]) 
+                });
     }
 
 /*  var legend = svg.append("g")
@@ -146,5 +129,5 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
         .attr("transform","translate(50,30)")
         .style("font-size","12px")
         .call(d3.legend);
-*/        
+*/
 }
