@@ -268,7 +268,7 @@ console.log("Filter step 1, top of the function.")
             topDiseasesDivString = "#mainVis";
             mapDivString="#vis4"
             $(mapDivString + ' span').text(visTitleMap);
-            $(topRegionsDivString + ' span').text(visTitle4);
+            $(topDiseasesDivString + ' span').text(visTitle4);
         break;
 
     default:
