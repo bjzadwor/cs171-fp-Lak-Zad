@@ -94,7 +94,7 @@ function filter(){
     filteredData = [];
     ageBarChartData = [];
     simpleYearChartData = [];
-    allDiseasesData=[];
+    topDiseasesData=[];
     console.log("filter firing");
     ageYearLineTrendData = {};
     ageYearLineTrendData["1990"] = [];
@@ -172,11 +172,17 @@ function filter(){
         {
             ageSexTrendData[element.sex_name.trim()].push(element);
         }
+        if ((element.region_name.trim() == filterValues.region)
+            && (element.year.trim() == filterValues.year)
+            && (element.age_name.trim() == age_value[filterValues.age])
+            && (element.sex_name.trim() == filterValues.sex)
+           )
+        {
+            topDiseasesData.push(element);
+        }
 
         return true;
     })//end fullData.every
-
-
 
     // remove all the vis so we can re-draw them
     $('svg').remove();
@@ -296,5 +302,7 @@ function filter(){
 
     if (isDataEmpty(ageSexTrendData)) noDataToDisplay(ageSexTrendChartDivString);
     else ageSexTrendChart(ageSexTrendData, ageSexTrendChartDivString);
+
+    topDiseases(topDiseasesData, topDiseasesDivString);
 
 }// end filter()

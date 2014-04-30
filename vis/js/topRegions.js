@@ -6,7 +6,7 @@
  */
 
 function topRegions(topRegionsData, topRegionsDiv){
-
+var numToDisplay;
 
     topRegionsData.sort(function(a,b){
         return b[filterValues.metric] - a[filterValues.metric]
@@ -19,8 +19,16 @@ function topRegions(topRegionsData, topRegionsDiv){
     $(topRegionsDiv).append('<table class="tabularData topRegionsTable" id = '+tableNameShort+'></table>');
     $(tableName).append("<tr><th>Region Name</th><th>"+mappings[filterValues.metric]+"</th></tr>")
 
-    for (var i=0; i<10; i++){
-        $(tableName).append("<tr><td>"+mappings[topRegionsData[i].region_name]+"</td><td>"+topRegionsData[i][filterValues.metric]+"</td></tr>");
+    numToDisplay = 8
+    if (topRegionsDiv=="#mainVis")numToDisplay = 10
+
+    for (var i=0; i<numToDisplay; i++){
+       try{
+           $(tableName).append("<tr><td>"+mappings[topRegionsData[i].region_name]+"</td><td>"+topRegionsData[i][filterValues.metric]+"</td></tr>");
+       }
+        catch(err){
+            console.log(err);
+        }
     }
 
 

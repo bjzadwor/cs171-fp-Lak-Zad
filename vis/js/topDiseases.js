@@ -3,7 +3,7 @@
  */
 
 function topDiseases(topDiseasesData, topDiseasesDiv){
-
+var numToDisplay;
 
     topDiseasesData.sort(function(a,b){
         return b[filterValues.metric] - a[filterValues.metric]
@@ -11,13 +11,21 @@ function topDiseases(topDiseasesData, topDiseasesDiv){
 
     tableName = topDiseasesDiv + "table"
     tableNameShort = topDiseasesDiv.substr(1) + "table" // remove the #
-    $(".topRegionsTable").remove();
+    $(".topDiseasesTable").remove();
 
     $(topDiseasesDiv).append('<table class="tabularData topRegionsTable" id = '+tableNameShort+'></table>');
-    $(tableName).append("<tr><th>Region Name</th><th>"+mappings[filterValues.metric]+"</th></tr>")
+    $(tableName).append("<tr><th>Causes</th><th>"+mappings[filterValues.metric]+"</th></tr>")
 
-    for (var i=0; i<10; i++){
-        $(tableName).append("<tr><td>"+mappings[topDiseasesData[i].region_name]+"</td><td>"+topDiseasesData[i][filterValues.metric]+"</td></tr>");
+    numToDisplay = 5
+    if (topDiseasesDiv=="#mainVis")numToDisplay = 10
+
+    for (var i=0; i<numToDisplay; i++){
+     try{
+         $(tableName).append("<tr><td>"+topDiseasesData[i].cause_medium+"</td><td>"+topDiseasesData[i][filterValues.metric]+"</td></tr>");
+     }
+        catch(err){
+            console.log(err)
+        }
     }
 
 
