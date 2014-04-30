@@ -134,10 +134,10 @@ function processData(csv){
     globalCSV = csv;
 if (!( geoJSONLoaded && mappingsLoaded && regionsLoaded)){
 
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!waiting a half second to process the data!!!!!!!!!!!!!!!!!!!!!!!!!");
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!waiting to process the data!!!!!!!!!!!!!!!!!!!!!!!!!" + new Date());
     setTimeout(function() {
         processData(csv);
-    }, 500);
+    }, 100);
 
 }
     else {

@@ -249,6 +249,12 @@ function filter(){
             $(regionYearTrendChartDivString + ' span').text(visTitle7);
         break;
 
+        case "topRegions":
+            topRegionsDivString = "#mainVis";
+            mapDivString="#vis8"
+            $(mapDivString + ' span').text(visTitleMap);
+            $(topRegionsDivString + ' span').text(visTitle8);
+        break;
     default:
         console.log("Default Fired You should not be seeing this");
     break;
@@ -262,8 +268,14 @@ function filter(){
     if (isDataEmpty(ageBarChartData)) noDataToDisplay(ageGroupBarChartDivString);
     else createAgeBars(ageBarChartData, ageGroupBarChartDivString);
 
-    if (isDataEmpty(filteredData)) noDataToDisplay(regionalBarChartDivString);
-    else regionBarChart(filteredData, regionalBarChartDivString);
+    if (isDataEmpty(filteredData)){
+        noDataToDisplay(regionalBarChartDivString);
+        noDataToDisplay(topRegionsDivString);
+    }
+    else{
+        regionBarChart(filteredData, regionalBarChartDivString);
+        topDiseases(filteredData, topRegionsDivString);
+    }
 
     if (isDataEmpty(ageYearLineTrendData)) noDataToDisplay(ageLineChartDivString);
     else trendLineGraph(ageYearLineTrendData, ageLineChartDivString);

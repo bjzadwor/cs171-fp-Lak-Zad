@@ -114,7 +114,7 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
 
 
     for (var key in dataSet) {
-console.log(key, dataSet[key]);
+        console.log(key, dataSet[key]);
         switch (dataSet[key][0].year){
             case "1990":
                 chosenColor = ninety;
