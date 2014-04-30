@@ -2,10 +2,11 @@
  * Created by Zadworney on 4/21/2014.
  */
 
-var width, height, projection, path, zoom, improvedMapSvg, improvedMapG
+var width, height, projection, path, zoom, improvedMapSvg, improvedMapG;
 
 function drawImprovedMap(improvedMapDiv) {
 
+        console.log("IM 1. Drawing Improved Map");
     var divWidth = $(improvedMapDiv).width()
     if(improvedMapDiv == "#mainVis"){
         width = 900;
@@ -39,7 +40,7 @@ function drawImprovedMap(improvedMapDiv) {
             else return 'translate(-325,-140)'
         })
         .call(zoom);
-
+    console.log("IM 2. Appending Rectangle");
     improvedMapG.append("rect")
         .attr("class", "background")
         .attr("fill", backgroundColor)
@@ -50,8 +51,8 @@ function drawImprovedMap(improvedMapDiv) {
             else return 'translate(-325,-140)'
         })
         ;
-
-
+    console.log("IM 3. Done with Rectangle");
+    console.log("IM 4. Drawing Regions");
         improvedMapG.append("g")
             .attr("id", "regions")
             .selectAll("path")
@@ -107,7 +108,7 @@ function drawImprovedMap(improvedMapDiv) {
                     $("#filterForm").change();
                 }
             });
-           // .on("dblclick", dblclicked)
+    console.log("IM 5. Done drawing regions calling drawChartColors2");
 
         drawChartColors2();
 };
@@ -137,7 +138,7 @@ function zoomed() {
 
 
 function drawChartColors2(){
-
+    console.log("DCC 1. Drawing ChartColors Called");
     scaleValues = d3.extent(filteredData, function(d){
         return +d[filterValues.metric]
     })
@@ -180,7 +181,7 @@ function drawChartColors2(){
         .scale(numberScale)
         // .ticks(5)
         .orient("top");
-
+    console.log("DCC 2. Drawing Rectangle for gradient");
     var scaleRect = improvedMapSvg.append("rect")
         .attr("height", height * .02 )
         .attr("width", width/3)
@@ -205,7 +206,7 @@ function drawChartColors2(){
 
 
     $("path").attr("value","No Data Provided");
-
+    console.log("DCC 3. Looping Through filteredData");
     filteredData.forEach(function(d,i,a){
         color = colorScale(d[filterValues.metric])
         mapClass = "." + d.region_name.trim()
@@ -220,6 +221,7 @@ function drawChartColors2(){
             })
 
     })
+    console.log("DCC 4. Completed FilterredData");
 
     tip = d3.tip()
         .attr('class', 'd3-tip')
@@ -256,6 +258,6 @@ function drawChartColors2(){
             return html;
         });
 
-
+    console.log("DCC 5. Calling Tip");
     improvedMapSvg.call(tip)
 }

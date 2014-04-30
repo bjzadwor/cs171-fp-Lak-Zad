@@ -375,6 +375,7 @@
         }
         table{
             margin: 0 auto;
+            min-width: 295px;
         }
         td
         {
@@ -404,26 +405,36 @@
     .underlineText{
         text-decoration : underline;
     }
+
+    #instructions{
+        position:fixed;
+        top: 0;
+        width: 100%;
+        background-color: white;
+    }
     </style>
 
 </head>
 <body>
+
+
+
 <header class ="header">
     <div id="help" class="help pull-right">Help</div>
     <h1 class="centerText">Global Mortality Dashboard</h1>
 </header>
 
-
-
-<div id="container" class="container ">
-    <div id="inst" class="hidden">Instructions Container
+<div id="instructions" class="hidden2">Instructions Container
 
     <div id="checkbox" class="pull-right">
         <form>
             <input type="checkbox" name="stop" value="stop">I do not want to see these instructions when I load the page
         </form>
     </div>
-    </div>
+</div>
+
+<div id="container" class="container ">
+
 
     <div class="row">
         <div id="mainVis" class="visTitle border"><span>mainVis</span></div>
@@ -533,6 +544,7 @@
     <script type="text/javascript" src="js/filter.js"></script>
     <script type="text/javascript" src="js/topDiseases.js"></script>
     <script type="text/javascript" src="js/topRegions.js"></script>
+    <script type="text/javascript" src="js/story.js"></script>
    <!-- <script type="text/javascript" src="js/modal.js"></script>-->
     <script type="text/javascript" src="js/cookies.js"></script>
   <!--  <script type="text/javascript" src="js/map.js"></script> -->

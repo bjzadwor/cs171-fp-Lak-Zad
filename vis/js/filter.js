@@ -307,6 +307,11 @@ console.log("Filter step 1, top of the function.")
     if (isDataEmpty(ageSexTrendData)) noDataToDisplay(ageSexTrendChartDivString);
     else ageSexTrendChart(ageSexTrendData, ageSexTrendChartDivString);
 
-    topDiseases(topDiseasesData, topDiseasesDivString);
-
+    if (isDataEmpty(topDiseasesData)){
+        $("topDiseasesTable").remove()
+        noDataToDisplay(topDiseasesDivString)
+    }
+    else {
+        topDiseases(topDiseasesData, topDiseasesDivString);
+    }
 }// end filter()

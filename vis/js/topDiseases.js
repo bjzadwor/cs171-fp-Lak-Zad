@@ -13,7 +13,7 @@ var numToDisplay;
     tableNameShort = topDiseasesDiv.substr(1) + "table" // remove the #
     $(".topDiseasesTable").remove();
 
-    $(topDiseasesDiv).append('<table class="tabularData topRegionsTable" id = '+tableNameShort+'></table>');
+    $(topDiseasesDiv).append('<table class="tabularData topDiseasesTable" id = '+tableNameShort+'></table>');
     $(tableName).append("<tr><th>Causes</th><th>"+mappings[filterValues.metric]+"</th></tr>")
 
     numToDisplay = 5
