@@ -137,8 +137,7 @@ console.log(key, dataSet[key]);
             .attr("class", computedClass)
             .attr("cx", function(d, i) { return xScale(i) + width / (3 * dataLength); })
             .attr("cy", function(d, i) { return yScale(d[filterValues.metric]); })
-            .attr("r", 2)
-        .attr("fill", chosenColor);
+            .attr("r", 2);
     }
 
 /*  var legend = svg.append("g")
