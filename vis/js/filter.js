@@ -1,3 +1,4 @@
+var filteredData;
 
 $("#filterForm").change(function(){
     filterValues.main = $("#mainSelect").val();
@@ -68,29 +69,19 @@ var isDataEmpty = function(validateDataSet) {
 * */
 var yearChartData;
 function filter(){
-
-    var visTitleMap = "Choropleth Map"
-         visTitle1 = "Age Bar Chart",
-         visTitle2 = "Age/Sex Bar Chart",
-         visTitle3 = "Age/Year Line Chart",
-         visTitle4 = "Top Diseases",
-         visTitle5 = "Region Bar Chart",
-         visTitle6 = "Region/Sex Bar Chart",
-         visTitle7 = "Region/Year Bar Chart",
-         visTitle8 = "Top Regions";
-
-        /* visTitle1 = "Age Group Metrics Distribution for sel. Cause & Region for " + filterValues.year,
-        visTitle2 = "Age Group/Sex-wise Metrics for sel. Cause & Region for " + filterValues.year, 
-        visTitle3 = "Age Group Metrics Trend 1990-2010 for sel. Cause & Region", 
-        visTitle4 = "Tabular Visualization 4 - Top regions affected by sel. Cause", 
-        visTitle5 = "Region-wise Metrics Distribution for sel. Cause, Sex & Region for " + filterValues.year, 
-        visTitle6 = "Region-wise/Sex Metrics Distribution for sel. Cause & Age Group for " + filterValues.year, 
-        visTitle7 = "Region-wise Metrics Trend 1990-2010 for sel. Cause, Sex & Age Group", 
-        visTitle8 = "Tabular Visualization 8 - Top Mortality Causes for " + mappings[filterValues.region];*/
-
-    var mapDivString, ageGroupBarChartDivString, regionalBarChartDivString, ageLineChartDivString,
+console.log("Filter step 1, top of the function.")
+    var visTitleMap, visTitle1,visTitle2,visTitle3,visTitle4,visTitle5,visTitle6,visTitle7,visTitle8,mapDivString,
+        ageGroupBarChartDivString, regionalBarChartDivString, ageLineChartDivString,
         regionYearTrendChartDivString, ageSexTrendChartDivString, regionSexTrendChartDivString, topDiseasesDivString,
-        topRegionsDivString;
+        topRegionsDivString,
+        ageBarChartData,
+        simpleYearChartData,
+        topDiseasesData,
+        ageYearLineTrendData ,
+        regionYearTrendData ,
+        ageSexTrendData,
+        regionSexTrendData;
+
     filteredData = [];
     ageBarChartData = [];
     simpleYearChartData = [];
@@ -119,6 +110,7 @@ function filter(){
 
     // Loop through the data, testing each data point and adding it to the appropriate array if it
     // is one of the data points needed for the visualization.
+    console.log("Filter step 2, Starting to loop through fullData.")
     fullData.every(function(element, index, array){
 
       // draw the region metrics bar chart
@@ -183,7 +175,7 @@ function filter(){
 
         return true;
     })//end fullData.every
-
+    console.log("Filter step 3, Finished looping through FullData.")
     // remove all the vis so we can re-draw them
     $('svg').remove();
 
@@ -197,6 +189,18 @@ function filter(){
     regionYearTrendChartDivString = "#vis7"
     topRegionsDivString = "#vis8"
 
+
+        visTitleMap = "Choropleth Map";
+        visTitle1 = "Age Bar Chart";
+        visTitle2 = "Age/Sex Bar Chart";
+        visTitle3 = "Age/Year Line Chart";
+        visTitle4 = "Top Diseases";
+        visTitle5 = "Region Bar Chart";
+        visTitle6 = "Region/Sex Bar Chart";
+        visTitle7 = "Region/Year Bar Chart";
+        visTitle8 = "Top Regions";
+
+    $('#mainVis span').text(visTitleMap);
     $('#vis1 span').text(visTitle1);
     $('#vis2 span').text(visTitle2);
     $('#vis3 span').text(visTitle3);
@@ -206,15 +210,13 @@ function filter(){
     $('#vis7 span').text(visTitle7);
     $('#vis8 span').text(visTitle8);
 
-    
+    console.log("Filter step 4,Switching filterValues.main.")
     switch (filterValues.main){
     case "map":
-
-        console.log("drawing Map in Main Vis");
+        $(mapDivString + ' span').text(visTitleMap);
         break;
 
         case"ageBarChart":
-            console.log("drawing Age Groups in Main Vis");
             ageGroupBarChartDivString = "#mainVis";
             mapDivString="#vis1";
             $(mapDivString + ' span').text(visTitleMap);
@@ -274,10 +276,11 @@ function filter(){
     break;
 
     }
-
+    console.log("Filter step 5, Calling DrawImprovedMap")
     // drawMap(mapDivString);
     drawImprovedMap(mapDivString);
-    
+    console.log("Filter step 6, Done DrawImprovedMap Drawing the rest of the page")
+
     // checking if the filtered data is an empty dataset and display the viz accordingly
     if (isDataEmpty(ageBarChartData)) noDataToDisplay(ageGroupBarChartDivString);
     else createAgeBars(ageBarChartData, ageGroupBarChartDivString);
@@ -288,6 +291,7 @@ function filter(){
     }
     else{
         regionBarChart(filteredData, regionalBarChartDivString);
+        console.log("topRegionsDivString", topRegionsDivString)
         topRegions(filteredData, topRegionsDivString);
     }
 
