@@ -214,10 +214,28 @@
             z-index: 1000;
             width:100%;
        }
+
+        .storyForm{
+            position:absolute;
+            bottom:3px;
+            right: 3px;
+            max-width: 125px;
+        }
         #checkbox{
+            padding-right: 2px;
             position: absolute;
             bottom: 2px;
             right: 2px;
+        }
+
+        #openingInstructions {
+            position: absolute;
+            z-index: 1000;
+            top: 58px;
+            left: 10%;
+            width: 80%;
+            height: 400px;
+            background-color: red;
         }
 
         #mainVisInstructions{
@@ -230,7 +248,7 @@
             z-index:500;
         }
 
-        #formInstructions{
+        #filterFormInstructions{
             position:absolute;
             left: -205px;
             top: 10px;
@@ -249,13 +267,7 @@
         }
 
 
-        .instructions1 {
-            position: absolute;
-            top: 250px;
-            width: 100%;
-            height: 400px;
-            background-color: red;
-        }
+
         .instructions2{
             position:absolute;
             top:250px;
@@ -265,11 +277,7 @@
             background-color: yellow;
         }
 
-        .storyForm{
-            position:absolute;
-            bottom:3px;
-            right: 3px;
-        }
+
       /* ***********************************************************
       * End CSS for the instructions
       *********************************************************** */
@@ -501,13 +509,16 @@
 
 
 
-<div id="instructions" class="hidden2 allInstructions">Instructions Container
+<div id="openingInstructions" class="hidden instructions1 allInstructions">
+    <p>Instructions Container</p>
 
-    <div id="checkbox" class="pull-right">
-        <form>
-            <input type="checkbox" name="stop" value="stop">I do not want to see these instructions when I load the page
-        </form>
-    </div>
+
+    <form class="storyForm">
+        <button onclick="showInstructions(1)" type="button">Continue</button>
+        <button onclick="exitInstructions(1)" type="button">Exit</button>
+
+        <input type="checkbox" name="stop" class="stop" value="stop">Do not display instructions on load
+    </form>
 </div>
 
 
@@ -519,21 +530,31 @@
     <div class="row">
         <div id="mainVis" class="visTitle border" style="position:relative;">
         <span>mainVis</span>
-        <div id="mainVisInstructions" class="hidden2 allInstructions">
+        <div id="mainVisInstructions" class="instructions2 hidden allInstructions">
             <p> Blah Blah Blah Something Everything Nothing WhyNot Everyone </p>
 
 
 
             <form class="storyForm">
-                <button onclick="story(this.parentNode.parentNode.id)" type="button">Continue</button>
-                <button onclick="exitInstructions()" type="button">Exit</button>
+                <button onclick="showInstructions(2)" type="button">Continue</button>
+                <button onclick="exitInstructions(2)" type="button">Exit</button>
+
+                <input type="checkbox" name="stop" class="stop" value="stop">Do not display instructions on load
             </form>
         </div>
         </div>
         <div id="rightColumn" class="floatR border" style="position:relative;">
-            <div id="formInstructions" class="hidden2 allInstructions">
+            <div id="filterFormInstructions" class="hidden instructions3 allInstructions">
                 Form Instructions
+            <form class="storyForm">
+                <button onclick="showInstructions(3)" type="button">Continue</button>
+                <button onclick="exitInstructions(3)" type="button">Exit</button>
+
+                <input type="checkbox" name="stop" class="stop" value="stop">Do not display instructions on load
+            </form>
             </div>
+
+
             <form id="filterForm" class = "something">
                 <label for="mainSelect">Main Visualization:</label>
                 <br />
@@ -590,7 +611,19 @@
         </div>
     </div>
     <div class="row" style="position:relative;">
-        <div id="smallVisInstructions" class="hidden2 allInstructions">SmallVis Instructions</div>
+        <div id="smallVisInstructions" class="hidden instructions4 allInstructions">
+            SmallVis Instructions
+
+            <form class="storyForm">
+                <button onclick="showInstructions(4)" type="button">Continue</button>
+                <button onclick="exitInstructions(4)" type="button">Exit</button>
+
+                <input type="checkbox" name="stop" class="stop" value="stop">Do not display instructions on load
+            </form>
+
+
+
+        </div>
         <div id="vis1" class="vis visTitle"><span id="vis1Span" class = "pointer underlineText">vis1</span></div>
         <div id="vis2" class="vis visTitle"><span id="vis2Span" class = "pointer underlineText">vis2</span></div>
         <div id="vis3" class="vis visTitle"><span id="vis3Span" class = "pointer underlineText">vis3</span></div>

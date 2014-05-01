@@ -64,6 +64,10 @@ metric["Years Lived with Disabilty per 100,000"] = "YLD_rate";
 metric["YLL_rate"] = "Years of Life Lost per 100,000";
 metric["Years of Life Lost per 100,000"] = "YLL_rate";
 
+$(document).ready(function(){
+    showInstructions(0);
+});
+
 function handleSpanClick (mainSelectValue){
     if ($("#mainSelect").val() == mainSelectValue)
         $("#mainSelect").val("map")
