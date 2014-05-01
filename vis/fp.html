@@ -260,9 +260,9 @@
 
         #filterFormInstructions{
             position:absolute;
-            left: -205px;
-            top: 10px;
-            width:200px;
+            left: -560px;
+            top: 0px;
+            width:540px;
 
             background-color: lightgray;
         }
@@ -575,18 +575,23 @@
         <div id="mainVisInstructions" class="instructions2 hidden allInstructions">
             <div>
                 <h1>Main Visualization</h1>
-             <p>Along the top of the screen is the Main Visualization Screen the user </p>
+             <p>
+             Along the top of the page is the Main Visualization section.  When the page initially loads
+             the user will be presented with a Choropleth World Map.  This map colorizes the regions to represent
+             the appropriate metric, bright red indicates the region with the highest values.  You can drag the map around,
+             and zoom using the mouse wheel.  To reset the map to the default zoom click the "Reset Zoom" link in the bottom left corner of the map.
+             Clicking on a region will cause the Region select drop down list to change
+             to the chosen region, and the charts will redraw with the appropriate data.
+             </p>
 
-            <p>Instructions Container</p>
-            <p>Instructions Container</p>
-            <p>Instructions Container</p>
-            <p>Instructions Container</p>
-            <p>Instructions Container</p>
-            <p>Instructions Container</p>
-            <p>Instructions Container</p>
-            <p>Instructions Container</p>
+             <p> If you hold your mouse over a country the appropriate region will be highlited,
+                 and a tool tip will appear displaying the country name, region name, and the value.
+                 The regions of the map are also linked to the bar charts along the bottom of the screen,
+                 hovering over a bar or a country will highlight both the region of the map, and the appropriate bars
+                 in the charts below.
+             </p>
 
-            </div>
+           </div>
 
             <form class="storyForm">
                 <button onclick="showInstructions(2)" type="button">Continue</button>
@@ -598,7 +603,20 @@
         </div>
         <div id="rightColumn" class="floatR border" style="position:relative;">
             <div id="filterFormInstructions" class="hidden instructions3 allInstructions">
-                Form Instructions
+                <h1>Filter</h1>
+                <p>To the right of the main visualization you will find the filter form.  This form allows the user
+                to select a number of different variables.  As the user makes a change the page will automatically re-draw with the appropriate data.
+                    There is no submit button for this form, the page will redraw immediately upon the user making a selection.
+                 <br />
+                    Form values will be saved, when the user returns
+                    to the page their information will be available for reuse.
+                  <br />
+
+                  Along the bottom of the filter form you will find 6 buttons, the color of these buttons matches the colors used
+                    throughout the visualizations on this page.  The Age Bar Char and Region Bar Chart color represents the year chosen by
+                    the user.
+
+                </p>
             <form class="storyForm">
                 <button onclick="showInstructions(3)" type="button">Continue</button>
                 <!--  <button onclick="exitInstructions(3)" type="button">Exit</button> -->
