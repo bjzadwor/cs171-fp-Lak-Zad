@@ -287,11 +287,11 @@ console.log("Filter step 1, top of the function.")
 
     if (isDataEmpty(filteredData)){
         noDataToDisplay(regionalBarChartDivString);
+        $(topRegionsDivString+"table").remove();
         noDataToDisplay(topRegionsDivString);
     }
     else{
         regionBarChart(filteredData, regionalBarChartDivString);
-        console.log("topRegionsDivString", topRegionsDivString)
         topRegions(filteredData, topRegionsDivString);
     }
 
