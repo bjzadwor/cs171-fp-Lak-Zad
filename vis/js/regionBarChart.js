@@ -91,7 +91,9 @@ function regionBarChart (dataSet, regionGraphDiv) {
     var bars = svg.selectAll(".bar")
         .data(dataSet)
         .enter().append("rect")
-        .attr("class", function(d){ return "bar pointer bar" + d.year; })
+//        .attr("class", function(d){ return "bar pointer bar" + d.year; })
+        .attr("class", function(d){ console.log("class", "bar pointer " + d.region_name.trim() + " bar" + d.year); 
+            return "bar pointer " + d.region_name.trim() + " bar" + d.year; })
         .attr("x", function(d, i) { return padding + xScale(i); })
 //              .attr("width", xScale.rangeBand())
         .attr("width", wdBar)
@@ -116,37 +118,32 @@ function regionBarChart (dataSet, regionGraphDiv) {
 
                 if (d.region_name.trim() != 'GLB') {
                     className = '.' + d.region_name.trim();
+                console.log("className", className); 
+                  d3.selectAll(className)//.filter("path")
+                        .attr("class", function(d) { return d3.select(this).attr("class") + " highlight" ; });
+                   
 
-                /*    d3.selectAll(className)
-                        .attr("class","test Class Name");
-*/
-
-                    d3.selectAll(".bar1990").classed("ZZZ", true);
-
-                    console.log("This fired")
-                    d3.selectAll(className).filter("path")
-                        .classed("ZZZZZZZ", true)
-                        .attr("fill", "Blue");
-
-                    d3.selectAll(className).filter("rect")
-                        .attr("class", "zzz")
-                        .classed("zzzz", true)
-                        .attr("fill", "blue")
-                        .attr("stroke", "yellow");
+//                    d3.selectAll(className).filter("rect")
+//                        .attr("fill", "yellow")
+//                        .attr("stroke", "yellow");
                 }
            })
             .on("mouseout", function(d){
                 if (d.region_name.trim() != 'GLB') {
                     className = '.' + d.region_name;
-                    d3.selectAll(className).filter("path")
+                    /*d3.selectAll(className).filter("path")
                         .attr("fill", function () {
                             return d3.select(this).attr("fill2")
                         });
+                    */
+                    $(className).removeClass("highlight");
+
 
                     d3.selectAll(".bar1990").classed("ZZZ", false);
                     d3.selectAll(className).filter("rect")
                         .attr("fill", "black")
                         .attr("stroke", "black");
+
                 }
             });
 
