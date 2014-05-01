@@ -116,11 +116,22 @@ function regionBarChart (dataSet, regionGraphDiv) {
 
                 if (d.region_name.trim() != 'GLB') {
                     className = '.' + d.region_name.trim();
+
+                /*    d3.selectAll(className)
+                        .attr("class","test Class Name");
+*/
+
+                    d3.selectAll(".bar1990").classed("ZZZ", true);
+
+                    console.log("This fired")
                     d3.selectAll(className).filter("path")
-                        .attr("fill", "yellow");
+                        .classed("ZZZZZZZ", true)
+                        .attr("fill", "Blue");
 
                     d3.selectAll(className).filter("rect")
-                        .attr("fill", "yellow")
+                        .attr("class", "zzz")
+                        .classed("zzzz", true)
+                        .attr("fill", "blue")
                         .attr("stroke", "yellow");
                 }
            })
