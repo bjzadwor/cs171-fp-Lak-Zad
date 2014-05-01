@@ -3,12 +3,12 @@
  */
 function regionBarChart (dataSet, regionGraphDiv) {
     var className;
-    var xAxis, xScale, yAxis,  yScale, tickCt=10;
+    var xAxis, xScale, yAxis,  yScale, tickCt=10, xAxisAngle="-90";
     var barChartContainerWidth = $(regionGraphDiv).width();
-    var margin = { left: 40 , right: 0, top: 15, bottom: 40};
+    var margin = { left: 40 , right: 0, top: 15, bottom: 60};
     var width = barChartContainerWidth - margin.left - margin.right;
     var height = (.65*barChartContainerWidth) - margin.bottom - margin.top;
-    if (regionGraphDiv == "#mainVis") height = (250)
+    if (regionGraphDiv == "#mainVis") { height = 250; xAxisAngle="-50"; }
     var xAxisMetric = "region_name";
 
     var backgroundColor = $('body').css("background-color");
@@ -66,7 +66,7 @@ function regionBarChart (dataSet, regionGraphDiv) {
         .style("text-anchor", "end")
         .attr("dx", "-.2em")
         .attr("dy", width / (3 * dataLength)) //".15em")
-        .attr("transform", "rotate(-90)");
+        .attr("transform", "rotate(" + xAxisAngle + ")");
 
     var yAxisDrawing = svg.append("g") // Y Axis
         .attr("class", "axis")
@@ -84,7 +84,7 @@ function regionBarChart (dataSet, regionGraphDiv) {
         .attr("class", "caption");
 
     var bottomLabel =  svg.append("text")   // Bottom Label
-        .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," + (height + 2* margin.top) + ")")
+        .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," + (height + (regionGraphDiv == "#mainVis"? 1 : 0.5) * margin.bottom) + ")")
         .style("text-anchor", "middle")
         .text(mappings[xAxisMetric])
         .attr("class", "caption");
