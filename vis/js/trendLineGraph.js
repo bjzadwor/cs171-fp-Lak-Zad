@@ -3,12 +3,12 @@
  */
 
 var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
-    var lineChart, xAxis, xScale, yAxis,  yScale, tickCt=10, rad=2;
+    var lineChart, xAxis, xScale, yAxis,  yScale, tickCt=10, rad=2, xAxisAngle="-90";
     var lineChartContainerWidth = $(trendGraphDiv).width()
-    var margin = { left: 40 , right: 0, top: 15, bottom: 40};
+    var margin = { left: 40 , right: 0, top: 15, bottom: 60};
     var width = lineChartContainerWidth - margin.left - margin.right;
     var height = (.65*lineChartContainerWidth) - margin.bottom - margin.top;
-    if (trendGraphDiv == "#mainVis") { height = 250; rad = 3; }
+    if (trendGraphDiv == "#mainVis") { height = 250; rad = 3; xAxisAngle="-50"; }
     var xAxisMetric = "age_name";
 
     lineChart = d3.select(trendGraphDiv).append("svg")
@@ -61,7 +61,7 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
             .style("text-anchor", "end")
             .attr("dx", "-.2em")
             .attr("dy", width / (3 * dataLength)) //".15em")
-            .attr("transform", "rotate(-90)");
+            .attr("transform", "rotate(" + xAxisAngle + ")");
 
     lineChart.append("g")
         .attr("class", "axis")
@@ -83,8 +83,7 @@ var trendLineGraph = function(dataSet, trendGraphDiv) { //trendChartData
         .attr("class", "caption");
 
     lineChart.append("text")
-        .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," 
-            + (height + margin.top + margin.bottom) + ")")
+        .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," + (height + (trendGraphDiv == "#mainVis"? 1.25 : 1) * margin.bottom) + ")")
         .style("text-anchor", "middle")
         .text(mappings[xAxisMetric]) 
         .attr("class", "caption");

@@ -3,7 +3,7 @@
  */
 
 var noDataToDisplay = function(divNoData) {
-    var noDataContainerWidth = $(divNoData).width()
+    var noDataContainerWidth = $(divNoData).width();
     var margin = { left: 40 , right: 0, top: 15, bottom: 40};
     var width = noDataContainerWidth - margin.left - margin.right;
     var height = (.65*noDataContainerWidth) - margin.bottom - margin.top;
@@ -15,19 +15,19 @@ var noDataToDisplay = function(divNoData) {
     svg.append("text")
         .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," + (height + margin.top+ margin.bottom)/2 + ")")
         .style("text-anchor", "middle")
-        .text("NO DATA TO DISPLAY FOR THE SELECTED CRITERIA!")
-        .attr("class", "caption");
+        .text("NO DATA TO DISPLAY \n FOR THE SELECTED CRITERIA!")
+        .attr("class", "noData");
 }
 
 
 var createAgeBars = function(ageDataSet, div) {
-    var ageBars, xAxis, xScale, yAxis,  yScale, tickCt=10;
+    var ageBars, xAxis, xScale, yAxis,  yScale, tickCt=10, xAxisAngle="-90";
     var barChartContainerWidth = $(div).width()
-    var margin = { left: 40 , right: 0, top: 15, bottom: 40};
+    var margin = { left: 40 , right: 0, top: 15, bottom: 60};
     var width = barChartContainerWidth - margin.left - margin.right;
     var height = (.65*barChartContainerWidth) - margin.bottom - margin.top;
 	var xAxisMetric = "age_name";
-    if (div == "#mainVis") height = (250)
+    if (div == "#mainVis") { height = (250); xAxisAngle="-50"; }
 
     ageBars = d3.select(div).append("svg")
         .attr({ width: width + margin.left + margin.right,
@@ -76,7 +76,7 @@ var createAgeBars = function(ageDataSet, div) {
             .style("text-anchor", "end")
             .attr("dx", "-.2em")
             .attr("dy", width / (3*dataLength)) //".15em")
-            .attr("transform", "rotate(-90)");
+            .attr("transform", "rotate(" + xAxisAngle + ")");
 
     ageBars.append("g")
         .attr("class", "axis")
@@ -97,7 +97,7 @@ var createAgeBars = function(ageDataSet, div) {
         .attr("class", "caption");
 // Bottom  Caption
     ageBars.append("text")
-        .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," + (height + margin.top+ margin.bottom) + ")")
+        .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," + (height + (div == "#mainVis"? 1.25 : 1) * margin.bottom) + ")")
         .style("text-anchor", "middle")
         .text(mappings[xAxisMetric])
         .attr("class", "caption");

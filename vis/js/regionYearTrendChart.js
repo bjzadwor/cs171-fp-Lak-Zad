@@ -3,12 +3,12 @@
  */
 
 function regionYearTrendChart (trendBarDataSet, regionTrendDiv) {
-    var barChart, xAxis, xScale, yAxis,  yScale, tickCt=10;
+    var barChart, xAxis, xScale, yAxis,  yScale, tickCt=10, xAxisAngle="-90";
     var barChartContainerWidth = $(regionTrendDiv).width();
     var margin = { left: 40 , right: 0, top: 15, bottom: 40};
     var width = barChartContainerWidth - margin.left - margin.right;
     var height = (.65*barChartContainerWidth) - margin.bottom - margin.top;
-    if (regionTrendDiv == "#mainVis") height = (250)
+    if (regionTrendDiv == "#mainVis") { height = (250); xAxisAngle="-50"; }
     var xAxisMetric = "region_name";
 
     var backgroundColor = $('body').css("background-color");
@@ -69,7 +69,7 @@ function regionYearTrendChart (trendBarDataSet, regionTrendDiv) {
         .style("text-anchor", "end")
         .attr("dx", "-.2em")
         .attr("dy", width / (3 * trendBarDataSet[maxKeys].length)) //".15em")
-        .attr("transform", "rotate(-90)");
+        .attr("transform", "rotate(" + xAxisAngle + ")");
 
     var yAxisDrawing = svg.append("g") // Y Axis
         .attr("class", "axis")
@@ -87,7 +87,7 @@ function regionYearTrendChart (trendBarDataSet, regionTrendDiv) {
         .attr("class", "caption");
 
     var bottomLabel =  svg.append("text")   // Bottom Label
-        .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," + (height + 2* margin.top) + ")")
+        .attr("transform", "translate(" + ((width + margin.left) / 2) + " ," + (height + (regionTrendDiv == "#mainVis"? 1.25 : 1) * margin.bottom) + ")")
         .style("text-anchor", "middle")
         .text(mappings[xAxisMetric])
         .attr("class", "caption");
