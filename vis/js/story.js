@@ -8,6 +8,7 @@ function showInstructions(input){
 
         case -1:  // Load the page, disregarding the cookie
             $(".instructions1").removeClass("hidden");
+            setLoadingCookie(0); //
             $('.stop').prop("checked", false);
 
         break;
