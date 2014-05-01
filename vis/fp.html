@@ -192,9 +192,9 @@
         .hidden{
             display:none;
         }
-        /************************************************************
+        /* ***********************************************************
         * CSS for the instructions
-        ************************************************************/
+        *********************************************************** */
         #instructions{
             position:absolute;
             z-index: 1000;
@@ -205,6 +205,35 @@
             bottom: 2px;
             right: 2px;
         }
+
+        #mainVisInstructions{
+            position:absolute;
+            left: 0px;
+            bottom: -210px;
+            width: 900px;
+            height: 200px;
+            background-color: darkOrange;
+            z-index:500;
+        }
+
+        #formInstructions{
+            position:absolute;
+            left: -205px;
+            top: 10px;
+            width:200px;
+            height: 200px;
+            background-color: yellow;
+        }
+
+        #smallVisInstructions{
+            position:absolute;
+            left: 0px;
+            top: -205px;
+            width:200px;
+            height: 200px;
+            background-color: green;
+        }
+
 
         .instructions1 {
             position: absolute;
@@ -222,9 +251,14 @@
             background-color: yellow;
         }
 
-      /************************************************************
+        .storyForm{
+            position:absolute;
+            bottom:3px;
+            right: 3px;
+        }
+      /* ***********************************************************
       * End CSS for the instructions
-      ************************************************************/
+      *********************************************************** */
         header {
             width: 1200px;
             margin-left:auto;
@@ -453,7 +487,7 @@
 
 
 
-<div id="instructions" class="hidden2">Instructions Container
+<div id="instructions" class="hidden2 allInstructions">Instructions Container
 
     <div id="checkbox" class="pull-right">
         <form>
@@ -469,8 +503,23 @@
 
 
     <div class="row">
-        <div id="mainVis" class="visTitle border"><span>mainVis</span></div>
-        <div id="rightColumn" class="floatR border">
+        <div id="mainVis" class="visTitle border" style="position:relative;">
+        <span>mainVis</span>
+        <div id="mainVisInstructions" class="hidden2 allInstructions">
+            <p> Blah Blah Blah Something Everything Nothing WhyNot Everyone </p>
+
+
+
+            <form class="storyForm">
+                <button onclick="story(this.parentNode.parentNode.id)" type="button">Continue</button>
+                <button onclick="exitInstructions()" type="button">Exit</button>
+            </form>
+        </div>
+        </div>
+        <div id="rightColumn" class="floatR border" style="position:relative;">
+            <div id="formInstructions" class="hidden2 allInstructions">
+                Form Instructions
+            </div>
             <form id="filterForm" class = "something">
                 <label for="mainSelect">Main Visualization:</label>
                 <br />
@@ -484,10 +533,6 @@
                     <option value="trendSexBarChart">Region/Sex Bar Chart</option>
                     <option value="trendYearBarChart">Region/Year Bar Chart</option>
                     <option value="topRegions">Top Regions</option>
-                    <!--   <option value="DALY_abs">Disability Adjusted Life Years</option> -->
-                    <!--    <option value="YLD_abs">Years Lived with Disability</option> -->
-                    <!--    <option value="YLL_abs">Years of Life Lost</option> -->
-                    <!--    <option value="death_abs">Number of Deaths</option> -->
                 </select>
                 <br />
                 <label for="regionSelect">Region: </label>
@@ -506,13 +551,9 @@
                 <br />
                 <select id ="metricSelect">
                     <option value="death_rate">Death Rate Per 100,000</option>
-                 <!--   <option value="DALY_abs">Disability Adjusted Life Years</option> -->
-                    <option value="DALY_rate">Disability Adjusted Life Years (DALY) per 100,000</option>
-                 <!--    <option value="YLD_abs">Years Lived with Disability</option> -->
-                    <option value="YLD_rate">Years Lived with Disabilty (YLD) per 100,000 </option>
-                 <!--    <option value="YLL_abs">Years of Life Lost</option> -->
                     <option value="YLL_rate">Years of Life Lost (YLL) per 100,000</option>
-                 <!--    <option value="death_abs">Number of Deaths</option> -->
+                    <option value="DALY_rate">Disability Adjusted Life Years (DALY) per 100,000</option>
+                    <option value="YLD_rate">Years Lived with Disabilty (YLD) per 100,000 </option>
                 </select>
                 <br />
                 <label>Sex:</label>
@@ -534,7 +575,8 @@
             </form>
         </div>
     </div>
-    <div class="row">
+    <div class="row" style="position:relative;">
+        <div id="smallVisInstructions" class="hidden2 allInstructions">SmallVis Instructions</div>
         <div id="vis1" class="vis visTitle"><span id="vis1Span" class = "pointer underlineText">vis1</span></div>
         <div id="vis2" class="vis visTitle"><span id="vis2Span" class = "pointer underlineText">vis2</span></div>
         <div id="vis3" class="vis visTitle"><span id="vis3Span" class = "pointer underlineText">vis3</span></div>
