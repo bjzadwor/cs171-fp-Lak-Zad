@@ -8,6 +8,8 @@ function showInstructions(input){
 
         case -1:  // Load the page, disregarding the cookie
             $(".instructions1").removeClass("hidden");
+            $('.stop').prop("checked", false);
+
         break;
         case 0:
             console.log("Case0Fired")
@@ -20,7 +22,7 @@ function showInstructions(input){
             $(".instructions1").addClass("hidden");
             if ($('#openingInstructions .stop').is(':checked'))
             {
-                setLoadingCookie();
+                setLoadingCookie(1);
                 console.log("Setting Loading Cookie");
 
             }
@@ -34,7 +36,7 @@ function showInstructions(input){
             $(".instructions2").addClass("hidden");
             if ($('#mainVisInstructions .stop').is(':checked'))
             {
-                setLoadingCookie();
+                setLoadingCookie(1);
                 console.log("Setting Loading Cookie");
 
             }
@@ -48,7 +50,7 @@ function showInstructions(input){
             $(".instructions3").addClass("hidden");
             if ($('#filterFormInstructions .stop').is(':checked'))
             {
-                setLoadingCookie();
+                setLoadingCookie(1);
                 console.log("Setting Loading Cookie");
 
             }
@@ -62,7 +64,7 @@ function showInstructions(input){
             $(".instructions4").addClass("hidden");
         if ($('#smallVisInstructions .stop').is(':checked'))
             {
-                setLoadingCookie();
+                setLoadingCookie(1);
                 console.log("Setting Loading Cookie");
 
             }
@@ -78,49 +80,19 @@ function showInstructions(input){
     }
 }
 
-function exitInstructions(input) {
-    console.log("Exiting Instructions")
-    $('.allInstructions').addClass("hidden");
+function setLoadingCookie(input){
 
-    switch (input) {
+    switch(input) {
+        case 1:
+            setCookie("loadInstructions", "true", "365");
+    break;
 
-        case "1":
-
-            if ($('#instructions1 .stop').is(':checked')) {
-                setLoadingCookie();
-            }
-
-            break;
-        case "2":
-            if ($('#instructions1 .stop').is(':checked')) {
-                setLoadingCookie();
-            }
-
-            break;
-        case "3":
-            if ($('#instructions1 .stop').is(':checked')) {
-                setLoadingCookie();
-            }
-            break;
-        case "4":
-            if ($('#instructions1 .stop').is(':checked')) {
-                setLoadingCookie();
-            }
-            break;
-        case "5":
-            if ($('#instructions1 .stop').is(':checked')) {
-                setLoadingCookie();
-            }
-
-            break;
+        case 0:
+            setCookie("loadInstructions", "false", "365")
+    break;
 
 
-        default:
-            break;
     }
-}
-function setLoadingCookie(){
-    setCookie("loadInstructions","true","365");
 }
 
 function getLoadingCookie(){

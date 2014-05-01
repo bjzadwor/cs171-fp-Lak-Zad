@@ -214,13 +214,21 @@
             z-index: 1000;
             width:100%;
        }
+        .allInstructions{
+            border-radius: 25px;
+            border: black solid;
+            box-shadow: 10px 10px 5px #888888;
+            padding: 7px;
+            padding-bottom: 25px;
+        }
 
         .storyForm{
             position:absolute;
             bottom:3px;
             right: 3px;
-            max-width: 125px;
+            width: 195px;
         }
+
         #checkbox{
             padding-right: 2px;
             position: absolute;
@@ -501,7 +509,9 @@
 
 
 <header class ="header">
-    <div id="help" class="help pull-right">Help</div>
+    <div id="help" class="help pull-right underline" onclick="showInstructions(-1)">
+        <button type="button" onclick="showInstructions(-1)" >Help</button>
+    </div>
     <h1 class="centerText">Global Mortality Dashboard</h1>
 </header>
 
@@ -511,11 +521,30 @@
 
 <div id="openingInstructions" class="hidden instructions1 allInstructions">
     <p>Instructions Container</p>
+    <p>Instructions Container</p>
+    <p>Instructions Container</p>
+    <p>Instructions Container</p>
+    <p>Instructions Container</p>
+    <p>Instructions Container</p>
+    <p>Instructions Container</p>
+    <p>Instructions Container</p>
+    <p>Instructions Container</p>
+    <p>Instructions Container</p>
+    <p>Instructions Container</p>
+    <p>Instructions Container</p>
+    <p>Instructions Container</p>
+    <p>Instructions Container</p><p>Instructions Container</p>
+    <p>Instructions Container</p>
+    <p>Instructions Container</p>
+    <p>Instructions Container</p>
+
+
+
 
 
     <form class="storyForm">
         <button onclick="showInstructions(1)" type="button">Continue</button>
-        <button onclick="exitInstructions(1)" type="button">Exit</button>
+    <!--    <button onclick="exitInstructions(1)" type="button">Exit</button> -->
 
         <input type="checkbox" name="stop" class="stop" value="stop">Do not display instructions on load
     </form>
@@ -531,13 +560,32 @@
         <div id="mainVis" class="visTitle border" style="position:relative;">
         <span>mainVis</span>
         <div id="mainVisInstructions" class="instructions2 hidden allInstructions">
-            <p> Blah Blah Blah Something Everything Nothing WhyNot Everyone </p>
+            <div>
+             <p> Blah Blah Blah Something Everything Nothing WhyNot Everyone </p>
 
+            <p>Instructions Container</p>
+            <p>Instructions Container</p>
+            <p>Instructions Container</p>
+            <p>Instructions Container</p>
+            <p>Instructions Container</p>
+            <p>Instructions Container</p>
+            <p>Instructions Container</p>
+            <p>Instructions Container</p>
+            <p>Instructions Container</p>
+            <p>Instructions Container</p>
+            <p>Instructions Container</p>
+            <p>Instructions Container</p>
+            <p>Instructions Container</p>
+            <p>Instructions Container</p><p>Instructions Container</p>
+            <p>Instructions Container</p>
+            <p>Instructions Container</p>
+            <p>Instructions Container</p>
 
+            </div>
 
             <form class="storyForm">
                 <button onclick="showInstructions(2)" type="button">Continue</button>
-                <button onclick="exitInstructions(2)" type="button">Exit</button>
+            <!--    <button onclick="exitInstructions(2)" type="button">Exit</button> -->
 
                 <input type="checkbox" name="stop" class="stop" value="stop">Do not display instructions on load
             </form>
@@ -548,7 +596,7 @@
                 Form Instructions
             <form class="storyForm">
                 <button onclick="showInstructions(3)" type="button">Continue</button>
-                <button onclick="exitInstructions(3)" type="button">Exit</button>
+                <!--  <button onclick="exitInstructions(3)" type="button">Exit</button> -->
 
                 <input type="checkbox" name="stop" class="stop" value="stop">Do not display instructions on load
             </form>
@@ -615,8 +663,8 @@
             SmallVis Instructions
 
             <form class="storyForm">
-                <button onclick="showInstructions(4)" type="button">Continue</button>
-                <button onclick="exitInstructions(4)" type="button">Exit</button>
+                <button onclick="showInstructions(4)" type="button">Continue</button><br />
+                <!--   <button onclick="exitInstructions(4)" type="button">Exit</button> -->
 
                 <input type="checkbox" name="stop" class="stop" value="stop">Do not display instructions on load
             </form>
