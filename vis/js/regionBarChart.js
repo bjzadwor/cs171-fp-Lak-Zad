@@ -143,6 +143,7 @@ function regionBarChart (dataSet, regionGraphDiv) {
                             return d3.select(this).attr("fill2")
                         });
 
+                    d3.selectAll(".bar1990").classed("ZZZ", false);
                     d3.selectAll(className).filter("rect")
                         .attr("fill", "black")
                         .attr("stroke", "black");
