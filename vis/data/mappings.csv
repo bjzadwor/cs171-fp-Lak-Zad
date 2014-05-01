@@ -329,3 +329,318 @@ Female,F
 DALY,Disability Adjusted Life Years
 YLD,Years Lived with Disability
 YLL,Years of Life Lost
+0-6 days,0D
+7-27 days,7D
+28-364 days,28D
+1-4 years,1Y
+5-9 years,5Y
+10-14 years,10Y
+15-19 years,15Y
+20-24 years,20Y
+25-29 years,25Y
+30-34 years,30Y
+35-39 years,35Y
+40-44 years,40Y
+45-49 years,45Y
+50-54 years,50Y
+55-59 years,55Y
+60-64 years,60Y
+65-69 years,65Y
+70-74 years,70Y
+75-79 years,75Y
+80+ years,80Y
+All ages,ALL
+Global,GLB
+Andean Latin America,ALA
+Australasia,AUA
+Caribbean,CAR
+Central Asia,CAS
+Central Europe,CEU
+Central Latin America,CLA
+Central sub-Saharan Africa,CSA
+East Asia,EAS
+Eastern Europe,EEU
+Eastern sub-Saharan Africa,ESA
+High-income Asia Pacific,HAP
+High-income North America,HNA
+North Africa and Middle East,NAM
+Oceania,OCA
+South Asia,SAS
+Southeast Asia,SEA
+Southern Latin America,SLA
+Southern sub-Saharan Africa,SSA
+Tropical Latin America,TLA
+Western Europe,WEU
+Western sub-Saharan Africa,WSA
+Tuberculosis,TB
+HIV disease resulting in mycobacterial infection,HIV-TB
+HIV disease resulting in other specified or unspecified diseases,Other HIV
+Cholera,Cholera
+Other salmonella infections,Salmonella
+Shigellosis,Shigellosis
+Enteropathogenic E coli infection,EPEC
+Enterotoxigenic E coli infection,ETEC
+Campylobacter enteritis,Campylo
+Amoebiasis,Amoebiasis
+Cryptosporidiosis,Crypto
+Rotaviral enteritis,Rotavirus
+Other diarrheal diseases,Oth Diarr
+Typhoid and paratyphoid fevers,Typhoid
+Influenza,LRI-Flu
+Pneumococcal pneumonia,LRI-Pneum
+H influenzae type B pneumonia,LRI-HiB
+Respiratory syncytial virus pneumonia,LRI-RSV
+Other lower respiratory infections,Oth LRI
+Upper respiratory infections,URI
+Otitis media,Otitis
+Pneumococcal meningitis,Mng-Pneum
+H influenzae type B meningitis,Mng-HiB
+Meningococcal infection,Mng-Mening
+Other meningitis,Oth Mng
+Encephalitis,Enceph
+Diphtheria,Diptheria
+Whooping cough,Whooping
+Tetanus,Tetanus
+Measles,Measles
+Varicella,Varicella
+Malaria,Malaria
+Chagas disease,Chagas
+Leishmaniasis,Leish
+African trypanosomiasis,Afr Tryp
+Schistosomiasis,Schisto
+Cysticercosis,Cysticer
+Echinococcosis,Echino
+Lymphatic filariasis,LF
+Onchocerciasis,Oncho
+Trachoma,Trachoma
+Dengue,Dengue
+Yellow fever,Yellow F
+Rabies,Rabies
+Ascariasis,Ascar
+Trichuriasis,Trichur
+Hookworm disease,Hookworm
+Food-borne trematodiases,FBT
+Other neglected tropical diseases,Oth NTD
+Maternal hemorrhage,M Hem
+Maternal sepsis,M Sepsis
+Hypertensive disorders of pregnancy,M HTN
+Obstructed labor,Obs Labor
+Abortion,Abortion
+Other maternal disorders,Oth M
+Preterm birth complications,Preterm
+Neonatal encephalopathy (birth asphyxia and birth trauma),N Enceph
+Sepsis and other infectious disorders of the newborn baby,N Sepsis
+Other neonatal disorders,Oth Neo
+Protein-energy malnutrition,PEM
+Iodine deficiency,Iodine
+Vitamin A deficiency,Vit A
+Iron-deficiency anemia,Iron
+Other nutritional deficiencies,Oth Nutr
+Syphilis,Syphilis
+Sexually transmitted chlamydial diseases,Chlamydia
+Gonococcal infection,Gonnorhea
+Trichomoniasis,Tricho
+Other sexually transmitted diseases,Oth STD
+Acute hepatitis A,Hep A
+Acute hepatitis B,Hep B
+Acute hepatitis C,Hep C
+Acute hepatitis E,Hep E
+Leprosy,Leprosy
+Other infectious diseases,Oth Inf
+Esophageal cancer,Esophagus
+Stomach cancer,Stomach
+Liver cancer secondary to hepatitis B,Liver-HepB
+Liver cancer secondary to hepatitis C,Liver-HepC
+Liver cancer secondary to alcohol use,Liver-Alcohol
+Other liver cancer,Liver-Other
+Larynx cancer,Larynx
+"Trachea, bronchus, and lung cancers",Lung
+Breast cancer,Breast
+Cervical cancer,Cervix
+Uterine cancer,Uterus
+Prostate cancer,Prostate
+Colon and rectum cancers,Colorectal
+Mouth cancer,Mouth
+Nasopharynx cancer,Naso
+Cancer of other part of pharynx and oropharynx,Oth Pharynx
+Gallbladder and biliary tract cancer,Gallbladder
+Pancreatic cancer,Pancreas
+Malignant melanoma of skin,Melanoma
+Non-melanoma skin cancer,NMSC
+Ovarian cancer,Ovary
+Testicular cancer,Testis
+Kidney and other urinary organ cancers,Kidney
+Bladder cancer,Bladder
+Brain and nervous system cancers,Brain
+Thyroid cancer,Thyroid
+Hodgkin's disease,Hodgkin's
+Non-Hodgkin lymphoma,Lymphoma
+Multiple myeloma,Myeloma
+Leukemia,Leukemia
+Other neoplasms,Oth Neoplasm
+Rheumatic heart disease,Rheum HD
+Ischemic heart disease,IHD
+Ischemic stroke,Isch Stroke
+Hemorrhagic and other non-ischemic stroke,Hem Stroke
+Hypertensive heart disease,HTN Heart
+Cardiomyopathy and myocarditis,CMP
+Atrial fibrillation and flutter,AFib
+Aortic aneurysm,AA
+Peripheral vascular disease,PVD
+Endocarditis,Endocarditis
+Other cardiovascular and circulatory diseases,Oth Circ
+Chronic obstructive pulmonary disease,COPD
+Pneumoconiosis,P-coniosis
+Asthma,Asthma
+Interstitial lung disease and pulmonary sarcoidosis,Int Lung
+Other chronic respiratory diseases,Oth Resp
+Cirrhosis of the liver secondary to hepatitis B,Cirrhosis-HepB
+Cirrhosis of the liver secondary to hepatitis C,Cirrhosis-HepC
+Cirrhosis of the liver secondary to alcohol use,Cirrhosis-Alcohol
+Other cirrhosis of the liver,Cirrhosis-Other
+Peptic ulcer disease,PUD
+Gastritis and duodenitis,Gastrititis
+Appendicitis,Appendicitis
+Paralytic ileus and intestinal obstruction without hernia,Ileus
+Inguinal or femoral hernia,I+F Hernia
+Non-infective inflammatory bowel disease,IBD
+Vascular disorders of intestine,Vasc Intest
+Gall bladder and bile duct disease,Gall+Bile
+Pancreatitis,Pancreatitis
+Other digestive diseases,Oth Diges
+Alzheimer's disease and other dementias,Alzh
+Parkinson's disease,Parkins
+Epilepsy,Epilepsy
+Multiple sclerosis,MS
+Migraine,Migraine
+Tension-type headache,Headache
+Other neurological disorders,Oth Neuro
+Schizophrenia,Schizo
+Alcohol use disorders,Alcohol
+Opioid use disorders,Opioids
+Cocaine use disorders,Cocaine
+Amphetamine use disorders,Amphet
+Cannabis use disorders,Cannabis
+Other drug use disorders,Oth Drug
+Major depressive disorder,MDD
+Dysthymia,Dysthymia
+Bipolar affective disorder,Bipolar
+Anxiety disorders,Anxiety
+Eating disorders,Eat Disorder
+Autism,Autism
+Asperger's syndrome,Asperger
+Attention-deficit hyperactivity disorder,ADHD
+Conduct disorder,Conduct
+Idiopathic intellectual disability,Intellect
+Other mental and behavioral disorders,Oth Mental
+Diabetes mellitus,Diabetes
+Acute glomerulonephritis,Glom
+Chronic kidney disease due to diabetes mellitus,Diab CKD
+Chronic kidney disease due to hypertension,HTN CKD
+Chronic kidney disease unspecified,Oth CKD
+"Tubulointerstitial nephritis, pyelonephritis, and urinary tract infections",Nephritis
+Urolithiasis,Urolith
+Benign prostatic hyperplasia,BPH
+Male infertility,Infertility-Mal
+Other urinary diseases,Oth Urin
+Uterine fibroids,Fibroids
+Polycystic ovarian syndrome,PCO
+Female infertility,Infertility-Fem
+Endometriosis,Endometr
+Genital prolapse,Prolapse
+Premenstrual syndrome,PMS
+Other gynecological diseases,Oth Gynecol
+Thalassemias,Thalass
+Sickle cell disorders,Sickle
+G6PD deficiency,G6PD
+Other hemoglobinopathies and hemolytic anemias,Oth Hemog
+"Other endocrine, nutritional, blood, and immune disorders",Oth Endo
+Rheumatoid arthritis,R Arthritis
+Osteoarthritis,Osteo
+Low back pain,Low Back Pain
+Neck pain,Neck Pain
+Gout,Gout
+Other musculoskeletal disorders,Oth Musculo
+Neural tube defects,NTD
+Congenital heart anomalies,C Heart
+Cleft lip and cleft palate,Cleft
+Down's syndrome,Down's
+Other chromosomal abnormalities,Oth Chromo
+Other congenital anomalies,Oth Congen
+Eczema,Eczema
+Psoriasis,Psoriasis
+Cellulitis,Cellulitis
+"Abscess, impetigo, and other bacterial skin diseases",Skin Bacterial
+Scabies,Scabies
+Fungal skin diseases,Skin Fungal
+Viral skin diseases,Skin Viral
+Acne vulgaris,Acne
+Alopecia areata,Alopecia
+Pruritus,Pruritus
+Urticaria,Urticaria
+Decubitus ulcer,Decubitus
+Other skin and subcutaneous diseases,Oth Skin D
+Glaucoma,Glaucoma
+Cataracts,Cataract
+Macular degeneration,Macular
+Refraction and accommodation disorders,Refraction
+Other hearing loss,Hearing
+Other vision loss,Oth Vision
+Other sense organ diseases,Oth Sense
+Dental caries,D Caries
+Periodontal disease,Periodontal
+Edentulism,Edent
+Sudden infant death syndrome,SIDS
+Pedestrian injury by road vehicle,Pedestrian
+Pedal cycle vehicle,Bicycle
+Motorized vehicle with two wheels,2-Wheel
+Motorized vehicle with three or more wheels,4-Wheel
+Road injury other,Oth Road Inj
+Other transport injury,Oth Trans
+Falls,Fall
+Drowning,Drown
+"Fire, heat and hot substances",Fire
+Poisonings,Poison
+Mechanical forces (firearm),Mech Firearm
+Mechanical forces (other),Oth Mech
+Adverse effects of medical treatment,Med Treat
+Animal contact (venomous),Animal (Venom)
+Animal contact (non-venomous),Animal (Non)
+Unintentional injuries not classified elsewhere,Oth Unintent
+Self-harm,Self-harm
+Assault by firearm,V Gun
+Assault by sharp object,V Knife
+Assault by other means,Oth Violence
+Exposure to forces of nature,Disaster
+Collective violence and legal intervention,War
+Cause Name,cause_name
+Medium Cause Name,cause_medium
+Short Cause Name,cause_short
+Region Name,region_name
+Year,year
+Age Group,age_name
+Sex,sex_name
+Number of Deaths,death_abs
+Number of Deaths - 95% Uncertainty Interval,death_abs_ui
+Death Percent of All Causes,death_pct
+Death Percent of All Causes - 95% Uncertainty Interval,death_pct_ui
+"Death Rate Per 100,000",death_rate
+"Death Rate Per 100,000 - 95% Uncertainty Interval",death_rate_ui
+Number of Years of Life Lost (YLL),YLL_abs
+Number of Years of Life Lost (YLL) - 95% Uncertainty Interval,YLL_abs_ui
+Years of Life Lost (YLL) Percent of All Causes,YLL_pct
+Years of Life Lost (YLL) Percent of All Causes - 95% Uncertainty Interval,YLL_pct_ui
+"YLL Rate Per 100,000",YLL_rate
+"Years of Life Lost (YLL) Rate Per 100,000 - 95% Uncertainty Interval",YLL_rate_ui
+Number of Years Lived with Disability (YLD),YLD_abs
+Number of Years Lived with Disability (YLD) - 95% Uncertainty Interval,YLD_abs_ui
+Years Lived with Disability (YLD) Percent of All Causes,YLD_pct
+Years Lived with Disability (YLD) Percent of All Causes - 95% Uncertainty Interval,YLD_pct_ui
+"YLD Rate Per 100,000",YLD_rate
+"Years Lived with Disability (YLD) Rate Per 100,000 - 95% Uncertainty Interval",YLD_rate_ui
+Number of Disability Adjusted Life Years (DALY),DALY_abs
+Number of Disability Adjusted Life Years (DALY) - 95% Uncertainty Interval,DALY_abs_ui
+Disability Adjusted Life Years (DALY) Percent of All Causes,DALY_pct
+Disability Adjusted Life Years (DALY) Percent of All Causes - 95% Uncertainty Interval,DALY_pct_ui
+"DALY Rate Per 100,000",DALY_rate
+"Disability Adjusted Life Years (DALY) Rate Per 100,000 - 95% Uncertainty Interval",DALY_rate_ui
