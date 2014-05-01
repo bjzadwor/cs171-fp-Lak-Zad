@@ -2,6 +2,7 @@
  * Created by Zadworney on 4/20/2014.
  */
 function regionBarChart (dataSet, regionGraphDiv) {
+    var className;
     var xAxis, xScale, yAxis,  yScale, tickCt=10;
     var barChartContainerWidth = $(regionGraphDiv).width();
     var margin = { left: 40 , right: 0, top: 15, bottom: 40};
@@ -118,37 +119,16 @@ function regionBarChart (dataSet, regionGraphDiv) {
 
                 if (d.region_name.trim() != 'GLB') {
                     className = '.' + d.region_name.trim();
-
-                    d3.selectAll(className)//.filter("path")
-                      .classed("highlight", true);
-
-
-                      //  .attr("class", function(d) { return d3.select(this).attr("class") + " highlight" ; });
-                   
-
-//                    d3.selectAll(className).filter("rect")
-//                        .attr("fill", "yellow")
-//                        .attr("stroke", "yellow");
-                }
+                    d3.selectAll(className)
+                        .classed("highlight", true);
+                 }
            })
             .on("mouseout", function(d){
                 if (d.region_name.trim() != 'GLB') {
                     className = '.' + d.region_name;
-                    /*d3.selectAll(className).filter("path")
-                        .attr("fill", function () {
-                            return d3.select(this).attr("fill2")
-                        });
-                    */
-                    d3.selectAll(className)//.filter("path")
+                    d3.selectAll(className)
                         .classed("highlight", false);
 
-/*
-
-                    d3.selectAll(".bar1990").classed("ZZZ", false);
-                    d3.selectAll(className).filter("rect")
-                        .attr("fill", "black")
-                        .attr("stroke", "black");
-*/
                 }
             });
 

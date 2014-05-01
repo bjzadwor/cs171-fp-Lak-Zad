@@ -65,32 +65,18 @@ function drawImprovedMap(improvedMapDiv) {
             .attr("stroke-width",.25)
             .on("mouseover", function(d){
                 // highlight the region and show the tool tip
-                className = "."+d.properties.featurecla
-                d3.selectAll(className).filter("path")
-                    .attr("fill", "yellow");
-
-                d3.selectAll(className).filter("rect")
-                    .attr("fill", "yellow")
-                    .attr("stroke", "yellow");
+                className = '.' + d.properties.featurecla;
+                d3.selectAll(className)
+                    .classed("highlight", true);
 
                 tip.show(d)
             })
             .on("mouseout", function(d){
 
                 tip.hide(d)
-                var className = "."+d.properties.featurecla
-                var color = d3.select(this).attr("fill2");
+                className = '.' + d.properties.featurecla;
                 d3.selectAll(className)
-                    .attr("stroke", "#222")
-                    .attr("fill", color)
-
-                d3.selectAll(className).filter("path")
-                    .attr("stroke", "#222")
-                    .attr("fill", color);
-
-                d3.selectAll(className).filter("rect")
-                    .attr("stroke", "black")
-                    .attr("fill", "black");
+                    .classed("highlight", false);
 
             })
             .on("click", function(d) {   // when you click on a region, change the filter to that region.

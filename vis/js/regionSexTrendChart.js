@@ -123,24 +123,20 @@ function regionSexTrendChart (trendBarDataSet, regionTrendDiv) {
            $("#filterForm").change();
         })
         .on("mouseover", function(d){
-            className = '.'+ d.region_name;
-            d3.selectAll(className).filter("path")
-                .attr("fill", "yellow");
 
-            d3.selectAll(className).filter("rect")
-                .attr("fill", "yellow")
-                .attr("stroke", "yellow");
+            if (d.region_name.trim() != 'GLB') {
+                className = '.' + d.region_name.trim();
+                d3.selectAll(className)
+                    .classed("highlight", true);
+            }
         })
         .on("mouseout", function(d){
+            if (d.region_name.trim() != 'GLB') {
+                className = '.' + d.region_name;
+                d3.selectAll(className)
+                    .classed("highlight", false);
 
-            className = ".bar" + d.year;
-
-        d3.selectAll(className).filter("path")
-           .attr("fill", function(){return d3.select(this).attr("fill2")});
-
-        d3.selectAll(className).filter("rect")
-            .attr("fill", "black")
-            .attr("stroke", "black");
+            }
         });
 
     } // end regionSexTrendChart function.
