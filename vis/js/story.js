@@ -102,5 +102,5 @@ function getLoadingCookie(){
 }
 
 function helpButtonClicked(){
-   showInstructions(99);
+   showInstructions(-1);
 }
