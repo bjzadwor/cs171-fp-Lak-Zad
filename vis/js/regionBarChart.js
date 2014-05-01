@@ -118,9 +118,12 @@ function regionBarChart (dataSet, regionGraphDiv) {
 
                 if (d.region_name.trim() != 'GLB') {
                     className = '.' + d.region_name.trim();
-                console.log("className", className); 
-                  d3.selectAll(className)//.filter("path")
-                        .attr("class", function(d) { return d3.select(this).attr("class") + " highlight" ; });
+
+                    d3.selectAll(className)//.filter("path")
+                      .classed("highlight", true);
+
+
+                      //  .attr("class", function(d) { return d3.select(this).attr("class") + " highlight" ; });
                    
 
 //                    d3.selectAll(className).filter("rect")
@@ -136,14 +139,16 @@ function regionBarChart (dataSet, regionGraphDiv) {
                             return d3.select(this).attr("fill2")
                         });
                     */
-                    $(className).removeClass("highlight");
+                    d3.selectAll(className)//.filter("path")
+                        .classed("highlight", false);
 
+/*
 
                     d3.selectAll(".bar1990").classed("ZZZ", false);
                     d3.selectAll(className).filter("rect")
                         .attr("fill", "black")
                         .attr("stroke", "black");
-
+*/
                 }
             });
 
