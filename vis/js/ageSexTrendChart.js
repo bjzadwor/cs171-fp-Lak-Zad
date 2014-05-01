@@ -3,7 +3,7 @@
  */
 
 function ageSexTrendChart (ageSexTrendDataSet, ageSexTrendDiv) {
-    var barChart, xAxis, xScale, yAxis,  yScale, tickCt=10;
+    var barChart, xAxis, xScale, yAxis,  yScale, className, tickCt=10;
     var barChartContainerWidth = $(ageSexTrendDiv).width();
     var margin = { left: 40 , right: 0, top: 15, bottom: 40};
     var width = barChartContainerWidth - margin.left - margin.right;
@@ -119,20 +119,32 @@ function ageSexTrendChart (ageSexTrendDataSet, ageSexTrendDiv) {
 
     svg.selectAll(".bar")
         .on("click", function(d){
-           $("#regionSelect").val(d.region_name);
-           $("#filterForm").change();
-        })
+            $("#ageSelect").val(age_name[d.age_name]);
+            $("#filterForm").change();
+        });
+/*
         .on("mouseover", function(d){
-            className = '.'+ d.region_name;
+            if (d.region_name.trim() != 'GLB') {
+                className = '.' + d.region_name.trim();
+                d3.selectAll(className)
+                    .classed("highlight", true);
+             }
+             className = '.'+ d.region_name;
             d3.selectAll(className).filter("path")
                 .attr("fill", "yellow");
 
             d3.selectAll(className).filter("rect")
                 .attr("fill", "yellow")
                 .attr("stroke", "yellow");
+
         })
         .on("mouseout", function(d){
-            console.log("mouseout!");
+            if (d.region_name.trim() != 'GLB') {
+                className = '.' + d.region_name;
+                d3.selectAll(className)
+                    .classed("highlight", false);
+            }
+             console.log("mouseout!");
             className = ".bar" + d.sex_name;
         console.log(className);
         d3.selectAll(className).filter("path")
@@ -142,5 +154,5 @@ function ageSexTrendChart (ageSexTrendDataSet, ageSexTrendDiv) {
             .attr("fill", "black")
             .attr("stroke", "black");
         });
-
+ */
     } // end ageSexTrendChart function.

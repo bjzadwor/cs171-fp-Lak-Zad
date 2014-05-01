@@ -105,10 +105,8 @@ var createAgeBars = function(ageDataSet, div) {
     ageBars.selectAll(".bar")
         .data(ageDataSet)
         .enter().append("rect")
-//                .attr("class", "agebar bar")
             .attr("class", function(d){ return "bar pointer bar" + d.year + " " + d.region_name.trim(); })
             .attr("x", function(d, i) { return padding + xScale(i); })
-//              .attr("width", xScale.rangeBand())
             .attr("width", wdBar)
             .attr("y", function(d, i) { return yScale(+d[filterValues.metric]); })
             //if the value is too small to be displayed, set the height to a minimum 0.001 
@@ -121,6 +119,12 @@ var createAgeBars = function(ageDataSet, div) {
                 return (d.year + ": " + mappings[d.region_name] + ", " + d.cause_medium + ", "
                     + d.age_name + ", Sex-" + d.sex_name + " : " +d[filterValues.metric])
             });
+    ageBars.selectAll(".bar")
+        .on("click", function(d) {
+            $("#ageSelect").val(age_name[d.age_name]);
+            $("#filterForm").change();
+        });
+
 }
 
 
