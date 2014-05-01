@@ -1,9 +1,6 @@
 /**
  * Created by Zadworney on 4/29/2014.
  */
-/**
- * Created by Zadworney on 4/29/2014.
- */
 
 function topRegions(topRegionsData, topRegionsDiv){
 var numToDisplay;
@@ -17,7 +14,7 @@ var numToDisplay;
     $(".topRegionsTable").remove();
 
     $(topRegionsDiv).append('<table class="tabularData topRegionsTable" id = '+tableNameShort+'></table>');
-    $(tableName).append("<tr><th>Region Name</th><th>"+(mappings[filterValues.metric]).replace(" Per 100,000", "")+"</th></tr>")
+    $(tableName).append("<tr><th width=\"75%\">Region Name</th><th>"+mappings[filterValues.metric]+"</th></tr>")
 
     numToDisplay = 5
     if (topRegionsDiv=="#mainVis")numToDisplay = 10;

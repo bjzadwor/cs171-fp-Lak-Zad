@@ -458,9 +458,10 @@
 
         table,td,th
         {
-            border:1px solid black;
-            border-collapse:collapse;
+            border:0px solid black;
+            border-collapse:separate;
             padding:3px;
+            border-spacing: 1px;
         }
         table{
             margin: 0 auto;
@@ -468,12 +469,19 @@
         }
         td
         {
+            background-color: #EEEEEE;
+            color: #444444;
             text-align:left;
+            font-weight: normal;
+            font-size: 10px;
         }
         th
         {
-            background-color: lightGray;
+            background-color: #777777;
+            color: white;
             text-align:center;
+            font-weight: bold;
+            font-size: 10px;
         }
 
         #maleButton.btn-primary,

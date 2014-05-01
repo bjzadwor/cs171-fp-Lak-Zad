@@ -14,7 +14,7 @@ var numToDisplay;
     $(".topDiseasesTable").remove();
 
     $(topDiseasesDiv).append('<table class="tabularData topDiseasesTable" id = '+tableNameShort+'></table>');
-    $(tableName).append("<tr><th>Causes</th><th>"+mappings[filterValues.metric]+"</th></tr>")
+    $(tableName).append("<tr><th width=\"75%\">Causes</th><th>"+mappings[filterValues.metric]+"</th></tr>")
 
     numToDisplay = 5
     if (topDiseasesDiv=="#mainVis")numToDisplay = 10
