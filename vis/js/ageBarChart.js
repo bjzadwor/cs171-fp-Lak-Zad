@@ -106,7 +106,7 @@ var createAgeBars = function(ageDataSet, div) {
         .data(ageDataSet)
         .enter().append("rect")
 //                .attr("class", "agebar bar")
-            .attr("class", function(d){ return "bar pointer bar" + d.year; })
+            .attr("class", function(d){ return "bar pointer bar" + d.year + " " + d.region_name.trim(); })
             .attr("x", function(d, i) { return padding + xScale(i); })
 //              .attr("width", xScale.rangeBand())
             .attr("width", wdBar)

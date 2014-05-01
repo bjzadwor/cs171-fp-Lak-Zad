@@ -101,7 +101,7 @@ function regionYearTrendChart (trendBarDataSet, regionTrendDiv) {
         var bars = svg.selectAll(keyClass)
             .data(trendBarDataSet[key])
             .enter().append("rect")
-            .attr("class", function(d) { return "bar pointer bar" + d.year; })
+            .attr("class", function(d) { return "bar pointer bar" + d.year + " " + d.region_name.trim(); })
             .attr("x", function(d, i) { return padding + xScale(i) + wdBar * j; })
             .attr("width", wdBar)
             .attr("y", function(d, i) { return yScale(+d[filterValues.metric]); })

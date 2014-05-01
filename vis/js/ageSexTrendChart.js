@@ -102,7 +102,7 @@ function ageSexTrendChart (ageSexTrendDataSet, ageSexTrendDiv) {
         var bars = svg.selectAll(keyClass)
             .data(ageSexTrendDataSet[keySet[j]])
             .enter().append("rect")
-            .attr("class", function(d) { return "bar pointer bar" + d.sex_name; })
+            .attr("class", function(d) { return "bar pointer bar" + d.sex_name + " " + d.region_name.trim(); })
             .attr("x", function(d, i) { return padding + xScale(i) + wdBar * j; })
             .attr("width", wdBar)
             .attr("y", function(d, i) { return yScale(+d[filterValues.metric]); })

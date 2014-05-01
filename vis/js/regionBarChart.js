@@ -93,8 +93,7 @@ function regionBarChart (dataSet, regionGraphDiv) {
         .data(dataSet)
         .enter().append("rect")
 //        .attr("class", function(d){ return "bar pointer bar" + d.year; })
-        .attr("class", function(d){ console.log("class", "bar pointer " + d.region_name.trim() + " bar" + d.year); 
-            return "bar pointer " + d.region_name.trim() + " bar" + d.year; })
+        .attr("class", function(d){ return "bar pointer " + d.region_name.trim() + " bar" + d.year; })
         .attr("x", function(d, i) { return padding + xScale(i); })
 //              .attr("width", xScale.rangeBand())
         .attr("width", wdBar)
