@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Global Mortality Dashboard</title>
+
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    <link href="css/bootstrap.css" rel="stylesheet" type = "text/css">
+    <link href="css/bootstrap-theme.css" rel="stylesheet" type = "text/css">
+  <!--
+   <link href="css/bootstrap-responsive.css" rel="stylesheet" type = "text/css">
+-->
+
+
+    <style>
+
+		.d3-tip {
+          line-height: 1;
+          font-weight: bold;
+          padding: 12px;
+          background: rgba(0, 0, 0, 0.8);
+          color: #fff;
+          border-radius: 2px;
+          pointer-events: none;
+        }
+
+        /* Creates a small triangle extender for the tooltip */
+        .d3-tip:after {
+          box-sizing: border-box;
+          display: inline;
+          font-size: 10px;
+          width: 100%;
+          line-height: 1;
+          color: rgba(0, 0, 0, 0.8);
+          position: absolute;
+
+        }
+
+        /* Northward tooltips */
+        .d3-tip.n:after {
+        /*  content: "\25BC";*/
+          margin: -1px 0 0 0;
+          top: 100%;
+          left: 0;
+          text-align: center;
+        }
+
+        /* Eastward tooltips */
+        .d3-tip.e:after {
+          /*content: "\25C0";*/
+          margin: -4px 0 0 0;
+          top: 50%;
+          left: -8px;
+        }
+
+        /* Southward tooltips */
+        .d3-tip.s:after {
+        /*  content: "\25B2"; */
+          margin: 0 0 1px 0;
+          top: -8px;
+          left: 0;
+          text-align: center;
+        }
+
+        /* Westward tooltips */
+        .d3-tip.w:after {
+         /* content: "\25B6";*/
+          margin: -4px 0 0 -1px;
+          top: 50%;
+          left: 100%;
+        }
+
+        .floatR{
+            float:right;
+        }
+
+        .floatL{
+            float:left;
+        }
+
+        .clear{
+            clear: both;
+        }
+
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #BBBBBB;
+            shape-rendering: crispEdges;
+        }
+
+        .caption {
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 9px;
+        }
+
+        .noData {
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 10px;
+            word-wrap: normal;
+            color:blue;
+        }
+
+        .axis text {
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 8px;
+        }
+
+        #mainVis .axis text {
+            font-family:sans-serif;
+            font-weight: bold;
+            font-size: 10px;
+        }
+        .line {
+            fill: none;
+            stroke: 2px;
+        }
+        .dataArea {
+            stroke: 1px steelblue;
+            fill:steelblue;
+            fill-opacity:0.5;
+            clip-path: url(#clip);
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            opacity: 0.9;
+            filter: alpha(opacity=50);
+        }
+
+        #modal {
+            position:absolute;
+            background:rgba(0,0,0,0.2);
+            border-radius:14px;
+            padding:8px;
+        }
+
+        #loadingOverlay{
+            display:table;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            opacity: 0.99;
+
+        }
+        #loadingOuter{
+            float:left;
+            height:50%;
+            margin-bottom: -250px;
+            width:100%;
+        }
+
+        #loading{
+            clear:both;
+            height: 500px;
+            position:relative;
+            width: 130px;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+
+        #loading h1{
+            color: black;
+        }
+
+        #content {
+            border-radius:8px;
+            background:#fff;
+            padding:20px;
+        }
+
+        #close {
+            position:absolute;
+            background:url(img/close.png) 0 0 no-repeat;
+            width:24px;
+            height:27px;
+            display:block;
+            text-indent:-9999px;
+            top:-7px;
+            right:-7px;
+        }
+
+        .centerText
+        {
+            text-align : center;
+        }
+
+        select{
+            width:280px;
+        }
+
+        .hidden{
+            display:none;
+        }
+        /* ***********************************************************
+        * CSS for the instructions
+        *********************************************************** */
+        #instructions{
+            position:absolute;
+            z-index: 1000;
+            width:100%;
+       }
+        .allInstructions{
+            border-radius: 25px;
+            border: lightgray solid;
+            box-shadow: 10px 10px 5px #888888;
+            padding: 7px;
+            padding-bottom: 35px;
+            text-align:left;
+            min-height: 50px;
+            background-color: lightgray;
+            opacity: .95;
+        }
+
+        .storyForm{
+            position:absolute;
+            bottom:3px;
+            right: 3px;
+            width: 330px;
+        }
+
+        #checkbox{
+            padding-right: 2px;
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+        }
+
+        #openingInstructions {
+            position: absolute;
+            z-index: 1000;
+            top: 58px;
+            left: 2.5%;
+            width: 95%;
+
+
+        }
+
+        #mainVisInstructions{
+            position:absolute;
+            left: 0px;
+            top: 325px;
+            width: 1200px;
+            background-color: lightgray;
+            z-index:1500;
+        }
+
+        #filterFormInstructions{
+            position:absolute;
+            left: -560px;
+            top: 0px;
+            width:540px;
+            z-index: 1000;
+
+            background-color: lightgray;
+        }
+
+        #smallVisInstructions{
+            position:absolute;
+            left: 0px;
+            top: -270px;
+            width:900px;
+            z-index:1000;
+            background-color: lightgray;
+        }
+
+
+
+
+
+      /* ***********************************************************
+      * End CSS for the instructions
+      *********************************************************** */
+        header {
+            width: 1200px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        #container{
+            width: 1200px;
+        }
+
+        .border{
+            border:none;
+
+        }
+
+        #mainVis{
+            width: 895px;
+            min-height: 350px;
+        }
+
+        #rightColumn{
+
+            padding-left: 5px;
+            width: 300px;
+        }
+
+        .btn-group{
+            margin-left:  auto;
+            margin-right: auto;
+        }
+
+        .vis{
+            width:300px;
+        }
+
+        #filterForm label{
+            margin:0;
+        }
+
+        path{
+            cursor : pointer;
+        }
+
+        .pointer {
+            cursor : pointer;
+        }
+
+     select[selected], .blueBackground, body{
+            background : #B7D5ED;
+
+        }
+
+        .third{
+            width: 95px;
+            text-shadow : none;
+
+
+        }
+        .btn-default{
+            height: 25px;
+        }
+
+        .barMale {
+            fill:#0000FF;
+            stroke:#0000FF;
+        }
+        #maleButton{
+
+            background-color : #0000FF;
+            background-image : none;
+            color:white;
+        }
+        .barBoth {
+            fill:#801ACC;
+            stroke:#801ACC;
+        }
+        #bothButton{
+
+            background-color : #801ACC;
+            background-image : none;
+            color:white;
+        }
+        .barFemale {
+            fill:#FF3399;
+            stroke:#FF3399;
+        }
+        #femaleButton{
+
+            background-color : #FF3399;
+            background-image : none;
+            color:white;
+        }
+
+        .bar1990 {
+            fill:#FF6600; //#99aa99;//#770033;  //#5ca587; //#99d8c9;
+            stroke:#FF6600; //#99aa99;
+        }
+
+        .line1990 {
+            stroke:#FF6600; //#99aa99
+        }
+
+        #yr1990Button{
+            background-color : #FF6600;
+            background-image : none;
+            color:white;
+        }
+
+        .circle1990 {
+            fill:#B7D5ED;
+            stroke:#FF6600;
+        }
+
+        .circle1990:hover {
+            fill: #FF6600;
+        }
+
+        .bar2005 {
+            fill:#2e772e; //#41ae76;
+            stroke:#2e772e;
+        }
+        .line2005 {
+            stroke:#2e772e;
+        }
+        #yr2005Button{
+            background-color : #2e772e;
+            background-image : none;
+            color:white;
+        }
+
+        .circle2005 {
+            fill:#B7D5ED;
+            stroke:#2e772e;
+        }
+
+        .circle2005:hover {
+            fill: #2e772e;
+        }
+
+        .bar2010 {
+            fill:#990033; //#005805;
+            stroke:#990033; //#005805;
+        }
+
+        .line2010 {
+            stroke:#990033; //#005805;
+        }
+
+        #yr2010Button{
+            background-color :#990033;
+            background-image : none;
+            color:white;
+        }
+
+        .circle2010 {
+            fill:#B7D5ED;
+            stroke:#990033;
+        }
+
+        .circle2010:hover {
+            fill: #990033;
+        }
+
+        .highlight {
+            fill: yellow;
+        }
+
+        .visTitle {
+            text-align: center;
+            float:left;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        table,td,th
+        {
+            border:0px solid black;
+            border-collapse:separate;
+            padding:3px;
+            border-spacing: 1px;
+        }
+        table{
+            margin: 0 auto;
+            min-width: 295px;
+        }
+        td
+        {
+            background-color: #EEEEEE;
+            color: #444444;
+            text-align:left;
+            font-weight: normal;
+            font-size: 10px;
+        }
+        th
+        {
+            background-color: #777777;
+            color: white;
+            text-align:center;
+            font-weight: bold;
+            font-size: 10px;
+        }
+
+        #maleButton.btn-primary,
+        #bothButton.btn-primary,
+        #femaleButton.btn-primary,
+        #yr1990Button.btn-primary,
+        #yr2005Button.btn-primary,
+        #yr2010Button.btn-primary{
+            font-weight: bolder;
+            color:yellow;
+            text-shadow:none;
+            border-color: black;
+            border-style: ridge;
+            border-width: 3px;
+            padding : 2px;
+        }
+
+    .underlineText{
+        text-decoration : underline;
+    }
+
+    </style>
+
+</head>
+<body>
+
+
+
+<header class ="header">
+    <div id="help" class="help pull-right underline" onclick="showInstructions(-1)">
+        <button type="button" onclick="showInstructions(-1)" >Help</button>
+    </div>
+    <h1 class="centerText">Global Mortality Dashboard</h1>
+</header>
+
+
+
+
+
+<div id="openingInstructions" class="hidden instructions1 allInstructions">
+   <h1> Global Mortality Dashboard</h1>
+    <h2>Institute of Health Metrics and Evaluation -- Global Burden of Disease Study (GBD)</h2>
+
+    <p>"The Global Burden of Disease (GBD) is a systematic, scientific effort by a collaborative
+        of researchers worldwide to quantify the comparative magnitude of health loss to diseases,
+        injuries, and risk factors by age, sex, and geography over time."  "The
+        <a href="http://www.healthmetricsandevaluation.org/" target="_blank">Institute for Health Metrics and Evaluation (IMHE)</a>
+        at the University of Washington is an independent research center identifying the best strategies to build a healthier world.
+        By measuring health, tracking program performance, finding ways to maximize health system impact, and developing innovative
+        measurement systems, IHME provides a foundation for informed decision-making that ultimately will lead to better health for people worldwide."</p>
+
+    <h2>Project Goals</h2>
+    <p>
+        This site was developed by <a href="mailto:bijishnedumparambill@g.harvard.edu" target = "_blank">Bijish N Lakshmanan</a> and
+        <a href="mailto:bjzadwor@hotmail.com" target = "_blank">Bryan Zadworney</a>
+        as their final project for <a href="http://www.cs171.org/#!index.md" target = "_blank">CS171 - Visualization</a>
+        at <a href="http://www.harvard.edu" target = "_blank">Harvard University.</a>
+        The site was developed in an effort to examine how causes of mortality vary by region, age, and sex.  Our main goal was to visualize
+        how people die, particularly looking at where they live affects how and when they die.  In order to account for the differences in population
+        size between the regions we chose to normalize data to 100,000 people in each population set.
+    </p>
+
+    <h4>Help</h4>
+    <p>The following windows will explain how to use the page.  If you decide you want to review these windows, you can click the help button
+        in the upper right hand corner.  These instructions will reload every time you visit the page.  To prevent this instructions from re-loading,
+        click the checkbox marked "Do not display instructions on load", then click the continue button.
+
+    </p>
+
+
+
+
+
+    <form class="storyForm">
+        <button onclick="showInstructions(1)" type="button">Continue</button>
+    <!--    <button onclick="exitInstructions(1)" type="button">Exit</button> -->
+
+        <input type="checkbox" name="stop" class="stop" value="stop">Do not display instructions on load
+    </form>
+</div>
+
+
+
+
+<div id="container" class="container ">
+
+
+    <div class="row">
+        <div id="mainVis" class="visTitle border" style="position:relative;">
+        <span>mainVis</span>
+        <div id="mainVisInstructions" class="instructions2 hidden allInstructions">
+            <div>
+                <h1>Main Visualization</h1>
+             <p>
+             Along the top of the page is the Main Visualization section.  When the page initially loads
+             the user will be presented with a Choropleth World Map.  This map colorizes the regions to represent
+             the appropriate metric, bright red indicates the region with the highest values.  You can drag the map around,
+             and zoom using the mouse wheel.  To reset the map to the default zoom click the "Reset Zoom" link in the bottom left corner of the map.
+             Clicking on a region will cause the Region select drop down list to change
+             to the chosen region, and the charts will redraw with the appropriate data.
+             </p>
+
+             <p> If you hold your mouse over a country the appropriate region will be highlited,
+                 and a tool tip will appear displaying the country name, region name, and the value.
+                 The regions of the map are also linked to the bar charts along the bottom of the screen,
+                 hovering over a bar or a country will highlight both the region of the map, and the appropriate bars
+                 in the charts below.
+             </p>
+
+           </div>
+
+            <form class="storyForm">
+                <button onclick="showInstructions(2)" type="button">Continue</button>
+            <!--    <button onclick="exitInstructions(2)" type="button">Exit</button> -->
+
+                <input type="checkbox" name="stop" class="stop" value="stop">Do not display instructions on load
+            </form>
+        </div>
+        </div>
+        <div id="rightColumn" class="floatR border" style="position:relative;">
+            <div id="filterFormInstructions" class="hidden instructions3 allInstructions">
+                <h1>Filter</h1>
+                <p>To the right of the main visualization sits the filter form.  This form allows the user
+                to select a number of different variables.  As the user makes a change the page automatically re-draws with the appropriate data.
+                    There is no submit button for this form, the page will redraw immediately upon the user making a selection. This page remembers the form settings; when the user returns
+                    to this page with the same browser the visualizations will redraw exactly as they were when the user last used the page.
+                  </p>
+                <p>
+
+                     Along the bottom of the filter form you will find 6 buttons, the color of these buttons matches the colors used
+                    throughout the visualizations on this page.
+                </p>
+            <form class="storyForm">
+                <button onclick="showInstructions(3)" type="button">Continue</button>
+                <!--  <button onclick="exitInstructions(3)" type="button">Exit</button> -->
+
+                <input type="checkbox" name="stop" class="stop" value="stop">Do not display instructions on load
+            </form>
+            </div>
+
+
+            <form id="filterForm" class = "something">
+                <label for="mainSelect">Main Visualization:</label>
+                <br />
+                <select id ="mainSelect" class="blueBackground">
+                    <option value="map" >Choropleth Map</option>
+                    <option value="ageBarChart">Age Bar Chart</option>
+                    <option value="trendAgeSexChart">Age/Sex Bar Chart</option>
+                    <option value="trendLineChart">Age/Year Line Chart</option>
+                    <option value="topDiseases">Top Diseases</option>
+                    <option value="regionBarChart">Region Bar Chart</option>
+                    <option value="trendSexBarChart">Region/Sex Bar Chart</option>
+                    <option value="trendYearBarChart">Region/Year Bar Chart</option>
+                    <option value="topRegions">Top Regions</option>
+                </select>
+                <br />
+                <label for="regionSelect">Region: </label>
+                <br />
+                <select id = "regionSelect"></select>
+                <br />
+                <label for = "causeSelect">Cause: </label>
+                <br />
+                <select id ="causeSelect"></select>
+                <br />
+                <label for ="ageSelect">Age Range: </label>
+                <br />
+                <select id ="ageSelect"></select>
+                <br />
+                <label for = "metricSelect">Metric: </label>
+                <br />
+                <select id ="metricSelect">
+                    <option value="death_rate">Death Rate Per 100,000</option>
+                    <option value="YLL_rate">Years of Life Lost (YLL) per 100,000</option>
+                    <option value="DALY_rate">Disability Adjusted Life Years (DALY) per 100,000</option>
+                    <option value="YLD_rate">Years Lived with Disabilty (YLD) per 100,000 </option>
+                </select>
+                <br />
+                <label>Sex:</label>
+                <br />
+                <div class="btn-group btn-group-xs">
+                    <button type="button" id="maleButton" class="third sexButton btn btn-default">Male</button>
+                    <button type="button" id="bothButton" class="third sexButton btn btn-default btn-primary">Both</button>
+                    <button type="button" id="femaleButton" class="third sexButton btn btn-default">Female</button>
+                </div>
+                <br />
+                <label>Year:</label>
+                <br />
+                <div class="btn-group btn-group-xs">
+                    <button type="button" id="yr1990Button" class="third yrButton btn btn-default btn-primary">1990</button>
+                    <button type="button" id="yr2005Button" class="third yrButton btn btn-default">2005</button>
+                    <button type="button" id="yr2010Button" class="third yrButton btn btn-default">2010</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="row" style="position:relative;">
+        <div id="smallVisInstructions" class="hidden instructions4 allInstructions">
+           <h1>Sub-Visualizations</h1>
+            <p> Along the bottom of the page you will find 8 smaller visualizations.
+            You can move these visualizations to the larger main visualization by clicking on the title.
+            Hovering over a regional bar will highlight the region in the map.
+                Clicking on the bars will change the appropriate filter value (region or age), and redraw the visualizations as necessary.
+           </p>
+            <p>Congratulations! You have completed the tour of our page.  If you would like to prevent these instructions from showing,
+                check the check mark along the bottom of the page.
+                If you need to review these instructions you can click the help button in the top right corner of the page.</p>
+            <form class="storyForm">
+                <button onclick="showInstructions(4)" type="button">Continue</button><br />
+                <!--   <button onclick="exitInstructions(4)" type="button">Exit</button> -->
+
+                <input type="checkbox" name="stop" class="stop" value="stop">Do not display instructions on load
+            </form>
+
+
+
+        </div>
+        <div id="vis1" class="vis visTitle"><span id="vis1Span" class = "pointer underlineText">vis1</span></div>
+        <div id="vis2" class="vis visTitle"><span id="vis2Span" class = "pointer underlineText">vis2</span></div>
+        <div id="vis3" class="vis visTitle"><span id="vis3Span" class = "pointer underlineText">vis3</span></div>
+        <div id="vis4" class="vis visTitle"><span id="vis4Span" class = "pointer underlineText">vis4</span></div>
+    </div>
+    <div class="row">
+        <div id="vis5" class="vis visTitle"><span id="vis5Span" class = "pointer underlineText">vis5</span></div>
+        <div id="vis6" class="vis visTitle"><span id="vis6Span" class = "pointer underlineText">vis6</span></div>
+        <div id="vis7" class="vis visTitle"><span id="vis7Span" class = "pointer underlineText">vis7</span></div>
+        <div id="vis8" class="vis visTitle"><span id="vis8Span" class = "pointer underlineText">vis8</span></div>
+    </div>
+</div>
+<div id="loadingOverlay" class="z">
+    <div id="loadingOuter">
+        <div id="loading">
+            <h1 class="center">Loading</h1>
+            <img src="img/ajax-loader.gif" alt = "Please be patient the page is loading"/>
+        </div>
+    </div>
+</div>
+
+    <!-- Load the scripts -->
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+  
+	<!--[if gt IE 8]><!-->
+	<script type="text/javascript" src="js/d3.min.js"></script> 
+	<script type="text/javascript" src="js/d3.tip.js"></script>
+    <script type="text/javascript" src="js/fileManagement.js"></script>
+	<script type="text/javascript" src="js/vis4.js"></script>
+	<script type="text/javascript" src="js/categoryPieChart.js"></script>
+    <script type="text/javascript" src="js/ageBarChart.js"></script>
+    <script type="text/javascript" src="js/regionBarChart.js"></script>
+    <script type="text/javascript" src="js/trendLineGraph.js"></script>
+    <script type="text/javascript" src="js/regionYearTrendChart.js"></script>
+    <script type="text/javascript" src="js/regionSexTrendChart.js"></script>
+    <script type="text/javascript" src="js/ageSexTrendChart.js"></script>
+    <script type="text/javascript" src="js/filter.js"></script>
+    <script type="text/javascript" src="js/topDiseases.js"></script>
+    <script type="text/javascript" src="js/topRegions.js"></script>
+    <script type="text/javascript" src="js/story.js"></script>
+   <!-- <script type="text/javascript" src="js/modal.js"></script>-->
+    <script type="text/javascript" src="js/cookies.js"></script>
+  <!--  <script type="text/javascript" src="js/map.js"></script> -->
+<!-- <script type="text/javascript" src="js/regionBarChart.js"></script> -->
+    <script type="text/javascript" src="js/mapImproved.js"></script>
+		
+	<!--<![endif]-->
+ 
+
+
+    <!--<script type="text/javascript" src="js/vis_old.js"></script>-->
+
+</body>
+</html>
