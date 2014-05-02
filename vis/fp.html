@@ -216,12 +216,14 @@
        }
         .allInstructions{
             border-radius: 25px;
-            border: black solid;
+            border: lightgray solid;
             box-shadow: 10px 10px 5px #888888;
             padding: 7px;
             padding-bottom: 35px;
             text-align:left;
             min-height: 50px;
+            background-color: lightgray;
+            opacity: .95;
         }
 
         .storyForm{
@@ -245,7 +247,7 @@
             left: 2.5%;
             width: 95%;
 
-            background-color: lightgray;
+
         }
 
         #mainVisInstructions{
@@ -253,11 +255,8 @@
             left: 0px;
             top: 325px;
             width: 1200px;
-            opacity: .8;
-            
-
             background-color: lightgray;
-            z-index:500;
+            z-index:1500;
         }
 
         #filterFormInstructions{
@@ -275,7 +274,7 @@
             left: 0px;
             top: -205px;
             width:200px;
-
+            z-index:1000;
             background-color: lightgray;
         }
 
@@ -607,16 +606,15 @@
         <div id="rightColumn" class="floatR border" style="position:relative;">
             <div id="filterFormInstructions" class="hidden instructions3 allInstructions">
                 <h1>Filter</h1>
-                <p>To the right of the main visualization you will find the filter form.  This form allows the user
-                to select a number of different variables.  As the user makes a change the page will automatically re-draw with the appropriate data.
-                    There is no submit button for this form, the page will redraw immediately upon the user making a selection. As the user makes changes to the form the settingsen the user returns
-                    to the page the visualizations will redraw with the same settings.
-                  <br />
+                <p>To the right of the main visualization sits the filter form.  This form allows the user
+                to select a number of different variables.  As the user makes a change the page automatically re-draws with the appropriate data.
+                    There is no submit button for this form, the page will redraw immediately upon the user making a selection. This page remembers the form settings; when the user returns
+                    to this page with the same browser the visualizations will redraw exactly as they were when the user last used the page.
+                  </p>
+                <p>
 
-                  Along the bottom of the filter form you will find 6 buttons, the color of these buttons matches the colors used
-                    throughout the visualizations on this page.  The Age Bar Char and Region Bar Chart color represents the year chosen by
-                    the user.
-
+                     Along the bottom of the filter form you will find 6 buttons, the color of these buttons matches the colors used
+                    throughout the visualizations on this page.
                 </p>
             <form class="storyForm">
                 <button onclick="showInstructions(3)" type="button">Continue</button>
