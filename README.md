@@ -1,6 +1,12 @@
-CS171 Final Project
+CS171 Final Project  Bryan Zadworney & Bijish N Lakshmanan
 
-The visualization for this project exists in the cs171-fp-Lak-Zad/vis folder.  The html file you need to look at is called fp.html.  We will eventually add an index.html which will hold the additional information necessary for this project.  This project is also hosted at http://www.zadworney.com/z/vis/fp.html .   This visualization still takes a little time to load when viewed online.  We are working to break the data set up into smaller regional segments which will make the page load quicker.  I also have caching turned off on the server, this makes it easier to test the online speeds as we shrink the data-set.
+The visualization for this project exists in the cs171-fp-Lak-Zad/vis/ folder.  The html file you need to look at is called fp.html.
+This visualization still takes a little time to load when viewed online.
 
+The url for the page is:
+http://bjzadwor.github.io/cs171-fp-Lak-Zad/vis/fp.html
 
+The URL for the video is:
+http://youtu.be/gCIfDkq-cJ4
 
+The process book is called  Zad-Lak Process Book.pdf, it can be found in the root of the repository.
