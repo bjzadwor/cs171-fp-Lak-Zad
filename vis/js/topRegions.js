@@ -11,7 +11,7 @@ var numToDisplay;
 
     tableName = topRegionsDiv + "table"
     tableNameShort = topRegionsDiv.substr(1) + "table" // remove the #
- //   $(".topRegionsTable").remove();
+    $(".topRegionsTable").remove();
 
     $(topRegionsDiv).append('<table class="tabularData topRegionsTable" id = '+tableNameShort+'></table>');
     $(tableName).append("<tr><th width=\"75%\">Region Name</th><th>"+mappings[filterValues.metric]+"</th></tr>")
