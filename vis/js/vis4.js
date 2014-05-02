@@ -134,18 +134,14 @@ d3.csv("data/mappings.csv", function(csv){
 
 // Load the data set
 function processData(csv){
-console.log("Processing the Data.")
     globalCSV = csv;
 if (!( geoJSONLoaded && mappingsLoaded && regionsLoaded)){
-
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!waiting to process the data!!!!!!!!!!!!!!!!!!!!!!!!!" + new Date());
     setTimeout(function() {
         processData(csv);
     }, 100);
 
 }
     else {
-    console.log("Continuing to Processing Data:");
 
     csv.forEach(function (row) {
         row.cause_medium = mappings[row.cause_medium];
@@ -200,7 +196,6 @@ if (!( geoJSONLoaded && mappingsLoaded && regionsLoaded)){
 
 
     fullData = csv;
-    console.log("Full Data Loaded")
     dataLoaded = true;
     drawPage();
     } // end else
@@ -210,7 +205,6 @@ if (!( geoJSONLoaded && mappingsLoaded && regionsLoaded)){
 d3.json("json/Combined.geojson", function(json) {
 
     geoJSON = json;
-    console.log("geoJson Loaded")
     geoJSONLoaded = true;
     drawPage();
 
@@ -219,22 +213,15 @@ d3.json("json/Combined.geojson", function(json) {
 function drawPage(){
     // Everything has downloaded and we have all the data, we can move on to step two;
     if (dataLoaded && geoJSONLoaded && mappingsLoaded && regionsLoaded ) drawPageStepTwo();
-    else console.log(dataLoaded, geoJSONLoaded, mappingsLoaded, regionsLoaded );
 }
 
 
 function drawPageStepTwo() {
-
-
-
-    console.log("All of the requirements have been met, drawing the page.")
     // Download the cookie into an object
     filterCookieValue = getJsonCookie("filter");
 
     // if the cookie existed set the filter form to the values from the cookie
-    if(filterCookieValue != ""){
-        filterValues = filterCookieValue;
-    } else console.log("Cooke was blank", filterValues)
+    if (filterCookieValue != "") filterValues = filterCookieValue;
         $('#mainSelect').val(filterValues.main);
         $('#regionSelect').val(filterValues.region);
         $('#causeSelect').val(filterValues.cause);
@@ -266,10 +253,6 @@ function drawPageStepTwo() {
                 $("#yr2010Button").addClass("btn-primary")
                 break;
         }
-
-
-
-
 
      $("#filterForm").change();
      $("#loadingOverlay").addClass("hidden");

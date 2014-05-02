@@ -69,7 +69,6 @@ var isDataEmpty = function(validateDataSet) {
 * */
 var yearChartData;
 function filter(){
-console.log("Filter step 1, top of the function.")
     var visTitleMap, visTitle1,visTitle2,visTitle3,visTitle4,visTitle5,visTitle6,visTitle7,visTitle8,mapDivString,
         ageGroupBarChartDivString, regionalBarChartDivString, ageLineChartDivString,
         regionYearTrendChartDivString, ageSexTrendChartDivString, regionSexTrendChartDivString, topDiseasesDivString,
@@ -86,7 +85,6 @@ console.log("Filter step 1, top of the function.")
     ageBarChartData = [];
     simpleYearChartData = [];
     topDiseasesData=[];
-    console.log("filter firing");
     ageYearLineTrendData = {};
     ageYearLineTrendData["1990"] = [];
     ageYearLineTrendData["2005"] = [];
@@ -110,7 +108,6 @@ console.log("Filter step 1, top of the function.")
 
     // Loop through the data, testing each data point and adding it to the appropriate array if it
     // is one of the data points needed for the visualization.
-    console.log("Filter step 2, Starting to loop through fullData.")
     fullData.every(function(element, index, array){
 
       // draw the region metrics bar chart
@@ -175,7 +172,6 @@ console.log("Filter step 1, top of the function.")
 
         return true;
     })//end fullData.every
-    console.log("Filter step 3, Finished looping through FullData.")
     // remove all the vis so we can re-draw them
     $('svg').remove();
 
@@ -210,7 +206,6 @@ console.log("Filter step 1, top of the function.")
     $('#vis7 span').text(visTitle7);
     $('#vis8 span').text(visTitle8);
 
-    console.log("Filter step 4,Switching filterValues.main.")
     switch (filterValues.main){
     case "map":
         $(mapDivString + ' span').text(visTitleMap);
@@ -276,10 +271,8 @@ console.log("Filter step 1, top of the function.")
     break;
 
     }
-    console.log("Filter step 5, Calling DrawImprovedMap")
     // drawMap(mapDivString);
     drawImprovedMap(mapDivString);
-    console.log("Filter step 6, Done DrawImprovedMap Drawing the rest of the page")
 
     // checking if the filtered data is an empty dataset and display the viz accordingly
     if (isDataEmpty(ageBarChartData)) noDataToDisplay(ageGroupBarChartDivString);
