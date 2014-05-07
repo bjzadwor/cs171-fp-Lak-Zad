@@ -79,7 +79,8 @@ function drawImprovedMap(improvedMapDiv) {
                     var className = "." + d.properties.featurecla
                     $("#regionSelect").val(d.properties.featurecla);
                     $("#filterForm").change();
-                    d3.selectAll(className).attr("fill", "yellow"); // color was getting reset when the form changed keep it yellow
+                    // Highlight the clicked region.
+
                     tip.show(d);
                 }
                 else {
@@ -120,7 +121,6 @@ function drawChartColors2(){
     scaleValues = d3.extent(filteredData, function(d){
         return +d[filterValues.metric]
     })
-// touch
 
 
     // http://bl.ocks.org/mbostock/1086421
@@ -236,4 +236,10 @@ function drawChartColors2(){
         });
 
     improvedMapSvg.call(tip)
+// highlight the selected region by making the borders thicker and orange
+
+    d3.selectAll("path.region."+filterValues.region)
+        .attr("stroke", "orange")
+        .attr("stroke-width", "2")
+    ;
 }

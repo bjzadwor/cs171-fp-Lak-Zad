@@ -186,15 +186,15 @@ function filter(){
     topRegionsDivString = "#vis8"
 
 
-        visTitleMap = "Choropleth Map";
-        visTitle1 = "Age Bar Chart";
-        visTitle2 = "Age/Sex Bar Chart";
-        visTitle3 = "Age/Year Line Chart";
-        visTitle4 = "Top Diseases";
-        visTitle5 = "Region Bar Chart";
-        visTitle6 = "Region/Sex Bar Chart";
-        visTitle7 = "Region/Year Bar Chart";
-        visTitle8 = "Top Regions";
+    visTitleMap = "Choropleth Map";
+    visTitle1 = "Age Bar Chart";
+    visTitle2 = "Age/Sex Bar Chart";
+    visTitle3 = "Age/Year Line Chart";
+    visTitle4 = "Top Diseases";
+    visTitle5 = "Region Bar Chart";
+    visTitle6 = "Region/Sex Bar Chart";
+    visTitle7 = "Region/Year Bar Chart";
+    visTitle8 = "Top Regions";
 
     $('#mainVis span').text(visTitleMap);
     $('#vis1 span').text(visTitle1);
@@ -272,7 +272,18 @@ function filter(){
 
     }
     // drawMap(mapDivString);
+    $(".tabularData").remove();
+    $(".tip").remove();
     drawImprovedMap(mapDivString);
+
+    if (isDataEmpty(topDiseasesData)){
+        $("topDiseasesTable").remove()
+        noDataToDisplay(topDiseasesDivString)
+    }
+    else {
+        console.log("Drawing top diseases in ", topDiseasesDivString)
+        topDiseases(topDiseasesData, topDiseasesDivString);
+    }
 
     // checking if the filtered data is an empty dataset and display the viz accordingly
     if (isDataEmpty(ageBarChartData)) noDataToDisplay(ageGroupBarChartDivString);
@@ -280,12 +291,13 @@ function filter(){
 
     if (isDataEmpty(filteredData)){
         noDataToDisplay(regionalBarChartDivString);
-        $(topRegionsDivString+"table").remove();
+     //   $(topRegionsDivString+"table").remove();
         noDataToDisplay(topRegionsDivString);
     }
     else{
         regionBarChart(filteredData, regionalBarChartDivString);
         topRegions(filteredData, topRegionsDivString);
+        console.log("Drawing topRegions in", topRegionsDivString)
     }
 
     if (isDataEmpty(ageYearLineTrendData)) noDataToDisplay(ageLineChartDivString);
@@ -300,11 +312,5 @@ function filter(){
     if (isDataEmpty(ageSexTrendData)) noDataToDisplay(ageSexTrendChartDivString);
     else ageSexTrendChart(ageSexTrendData, ageSexTrendChartDivString);
 
-    if (isDataEmpty(topDiseasesData)){
-        $("topDiseasesTable").remove()
-        noDataToDisplay(topDiseasesDivString)
-    }
-    else {
-        topDiseases(topDiseasesData, topDiseasesDivString);
-    }
+
 }// end filter()
